@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roshani Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;600&family=Roboto&family=Inder&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="dashboard.js"></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <img src="images/img_roshani_logo_1.png" alt="Roshani Technologies Logo">
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-item active">
+                <img src="images/img_grid.svg" alt="Dashboard Icon">
+                <span class="dashboard-active">Dashboard</span>
+            </div>
+            <div class="menu-item">
+                <img src="images/img_bar_chart.svg" alt="Spendings Icon">
+                <span>Spendings</span>
+            </div>
+            <div class="menu-item">
+                <img src="images/img_download.svg" alt="Downloads Icon">
+                <a href="mydesign.html"> <span>Downloads</span></a>
+            </div>
+            <div class="menu-item">
+                <img src="images/img_star.svg" alt="Favourites Icon">
+                <span>Favourites</span>
+            </div>
+            <div class="menu-item">
+                <img src="images/img_trash_2.svg" alt="Deleted Icon">
+                <span>Deleted</span>
+            </div>
+            <div class="menu-item">
+                <img src="images/img_bell.svg" alt="Notifications Icon">
+                <span>Notifications</span>
+            </div>
+            <a href="settings.html" class="menu-link">
+                <div class="menu-item">
+                    <img src="images/img_settings.svg" alt="Settings Icon">
+                    <span>Settings</span>
+                </div>
+            </a>
+
+            <div class="menu-item">
+                <img src="images/img_log_out.svg" alt="Log Out Icon">
+                <span>Log out</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div>
+
+            <div class="back-button" id="backButton" onclick="toggleSidebar()">
+                <img src="images/img_chevron_left.svg" alt="Back">
+            </div>
+
+            <h1 class="page-title">Dashboard</h1>
+        </div>
+
+
+
+        <div class="user-section">
+            <div class="search-bar">
+                <img src="images/img_search.svg" alt="Search">
+                <input type="text" placeholder="Search for anything...">
+            </div>
+
+            <div class="notification-bell">
+                <img src="images/img_bell_20x20.svg" alt="Notifications">
+            </div>
+            <div class="user-profile">
+                <img src="images/img_shape.png" alt="User Avatar" class="user-avatar">
+                <div class="user-info">
+                    <span class="user-name">Chirag jain</span>
+                    <span class="user-status">Unemployed</span>
+                </div>
+                <img src="images/img_chevron_down.svg" alt="Dropdown" class="dropdown-icon">
+            </div>
+        </div>
+        <div class="divider">
+
+        </div>
+    </div>
+    <div class="main-content">
+        <h2 class="section-title">Overview</h2>
+        <div class="filter-dropdown">
+            <span>Last 30 days</span>
+            <img src="images/img_chevron_left_14x12.svg" alt="Dropdown">
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon purple-bg">
+                    <img src="images/img_bar_chart.svg" alt="Spendings Icon">
+                </div>
+                <div class="stat-label">Spendings</div>
+                <div class="stat-value">₹50,000</div>
+            </div>
+
+            <a href="mydesign.html">
+                <div class="stat-card">
+                    <div class="stat-icon orange-bg">
+                        <img src="images/img_download.svg" alt="Downloads Icon">
+                    </div>
+                    <div class="stat-label">Downloads</div>
+                    <div class="stat-value">13 Designs</div>
+                </div>
+            </a>
+
+            <div class="stat-card">
+                <div class="stat-icon blue-bg">
+                    <img src="images/img_star.svg" alt="Favourites Icon">
+                </div>
+                <div class="stat-label">Favourites</div>
+                <div class="stat-value">07 Designs</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon yellow-bg">
+                    <img src="images/img_trash_2.svg" alt="Trash Icon">
+                </div>
+                <div class="stat-label">Trash</div>
+                <div class="stat-value">00 Designs</div>
+            </div>
+        </div>
+
+        <div class="tables-container">
+            <div class="table-card download-summary">
+                <div class="table-header">Download summary</div>
+                <div class="categories-dropdown">
+                    <span>Categories</span>
+                    <img src="images/img_chevron_down.svg" alt="Dropdown">
+                </div>
+                <hr>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Designer name</th>
+                                <th>Valid from</th>
+                                <th>Valid till</th>
+                                <th>Price</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>Nelsa car designs</td>
+                                <td class="designer-name">Om prakash rao</td>
+                                <td class="date">May 25, 2023</td>
+                                <td class="date">May 25, 2024</td>
+                                <td class="price">₹ 7,999</td>
+                            </tr>
+                            <tr>
+                                <td>Nelsa car designs</td>
+                                <td class="designer-name">Neilsan mando</td>
+                                <td class="date">Jun 20, 2023</td>
+                                <td class="date">Jun 20, 2024</td>
+                                <td class="price">₹ 3,299</td>
+                            </tr>
+                            <tr>
+                                <td>Nelsa car designs</td>
+                                <td class="designer-name">Tiruvelly priya</td>
+                                <td class="date">jul 13, 2023</td>
+                                <td class="date">jul 13, 2024</td>
+                                <td class="price">₹ 5,429</td>
+                            </tr>
+                            <tr>
+                                <td>Nelsa car designs</td>
+                                <td class="designer-name">Matte hannery</td>
+                                <td class="date">Dec 20, 2023</td>
+                                <td class="date">Dec 20, 2024</td>
+                                <td class="price">₹ 1,599</td>
+                            </tr>
+                            <tr>
+                                <td>Nelsa car designs</td>
+                                <td class="designer-name">Sukumar sandeep rao</td>
+                                <td class="date">Mar 15, 2024</td>
+                                <td class="date">Mar 15, 2025</td>
+                                <td class="price">₹ 6,549</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="offers-card">
+                <div>Exclusive offers</div>
+                <div class="offer-banner">
+                    <img src="images/img_screenshot_20250514_140932_1.png" alt="Special Offer" class="offer-image">
+                    <div class="offer-text">
+                        Unlock the ultimate upgrade with our exclusive offer Enjoy savings of up to 40% off on our
+                        latest New Arrivals
+                    </div>
+                    <div class="shop-now-btn">
+                        <span>Shop now</span>
+                    </div>
+                </div>
+                <div class="countdown-box days-box">
+                    <div class="countdown-value">06</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-box hours-box">
+                    <div class="countdown-value">18</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-box mins-box">
+                    <div class="countdown-value">03</div>
+                    <div class="countdown-label">Mins</div>
+                </div>
+            </div>
+
+            <div class="table-card top-designs">
+                <div class="table-header">Top designs</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Designer name</th>
+                            <th>Valid from</th>
+                            <th>Valid till</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <hr>
+                            <td>Nelsa car designs</td>
+                            <td class="designer-name">Om prakash rao</td>
+                            <td class="date">May 25, 2023</td>
+                            <td class="date">May 25, 2024</td>
+                            <td class="price">₹ 7,999</td>
+                        </tr>
+                        <tr>
+                            <td>Nelsa car designs</td>
+                            <td class="designer-name">Neilsan mando</td>
+                            <td class="date">Jun 20, 2023</td>
+                            <td class="date">Jun 20, 2024</td>
+                            <td class="price">₹ 3,299</td>
+                        </tr>
+                        <tr>
+                            <td>Nelsa car designs</td>
+                            <td class="designer-name">Tiruvelly priya</td>
+                            <td class="date">jul 13, 2023</td>
+                            <td class="date">jul 13, 2024</td>
+                            <td class="price">₹ 5,429</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="rewards-card">
+                <div class="rewards-header">
+                    <div class="table-header">Rewards earned</div>
+                    <img src="images/img_info.svg" alt="Info" class="info-icon">
+                </div>
+                <div class="rewards-divider"></div>
+                <div class="rewards-content">
+                    <div class="rewards-column">
+                        <div class="rewards-label">Tokens earned</div>
+                        <div class="tokens-value">₹75</div>
+                    </div>
+                    <div class="rewards-column">
+                        <div class="rewards-label">Eligible discount</div>
+                        <div class="discount-value">₹75</div>
+                    </div>
+                </div>
+                <div class="rewards-note">₹10 worth discount at each purchase</div>
+            </div>
+        </div>
+    </div>
+  
+</body>
+
+</html>

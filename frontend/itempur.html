@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roshani Technologies - Car Coupe Blueprint</title>
+    <link rel="stylesheet" href="item.css" />
+    <script src="item.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <img src="images/img_roshni_logo_1.png" alt="Roshani Technologies Logo" class="logo">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search here...">
+            <img src="images/img_search.svg" alt="Search" class="search-icon">
+        </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <button class="back-button" onclick="goBack()">
+       <a href="explore.html"> <img src="images/img_arrow_left.svg" alt="Back"> <span>GO BACK</span></a>
+    </button>
+
+    <div class="content">
+        <div class="blueprint-thumbnails">
+            <img src="images/img_image_6.png" alt="Side View" class="thumbnail active"
+                onclick="changeView(this, '/images/img_image_6.png')">
+            <img src="images/img_image_7.png" alt="Front View" class="thumbnail"
+                onclick="changeView(this, '/images/img_image_7.png')">
+            <img src="images/img_image_8.png" alt="Rear View" class="thumbnail"
+                onclick="changeView(this, '/images/img_image_8.png')">
+            <img src="images/img_image_9.png" alt="Top View" class="thumbnail"
+                onclick="changeView(this, '/images/img_image_9.png')">
+            <img src="images/img_image_12.png" alt="Interior View" class="thumbnail"
+                onclick="changeView(this, '/images/img_image_12.png')">
+        </div>
+        <div class="main-blueprint">
+            <img src="images/img_image_6.png" alt="Car Coupe Blueprint" id="mainImage" width="649" height="484">
+            <div class="fullscreen-icon" onclick="openFullscreen()">
+                <i>⛶</i>
+                <span>Full Screen</span>
+            </div>
+        </div>
+
+
+        <div class="blueprint-info">
+            <div class="breadcrumb">Explore / Car / Coupe</div>
+            <h1 class="blueprint-title">Coupe Blueprint</h1>
+            <p class="blueprint-description">
+                A car coupe design sketch is a stylized drawing of a sporty two-door car, highlighting sleek,
+                aerodynamic lines and an aggressive stance. It features a long hood, sloping roofline, short rear, large
+                wheels, and sharp details like LED headlights and bold grilles. Typically drawn in 3/4 perspective, it
+                uses dynamic lines, shading, and highlights to emphasize speed, style, and performance. The sketch
+                serves as an early concept for car design development.
+            </p>
+
+        <div class="action-buttons">
+          <a href="cart.html">  <button class="btn" id="addToCartBtn">ADD TO CART</button></a>
+           <a href="order.html"> <button class="btn" id="buyNowBtn">BUY NOW</button></a>
+        </div>
+
+        <div class="social-stats">
+            <div class="stat">
+                <img src="images/img_eye.svg" alt="Views">
+                <span>295 views</span>
+            </div>
+            <div class="stat">
+                <img src="images/img_share_2.svg" alt="Share">
+            </div>
+            <div class="stat">
+                <img src="images/img_heart.svg" alt="Likes">
+                <span>295 Likes</span>
+            </div>
+            <img src="images/img_bookmark.svg" alt="Bookmark" class="bookmark">
+        </div>
+    </div>
+    </div>
+
+
+</body>
+
+</html>

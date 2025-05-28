@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Roshani Dashboard - Settings</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* General Reset and Body */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ebdfd7;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            position: fixed;
+            width: 216px;
+            height: 100vh;
+            background-color: #000000;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            transition: width 0.5s ease;
+            overflow: hidden;
+        }
+
+        .sidebar-logo {
+            position: relative;
+            width: 180px;
+            height: 75px;
+            margin: 23px 15px;
+            background-color: #ebdfd7;
+            border-radius: 35px;
+            box-shadow: 6px 4px 200px #EBDFD7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar-logo img {
+            width: 180px;
+            height: 75px;
+        }
+
+        .sidebar-menu {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            filter: brightness(0) saturate(100%) invert(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .menu-item span {
+            font-size: 14px;
+            color: #ffffff;
+            font-weight: 400;
+            line-height: 21px;
+            user-select: none;
+        }
+
+        .menu-item.active {
+            background-color: white;
+            border-radius: 23px;
+            width: 140px;
+            height: 45px;
+            border: 1px solid #d9d9d9;
+            margin-left: 34px;
+        }
+
+        .menu-item.active span {
+            color: #fc8b23;
+        }
+
+        .menu-item.active img {
+            filter: brightness(0) saturate(100%) invert(66%) sepia(100%)
+                saturate(0%) hue-rotate(0deg) brightness(100%);
+        }
+
+        /* Main content */
+        .main-content {
+            margin-left: 216px;
+            padding: 20px 30px;
+            position: relative;
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 27px;
+            font-weight: 500;
+            color: #000000;
+            margin-left: 10px;
+            user-select: none;
+        }
+
+        /* Content wrapper splits old details and form horizontally */
+        .content-wrapper {
+            display: flex;
+            gap: 40px;
+            flex-wrap: nowrap;
+            flex-grow: 1;
+        }
+
+        /* Old details panel */
+        .old-details {
+            width: 300px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            user-select: none;
+        }
+
+        .old-details h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #fc8b23;
+            padding-bottom: 8px;
+            color: #000;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .old-details .profile-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid #fc8b23;
+            object-fit: cover;
+        }
+
+        .old-details .detail-item {
+            margin-bottom: 18px;
+        }
+
+        .old-details .detail-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 4px;
+        }
+
+        .old-details .detail-value {
+            font-size: 15px;
+            color: #222;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Settings form wrapper */
+        .settings-form-wrapper {
+            flex-grow: 1;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px 35px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Profile section inside form remains but smaller and aligned properly */
+        .profile-section {
+            display: none; /* We show profile in old details, so hide */
+        }
+
+        /* Form styles */
+        form {
+            max-width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            color: #333333;
+            user-select: none;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #d9d9d9;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #fc8b23;
+            outline: none;
+        }
+
+        /* Buttons */
+        .buttons-container {
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 22px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            user-select: none;
+        }
+
+        #save-changes {
+            background-color: #fc8b23;
+            color: #fff;
+        }
+
+        #save-changes:hover {
+            background-color: #e07b1a;
+        }
+
+        #cancel {
+            background-color: #d9d9d9;
+            color: #333;
+        }
+
+        #cancel:hover {
+            background-color: #bebebe;
+        }
+
+        #forgot-password {
+            background-color: transparent;
+            color: #fc8b23;
+            border: 2px solid #fc8b23;
+        }
+
+        #forgot-password:hover {
+            background-color: #fc8b23;
+            color: white;
+        }
+
+        /* Validation message styling */
+        .validation-message {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            .old-details,
+            .settings-form-wrapper {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-content {
+                margin-left: 0;
+                padding: 15px 20px;
+            }
+
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <img src="images/img_roshani_logo_1.png" alt="Roshani Technologies Logo" />
+        </div>
+        <div class="sidebar-menu">
+            <a href="dashboard.html" class="menu-link">
+                <div class="menu-item" id="menu-dashboard">
+                    <img src="images/img_grid.svg" alt="Dashboard Icon" />
+                    <span>Dashboard</span>
+                </div>
+            </a>
+            <a href="#" class="menu-link">
+                <div class="menu-item" id="menu-spendings">
+                    <img src="images/img_bar_chart.svg" alt="Spendings Icon" />
+                    <span>Spendings</span>
+                </div>
+            </a>
+            <a href="#" class="menu-link">
+                <div class="menu-item" id="menu-downloads">
+                    <img src="images/img_download.svg" alt="Downloads Icon" />
+                    <span>Downloads</span>
+                </div>
+            </a>
+            <a href="#" class="menu-link">
+                <div class="menu-item" id="menu-favourites">
+                    <img src="images/img_star.svg" alt="Favourites Icon" />
+                    <span>Favourites</span>
+                </div>
+            </a>
+            <a href="#" class="menu-link">
+                <div class="menu-item" id="menu-deleted">
+                    <img src="images/img_trash_2.svg" alt="Deleted Icon" />
+                    <span>Deleted</span>
+                </div>
+            </a>
+            <a href="#" class="menu-link">
+                <div class="menu-item" id="menu-notifications">
+                    <img src="images/img_bell.svg" alt="Notifications Icon" />
+                    <span>Notifications</span>
+                </div>
+            </a>
+            <!-- Settings menu item active -->
+            <a href="#" class="menu-link">
+                <div class="menu-item active" id="menu-settings">
+                    <img src="images/img_settings.svg" alt="Settings Icon" />
+                    <span>Settings</span>
+                </div>
+            </a>
+            <a href="#" class="menu-link">
+                <div class="menu-item" id="menu-logout">
+                    <img src="images/img_log_out.svg" alt="Log Out Icon" />
+                    <span>Log out</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1 class="page-title">Settings</h1>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="old-details" aria-label="Old user details">
+                <h2>Current Details</h2>
+                <img src="images/img_shape.png" alt="User Profile Photo" class="profile-photo" />
+                <div class="detail-item">
+                    <div class="detail-label">Username</div>
+                    <div class="detail-value" id="old-username">Chirag Jain</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Email</div>
+                    <div class="detail-value" id="old-email">chirag.jain@example.com</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Status</div>
+                    <div class="detail-value">Unemployed</div>
+                </div>
+            </div>
+
+            <div class="settings-form-wrapper">
+                <form id="settings-form" autocomplete="off" novalidate>
+                    <div class="form-group">
+                        <label for="username">Edit Username</label>
+                        <input type="text" id="username" name="username" placeholder="Enter new username" />
+                        <div class="validation-message" id="username-validation"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Add / Replace Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter new email" />
+                        <div class="validation-message" id="email-validation"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="old-password">Old Password</label>
+                        <input type="password" id="old-password" name="old-password" placeholder="Enter old password" />
+                        <div class="validation-message" id="old-password-validation"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new-password">New Password</label>
+                        <input type="password" id="new-password" name="new-password" placeholder="Enter new password" />
+                        <div class="validation-message" id="new-password-validation"></div>
+                    </div>
+
+                    <div class="buttons-container">
+                        <button type="button" id="save-changes">Save Changes</button>
+                        <button type="button" id="cancel">Cancel</button>
+                        <button type="button" id="forgot-password">Forgot Password?</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function isNumeric(str) {
+            return /^\d+$/.test(str);
+        }
+
+        function validatePassword(password) {
+            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+            return regex.test(password);
+        }
+
+        function validateEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        function clearValidationMessages() {
+            document.getElementById('username-validation').textContent = '';
+            document.getElementById('email-validation').textContent = '';
+            document.getElementById('old-password-validation').textContent = '';
+            document.getElementById('new-password-validation').textContent = '';
+        }
+
+        // Save changes handler
+        document.getElementById('save-changes').addEventListener('click', () => {
+            clearValidationMessages();
+
+            const usernameInput = document.getElementById('username').value.trim();
+            const emailInput = document.getElementById('email').value.trim();
+            const oldPassInput = document.getElementById('old-password').value;
+            const newPassInput = document.getElementById('new-password').value;
+
+            let valid = true;
+
+            // Validate username
+            if (usernameInput === '') {
+                document.getElementById('username-validation').textContent = 'Username cannot be empty.';
+                valid = false;
+            } else if (isNumeric(usernameInput)) {
+                document.getElementById('username-validation').textContent = 'Username cannot be numeric only.';
+                valid = false;
+            }
+
+            // Validate email if entered
+            if (emailInput !== '' && !validateEmail(emailInput)) {
+                document.getElementById('email-validation').textContent = 'Please enter a valid email address.';
+                valid = false;
+            }
+
+            // If setting new password, old password required
+            if (newPassInput !== '') {
+                if (oldPassInput === '') {
+                    document.getElementById('old-password-validation').textContent = 'Please enter your old password to set a new one.';
+                    valid = false;
+                }
+                if (!validatePassword(newPassInput)) {
+                    document.getElementById('new-password-validation').textContent =
+                        'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.';
+                    valid = false;
+                }
+            }
+
+            if (usernameInput === '' && emailInput === '' && oldPassInput === '' && newPassInput === '') {
+                alert('Please make some changes before saving or click cancel.');
+                valid = false;
+            }
+
+            if (!valid) return;
+
+            // Update displayed old details with new inputs if changed
+            if (usernameInput !== '') {
+                document.getElementById('old-username').textContent = usernameInput;
+                document.getElementById('current-username').textContent = usernameInput;
+            }
+            if (emailInput !== '') {
+                document.getElementById('old-email').textContent = emailInput;
+            }
+
+            alert('Your settings have been saved.');
+        });
+
+        // Cancel handler resets form and validation messages
+        document.getElementById('cancel').addEventListener('click', () => {
+            if (confirm('Are you sure you want to cancel all changes?')) {
+                document.getElementById('settings-form').reset();
+                clearValidationMessages();
+            }
+        });
+
+        // Forgot password
+        document.getElementById('forgot-password').addEventListener('click', () => {
+            alert('Redirecting to Forgot Password process...');
+        });
+    </script>
+</body>
+
+</html>
+

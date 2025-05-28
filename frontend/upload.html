@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Design Upload Portal</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea, #764ba2, #6a11cb);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1200px;
+      width: 100%;
+      margin: 40px auto;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        margin: 20px;
+      }
+    }
+
+    .form-section, .preview-section {
+      background: linear-gradient(145deg, #ffffffdd, #e0e0ffdd);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 40px rgba(106, 17, 203, 0.3);
+      color: #222;
+      transition: transform 0.3s ease;
+    }
+
+    .form-section:hover, .preview-section:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 0 0 60px rgba(106, 17, 203, 0.5);
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      color: #4b0082;
+      font-weight: 700;
+      text-align: center;
+      text-shadow: 0 0 5px #764ba2aa;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      margin-top: 12px;
+      border: 2px solid #764ba2;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      background-color: #fff;
+      color: #333;
+      box-shadow: inset 0 0 8px #6a11cb33;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #6a11cb;
+      box-shadow: 0 0 8px #6a11cbaa;
+      background-color: #f7f0ff;
+    }
+
+    .label {
+      font-weight: 700;
+      margin-top: 26px;
+      display: block;
+      color: #5a2a8c;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .file-upload-box {
+      margin-top: 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      border: 3px dashed #6a11cb;
+      border-radius: 20px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 0 15px #764ba2aa inset;
+      transition: background 0.4s ease, transform 0.3s ease, border-color 0.3s ease;
+      text-align: center;
+    }
+
+    .file-upload-box:hover {
+      background-color: #e6d4ff;
+      transform: scale(1.05);
+      border-color: #4b0082;
+      box-shadow: 0 0 30px #4b0082cc inset;
+    }
+
+    .upload-icon {
+      font-size: 64px;
+      margin-bottom: 12px;
+      text-shadow: 0 0 6px #6a11cb;
+    }
+
+    .file-upload-box span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #4b0082;
+      text-shadow: 0 0 5px #6a11cbbb;
+    }
+
+    .preview-box {
+      background: linear-gradient(145deg, #f8f8ff, #d7d7ff);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: inset 0 0 20px rgba(106, 17, 203, 0.2);
+      color: #3a007a;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .preview-box h3 {
+      font-size: 28px;
+      margin-bottom: 16px;
+      color: #4b0082;
+      font-weight: 800;
+      text-shadow: 0 0 8px #764ba2aa;
+    }
+
+    .preview-texts {
+      width: 100%;
+      max-width: 420px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #3a007a;
+    }
+
+    .preview-texts p {
+      margin: 8px 0;
+    }
+
+    .preview-img {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 16px;
+      border: 2px solid #764ba2;
+      display: none;
+      box-shadow: 0 0 20px #6a11cbbb;
+      transition: all 0.4s ease;
+      object-fit: contain;
+      max-height: 300px;
+    }
+
+    .submit-btn {
+      margin-top: 36px;
+      width: 100%;
+      background: linear-gradient(135deg, #6a11cb, #667eea);
+      color: white;
+      border: none;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 16px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(102, 126, 234, 0.7);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #5c0db1, #4b0082);
+      box-shadow: 0 8px 25px rgba(75, 0, 130, 0.9);
+    }
+
+    /* Back Button */
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: background 0.3s ease, transform 0.3s ease;
+      z-index: 10001;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    /* Modal and saved designs - Updated to match lavender theme */
+    #savedDesignsModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      overflow-y: auto;
+      padding: 60px 20px;
+    }
+
+    #savedGallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .saved-card {
+      background: linear-gradient(145deg, #ffffffdd, #e0e0ffdd);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 40px rgba(106, 17, 203, 0.3);
+      color: #4b0082;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .saved-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 50px rgba(106, 17, 203, 0.4);
+    }
+
+    .saved-card h3 {
+      color: #4b0082;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .saved-card p {
+      margin: 8px 0;
+      font-weight: 600;
+      color: #5a2a8c;
+    }
+
+    .saved-card img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 2px solid #764ba2;
+      box-shadow: 0 4px 12px #6a11cb88;
+      margin-bottom: 12px;
+    }
+
+    .delete-btn {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      color: #fff;
+      padding: 8px 16px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(231, 76, 60, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .delete-btn:hover {
+      background: linear-gradient(135deg, #ff5e4d, #e74c3c);
+      box-shadow: 0 6px 16px rgba(231, 76, 60, 0.7);
+    }
+
+    /* Modal container styling */
+    .modal-container {
+      max-width: 1200px;
+      margin: auto;
+      background: linear-gradient(145deg, #ffffffdd, #e0e0ffdd);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 40px rgba(106, 17, 203, 0.3);
+    }
+
+    .modal-container h2 {
+      color: #4b0082;
+      text-shadow: 0 0 5px #764ba2aa;
+    }
+
+    .modal-actions {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .modal-actions .submit-btn {
+      margin: 0 10px;
+      display: inline-block;
+      width: auto;
+      padding: 12px 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="back-btn" onclick="history.back()">← Back</button>
+
+  <div class="container">
+    <!-- Form Section -->
+    <div class="form-section">
+      <h2>Upload Your Design</h2>
+
+      <input type="file" id="designFile" accept="image/*" style="display: none;">
+      <div class="file-upload-box" onclick="document.getElementById('designFile').click()">
+        <div class="upload-icon">📤</div>
+        <span>Upload your Design here</span>
+      </div>
+
+      <label class="label">Category</label>
+      <select id="fileCategory">
+        <option value="">Select Category</option>
+        <option value="Logo Design">Logo Design</option>
+        <option value="Poster Design">Poster Design</option>
+        <option value="Banner Design">Banner Design</option>
+        <option value="Web UI">Web UI</option>
+      </select>
+
+      <label class="label">Design Name</label>
+      <input type="text" id="fileName" placeholder="Enter design name">
+
+      <label class="label">Description</label>
+      <textarea id="description" rows="4" placeholder="Write something about your design..."></textarea>
+
+      <label class="label">Price (in ₹)</label>
+      <input type="number" id="price" placeholder="Enter price">
+
+      <button class="submit-btn" onclick="saveDesign()">Submit Design</button>
+      <button class="submit-btn" style="background: linear-gradient(135deg, #e74c3c, #c0392b); margin-top: 10px;" onclick="showSavedDesigns()">View Saved Designs</button>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="preview-section">
+      <h2>Live Preview</h2>
+      <div class="preview-box" id="previewBox">
+        <h3 id="previewName">Design Name Here</h3>
+        <div class="preview-texts">
+          <p><strong>Category:</strong> <span id="previewCategory">--</span></p>
+          <p><strong>Description:</strong> <span id="previewDescription">--</span></p>
+          <p><strong>Price:</strong> ₹<span id="previewPrice">0</span></p>
+        </div>
+        <img id="previewImage" class="preview-img" src="" alt="Design Preview">
+      </div>
+    </div>
+  </div>
+
+  <!-- Saved Designs Modal - Updated to match lavender theme -->
+  <div id="savedDesignsModal">
+    <button class="back-btn" onclick="closeSavedDesigns()">← Back to Upload</button>
+
+    <div class="modal-container">
+      <h2>Saved Designs</h2>
+      <div id="savedGallery"></div>
+      <div class="modal-actions">
+        <button class="submit-btn" style="background: linear-gradient(135deg, #e74c3c, #c0392b);" onclick="clearAllSaved()">Delete All</button>
+        <button class="submit-btn" style="background: linear-gradient(135deg, #1abc9c, #16a085); margin-left: 20px;" onclick="closeSavedDesigns()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get all input elements
+    const nameInput = document.getElementById('fileName');
+    const categoryInput = document.getElementById('fileCategory');
+    const descriptionInput = document.getElementById('description');
+    const priceInput = document.getElementById('price');
+    const fileInput = document.getElementById('designFile');
+    const fileUploadBox = document.querySelector('.file-upload-box');
+
+    // Get all preview elements
+    const previewName = document.getElementById('previewName');
+    const previewCategory = document.getElementById('previewCategory');
+    const previewDescription = document.getElementById('previewDescription');
+    const previewPrice = document.getElementById('previewPrice');
+    const previewImage = document.getElementById('previewImage');
+
+    // Update preview when name changes
+    nameInput.addEventListener('input', updatePreview);
+    
+    // Update preview when category changes
+    categoryInput.addEventListener('change', updatePreview);
+    
+    // Update preview when description changes
+    descriptionInput.addEventListener('input', updatePreview);
+    
+    // Update preview when price changes
+    priceInput.addEventListener('input', updatePreview);
+    
+    // Handle file upload and update preview
+    fileInput.addEventListener('change', handleFileUpload);
+
+    // Function to update all preview elements
+    function updatePreview() {
+      previewName.textContent = nameInput.value.trim() || "Design Name Here";
+      previewCategory.textContent = categoryInput.value || "--";
+      previewDescription.textContent = descriptionInput.value.trim() || "--";
+      previewPrice.textContent = priceInput.value || "0";
+    }
+
+    // Function to handle file upload and display preview
+    function handleFileUpload() {
+      const file = fileInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewImage.src = e.target.result;
+          previewImage.style.display = 'block';
+          
+          // Update the upload box background with the image
+          fileUploadBox.style.backgroundImage = url(${e.target.result});
+          fileUploadBox.innerHTML = ''; // Clear the upload icon and text
+        };
+        reader.readAsDataURL(file);
+      } else {
+        previewImage.src = "";
+        previewImage.style.display = 'none';
+        fileUploadBox.style.backgroundImage = '';
+        fileUploadBox.innerHTML = `
+          <div class="upload-icon">📤</div>
+          <span>Upload your Design here</span>
+        `;
+      }
+    }
+
+    function saveDesign() {
+      if (!nameInput.value.trim()) {
+        alert("Please enter the design name.");
+        nameInput.focus();
+        return;
+      }
+      if (!categoryInput.value) {
+        alert("Please select a category.");
+        categoryInput.focus();
+        return;
+      }
+      if (!previewImage.src || previewImage.style.display === 'none') {
+        alert("Please upload an image for the design.");
+        fileInput.focus();
+        return;
+      }
+      const design = {
+        name: nameInput.value.trim(),
+        category: categoryInput.value,
+        description: descriptionInput.value.trim(),
+        price: priceInput.value || "0",
+        image: previewImage.src
+      };
+      const savedDesigns = JSON.parse(localStorage.getItem("savedDesigns") || "[]");
+      savedDesigns.push(design);
+      localStorage.setItem("savedDesigns", JSON.stringify(savedDesigns));
+      alert("Design saved successfully!");
+      resetForm();
+    }
+
+    function resetForm() {
+      nameInput.value = "";
+      categoryInput.value = "";
+      descriptionInput.value = "";
+      priceInput.value = "";
+      fileInput.value = "";
+      previewName.textContent = "Design Name Here";
+      previewCategory.textContent = "--";
+      previewDescription.textContent = "--";
+      previewPrice.textContent = "0";
+      previewImage.src = "";
+      previewImage.style.display = "none";
+      fileUploadBox.style.backgroundImage = '';
+      fileUploadBox.innerHTML = `
+        <div class="upload-icon">📤</div>
+        <span>Upload your Design here</span>
+      `;
+    }
+
+    function showSavedDesigns() {
+      const gallery = document.getElementById("savedGallery");
+      gallery.innerHTML = "";
+
+      const saved = JSON.parse(localStorage.getItem("savedDesigns") || "[]");
+      if (saved.length === 0) {
+        gallery.innerHTML = "<p style='color: #5a2a8c; text-align: center; font-weight: 600;'>No saved designs yet.</p>";
+      }
+
+      saved.forEach((design, index) => {
+        const card = document.createElement("div");
+        card.className = "saved-card";
+        card.innerHTML = `
+          <img src="${design.image}" alt="${design.name}" />
+          <h3>${design.name}</h3>
+          <p><strong>Category:</strong> ${design.category}</p>
+          <p><strong>Description:</strong> ${design.description || '--'}</p>
+          <p><strong>Price:</strong> ₹${design.price}</p>
+          <button class="delete-btn" onclick="deleteDesign(${index})">Delete</button>
+        `;
+        gallery.appendChild(card);
+      });
+
+      document.getElementById("savedDesignsModal").style.display = "block";
+      document.getElementById("savedDesignsModal").scrollTop = 0;
+    }
+
+    function closeSavedDesigns() {
+      document.getElementById("savedDesignsModal").style.display = "none";
+    }
+
+    function clearAllSaved() {
+      if (confirm("Are you sure you want to delete all saved designs?")) {
+        localStorage.removeItem("savedDesigns");
+        showSavedDesigns();
+      }
+    }
+
+    function deleteDesign(index) {
+      const saved = JSON.parse(localStorage.getItem("savedDesigns") || "[]");
+      saved.splice(index, 1);
+      localStorage.setItem("savedDesigns", JSON.stringify(saved));
+      showSavedDesigns();
+    }
+
+    // Initialize the preview
+    updatePreview();
+  </script>
+
+</body>
+</html>

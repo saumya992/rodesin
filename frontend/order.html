@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Order and Payment Page</title>
+
+  <link rel="stylesheet" href="checkout.css" />
+  <script src="checkout.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- LEFT CONTAINER -->
+    <div class="left-box">
+      <h2>Order Summary</h2>
+      <div class="centered">
+        <h3>Mechanical design</h3>
+        <img src="images/img_image_6.png" alt="Mechanical Car Drawing" />
+        <div class="description">
+          <strong>Description</strong>
+          This image is a technical drawing or engineering blueprint of a mechanical assembly titled "1.12 Rocker
+          Assembly".
+        </div>
+      </div>
+      <div class="promo-section">
+        <label for="promocode">Promocode</label><br><br>
+        <input type="text" id="promocode" value="Hola123" />
+        <button>Apply</button>
+      </div>
+    </div>
+
+    <!-- RIGHT CONTAINER -->
+    <div class="right-box">
+      <h2>Payment Method</h2><br>
+      <label><input type="radio" checked /> GPAY ID</label>
+      <div class="input-group">
+        <input type="text" value="HOLA123@12A" />
+        <button>★ Verify</button>
+      </div>
+
+      <div>
+        <a href="qr.html"> <button class="qr-button">Generate QR Scanner</button></a>
+
+      </div>
+      <div class="summary-box">
+        <h3>Summary(1 Item)</h3>
+        <p>Total <span>₹900</span></p>
+        <p>Discount <span>₹300</span></p>
+        <p class="total">Total <span>₹600</span></p>
+      </div>
+      <div>
+        <a href="paymentsucc.html"><button class="pay-button">PAY</button></a>
+       <a href="explore.html"><button class="back-button">← GO BACK</button></a>
+      </div>
+    </div>
+
+</body>
+
+</html>
