@@ -1,13 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <title>Order and Payment Page</title>
+  <head>
+    <meta charset="UTF-8">
+    <title>Order and Payment Page</title>
 
-  <link rel="stylesheet" href="checkout.css" />
-  <script src="checkout.js"></script>
-</head>
+    <style>
+      * {
+        margin: 5;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ebdfd7;
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        overflow: hidden;
+      }
+
+      body.order {
+        background: url('https://i.imgur.com/eaKdG4B.png');
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        gap: 0;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .left-box,
+      .right-box {
+        padding: 30px;
+        border-radius: 10px;
+        width: 50vw;
+        height: 100vh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .left-box {
+        background-color: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+        padding: 30px;
+      }
+
+      .right-box {
+        background-color: #ebdfd7;
+      }
+
+      h2 {
+        border-bottom: 1px solid black;
+        padding-bottom: 10px;
+        margin-top: 50px;
+      }
+
+      h2,
+      h3 {
+        font-size: 30px;
+        margin-top: 0;
+      }
+
+      .centered {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .centered img {
+        width: 250px;
+        height: auto;
+        margin: 15px 0;
+      }
+
+      .description {
+        margin: 15px 0;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .description strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .promo-section {
+        margin-top: 30px;
+      }
+
+      .promo-section label,
+      .right-box label {
+        font-weight: bold;
+      }
+
+      .promo-section input[type="text"] {
+        width: 70%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-right: none;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+      }
+
+      .promo-section button {
+        padding: 10px 20px;
+        border: none;
+        background-color: blue;
+        color: #ebdfd7;
+        font-weight: bold;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+      }
+
+      .input-group {
+        display: flex;
+        margin: 10px 0 20px 0;
+      }
+
+      .input-group input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-right: none;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+      }
+
+      .input-group button {
+        background-color: #222;
+        color: #ebdfd7;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .qr-button,
+      .qr-btn {
+        width: 100%;
+        padding: 10px 12px;
+        background-color: #0023ff;
+        color: white;
+        border: none;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 30px;
+      }
+
+      .summary-box,
+      .summary {
+        border-top: 1px solid black;
+        padding-top: 20px;
+        font-size: 16px;
+        margin-top: 30px;
+        line-height: 1.6;
+      }
+
+      .summary-box p,
+      .summary p {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px 0;
+      }
+
+      .summary-box .total,
+      .total,
+      .final-total {
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .pay-button,
+      .pay-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .view-btn {
+        margin-top: 5%;
+        width: 100%;
+      }
+      .back-button,
+      .back-btn {
+        margin-top: 10px;
+        padding: 10px;
+        width: 150px;
+        border: none;
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    </style>
+    <script src="checkout.js"></script>
+  </head>
 
 <body>
 
