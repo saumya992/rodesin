@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Google Pay via UPI QR</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9fafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #1f2937;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .qr-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Google Pay via UPI</h2>
+    <input type="number" id="amountInput" placeholder="Enter amount (INR)" />
+    <button id="generateBtn">Generate UPI QR</button>
+    <div class="qr-section" id="qrSection" style="display:none;">
+      <p>Scan this QR to pay</p>
+      <div id="qrCode"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const upiId = 'ohmp1015@okhdfcbank';
+    const name = 'Your Business Name';
+
+    const amountInput = document.getElementById('amountInput');
+    const generateBtn = document.getElementById('generateBtn');
+    const qrSection = document.getElementById('qrSection');
+    const qrCodeDiv = document.getElementById('qrCode');
+    let qrCodeInstance = null;
+
+    generateBtn.addEventListener('click', () => {
+      const amount = amountInput.value.trim();
+      if (!amount) {
+        alert('Please enter amount.');
+        return;
+      }
+      const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+
+      // Clear previous QR code if any
+      qrCodeDiv.innerHTML = '';
+      qrCodeInstance = new QRCode(qrCodeDiv, {
+        text: upiUrl,
+        width: 200,
+        height: 200,
+      });
+
+      qrSection.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
