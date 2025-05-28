@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roshani Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;600&family=Roboto&family=Inder&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ebdfd7;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            position: fixed;
+            width: 216px;
+            height: 100vh;
+            background-color: #000000;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            transition: width 0.5s ease; /* Smooth transition for width */
+            overflow: hidden;
+        }
+        .sidebar.collapsed {
+            width: 0;   
+        }
+
+        .main-content {
+            margin-left: 216px;
+            transition: margin-left 0.3s ease, width 0.3s ease;
+            padding: 20px 30px;
+            width: calc(100% - 216px);
+        }
+
+        .main-content.collapsed {
+            margin-left: 0;
+            width: 100%;
+        }
+        .container {
+            transition: all 0.3s ease-in-out;
+        }
+
+
+
+        /**/
+        
+        .main-content {
+            margin-left: 216px; /* Default margin */
+            transition: margin-left 0.3s ease;
+        }
+        .main-content.collapsed {
+            margin-left: 0;
+        }
+        .back-button {
+            
+            transition: margin-left 0.3s ease; /* Smooth transition for back button */
+        }
+        .back-button.collapsed {
+            margin-left: -20px; /* Adjust this value to move the button left */
+        }
+        .back-button.collapsed img {
+            transform: rotate(180deg);
+            transition: transform 0.7s ease;
+        }
+        .back-button img {
+            transition: transform 0.7s ease;
+        }
+
+        /**/
+
+
+
+        .sidebar-logo {
+            position: relative;
+            width: 180px;
+            height: 75px;
+            margin: 23px 15px;
+            background-color: #ebdfd7;
+            border-radius: 35px;
+            display: relative;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar-logo img {
+            width: 180px;
+            height: 75px;
+        }
+
+        .sidebar-menu {
+            position: relative;
+            margin-top: 20px;
+        }
+
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+        }
+
+        .menu-item span {
+            font-size: 14px;
+            color: #ffffff;
+            font-weight: 400;
+            line-height: 21px;
+        }
+
+        .menu-item.active {
+            background-color: white;
+            border-radius: 23px;
+            width: 140px;
+            height: 45px;
+            border: 1px solid #d9d9d9;
+            margin-left: 34px;
+        }
+
+        .menu-item.active span {
+            color: #fc8b23;
+        }
+
+        .dashboard-active {
+            color: orange!important;
+        }
+
+        .main-content {
+            margin-left: 216px;
+            padding: 20px 30px;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .back-button {
+            width: 30px;
+            height: 28px;
+            background-color: #ffffff;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-inline-start: -40px;
+            position: absolute;
+            z-index: 100;
+        }
+
+        .page-title {
+            font-size: 27px;
+            font-weight: 500;
+            color: #000000;
+            margin-left: 20px;
+        }
+
+        .search-bar {
+            
+
+            margin-left: 490px; /*490px*/
+            display: flex;
+            align-items: center;
+            width: 313px;
+
+            height: 48px;
+            background-color: #ffffff;
+            border-radius: 24px;
+            border: 1px solid #d9d9d9;
+            padding: 0 10px;
+        }
+
+        .search-bar img {
+            width: 22px;
+            height: 23px;
+            margin-right: 8px;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            color: #00000066;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .notification-bell {
+            width: 46px;
+            height: 45px;
+            background-color: #ffffff;
+            border-radius: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            width: 182px;
+            height: 44px;
+            background-color: #ffffff;
+            border-radius: 22px;
+            border: 1px solid #d9d9d9;
+            padding: 0 3px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            margin-right: 12px;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #292d32;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .user-status {
+            font-size: 11px;
+            color: #b3b3b3;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .dropdown-icon {
+            margin-left: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #000000;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filter-dropdown {
+            position: absolute;
+            right: 30px;
+            top: 108px;
+            display: flex;
+            align-items: center;
+            width: 126px;
+            height: 32px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #d9d9d9;
+            padding: 0 12px;
+            cursor: pointer;
+        }
+
+        .filter-dropdown span {
+            font-size: 13px;
+            font-weight: 400;
+            color: #000000;
+            margin-right: auto;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            width: 249px;
+            height: 183px;
+            background-color: #f2eae5;
+            border-radius: 15px;
+            padding: 15px;
+            position: relative;
+        }
+
+        .stat-icon {
+            width: 39px;
+            height: 38px;
+            border-radius: 19px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .purple-bg {
+            background-color: #d398e7;
+        }
+
+        .orange-bg {
+            background-color: #e99777;
+        }
+
+        .blue-bg {
+            background-color: #70a1e5;
+        }
+
+        .yellow-bg {
+            background-color: #f0c274;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #797979;
+            margin-top: 15px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 500;
+            color: #010101;
+            margin-top: 5px;
+        }
+
+        .tables-container {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+
+        .table-card {
+            background-color: #f2eae5;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .download-summary {
+            width: 675px;
+            height: 324px;
+        }
+
+        .top-designs {
+            width: 675px;
+            height: 237px;
+        }
+
+        .table-header {
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .categories-dropdown {
+            position: relative;
+            left: 500px;
+            bottom: 35px;
+            display: flex;
+            align-items: center;
+            width: 129px;
+            height: 28px;
+            background-color: #ffffff;
+            border-radius: 14px;
+            border: 1px solid #d9d9d9;
+            padding: 0 14px;
+            cursor: pointer;
+        }
+
+        .categories-dropdown span {
+            font-size: 15px;
+            font-weight: 400;
+            color: #131212;
+            margin-right: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            font-size: 13px;
+            font-weight: 500;
+            color: #131212;
+            text-align: left;
+            padding: 10px 0;
+        }
+
+        td {
+            font-size: 11px;
+            color: #131212;
+            padding: 10px 0;
+        }
+
+        .designer-name {
+            color: #000000;
+        }
+
+        .date,.price {
+            color: #171616;
+        }
+
+        .offers-card {
+            width: 409px;
+            height: 324px;
+            background-color: #f2eae5;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .offer-banner {
+            width: 285px;
+            height: 176px;
+            background-color: #ebdfd7;
+            border-radius: 5px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .offer-text {
+            position: absolute;
+            top: 180px;
+            text-align: center;
+            font-size: 11px;
+            font-family: 'Inder', sans-serif;
+            color: #1e1d1d;
+            padding: 0 20px;
+            line-height: 14px;
+        }
+
+        .shop-now-btn {
+            position: absolute;
+            top: 230px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 111px;
+            height: 23px;
+            background-color: #cbdac4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+        }
+
+        .shop-now-btn span {
+            font-size: 8px;
+            font-family: 'Inder', sans-serif;
+            color: #026d2b;
+        }
+
+        .countdown-box {
+            position: absolute;
+            right: 25px;
+            width: 56px;
+            height: 50px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .countdown-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .countdown-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .days-box {
+            top: 50.5px;
+            background-color: #d398e7;
+        }
+
+        .hours-box {
+            top: 139px;
+            background-color: #e99777;
+        }
+
+        .mins-box {
+            top: 230px;
+            background-color: #f0c274;
+        }
+
+        .rewards-card {
+            width: 409px;
+            height: 236px;
+            background-color: #f2eae5;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .rewards-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .info-icon {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .rewards-divider {
+            width: 100%;
+            height: 1px;
+            background-color: #d8cdc6;
+            margin-bottom: 10px;
+        }
+
+        .rewards-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .rewards-column {
+            width: 48%;
+        }
+
+        .rewards-label {
+            font-size: 15px;
+            font-weight: 500;
+            color: #000000;
+            margin-bottom: 10px;
+            padding-left: 25px;
+        }
+
+        .tokens-value {
+            font-size: 40px;
+            font-weight: 500;
+            color: #0e7bda;
+            padding-left: 40px;
+        }
+
+        .discount-value {
+            font-size: 40px;
+            font-weight: 500;
+            color: #5dae66;
+            padding-left: 60px;
+        }
+
+        .rewards-note {
+            font-size: 11px;
+            font-weight: 500;
+            color: #5b5b5b;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .segment-tabs {
+            display: flex;
+            width: 194px;
+            height: 57px;
+            background-color: #f2eae5;
+            border-radius: 25px;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+
+        .segment-tab {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .segment-tab.active {
+            background-color: #ffffff;
+            border-radius: 20px;
+        }
+
+        .segment-tab.active span {
+            color: #0000ff;
+        }
+
+        .segment-tab span {
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            color: #8f8f8f;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+
+            .stats-container,
+            .tables-container {
+                flex-wrap: wrap;
+            }
+
+            .stat-card {
+                width: 48%;
+                margin-bottom: 20px;
+            }
+
+            .table-card,
+            .offers-card,
+            .rewards-card {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+
+            .sidebar-menu span {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 70px;
+            }
+
+            .stat-card {
+                width: 100%;
+            }
+
+            .user-profile {
+                width: auto;
+            }
+
+            .user-info {
+                display: none;
+            }
+        }
+
+
+
+
+        /* Extra Small Devices (Phones) */
+@media (max-width: 480px) {
+    /* Styles for mobile devices */
+}
+
+/* Small Devices (Phones) */
+@media (min-width: 481px) and (max-width: 600px) {
+    /* Styles for small phones */
+}
+
+/* Portrait Tablets */
+@media (min-width: 601px) and (max-width: 768px) {
+    /* Styles for portrait tablets */
+}
+
+/* Landscape Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Styles for landscape tablets */
+}
+
+/* Small Laptops */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    /* Styles for small laptops */
+}
+
+/* Medium Laptops */
+@media (min-width: 1281px) and (max-width: 1440px) {
+    /* Styles for medium laptops */
+}
+
+/* Large Desktops */
+@media (min-width: 1441px) {
+    /* Styles for large desktops */
+}
+
+
+
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+    animation: fadeIn 0.5s; /* Fade in animation */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    animation: slideIn 0.5s; /* Slide in animation */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+
+<body>
+     <div class="sidebar">
+        <div class="sidebar-logo">
+            <img src="images\ROSHANI ka logo (1).png" alt="Roshani Technologies Logo">
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-item active" data-link="RoshaniDashboard.html">
+                <img src="images\Grid.svg" alt="Dashboard Icon">
+                <span class="dashboard-active">Dashboard</span>
+            </div>
+            <div class="menu-item" data-link="spendings.html">
+                <img src="images\img_bar_chart.svg" alt="Spendings Icon">
+                <span>Spendings</span>
+            </div>
+            <div class="menu-item" data-link="downloads.html">
+                <img src="images\img_download.svg" alt="Downloads Icon">
+                <span>Downloads</span>
+            </div>
+            <div class="menu-item" data-link="favourites.html">
+                <img src="images\img_star.svg" alt="Favourites Icon">
+                <span>Favourites</span>
+            </div>
+            <div class="menu-item" data-link="deleted.html">
+                <img src="images\img_trash_2.svg" alt="Deleted Icon">
+                <span>Deleted</span>
+            </div>
+            <div class="menu-item" data-link="notifications.html">
+                <img src="images\img_bell.svg" alt="Notifications Icon">
+                <span>Notifications</span>
+            </div>
+            <div class="menu-item" data-link="settings.html">
+                <img src="images\img_settings.svg" alt="Settings Icon">
+                <span>Settings</span>
+            </div>
+            <div class="menu-item" data-link="logout.html">
+                <img src="images\img_log_out.svg" alt="Log Out Icon">
+                <span>Log out</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main-content">
+        <div class="header">
+            <div style="display: flex; align-items: center;">
+                
+                <div class="back-button" id="backButton" onclick="toggleSidebar()">
+                    <img src="images\img_chevron_left.svg" alt="Back">
+                </div>
+
+                <h1 class="page-title">Dashboard</h1>
+            </div>
+
+            <div class="search-bar">
+                <img src="images\img_search.svg" alt="Search">
+                <input type="text" placeholder="Search for anything...">
+            </div>
+
+            <div class="user-section">
+                <div class="notification-bell">
+                <a href="notifications.html">
+                <img src="images\img_bell_20x20.svg" alt="Notifications">
+                </a>
+            </div>
+            <div class="user-profile">
+                <img src="images\img_shape.png" alt="User  Avatar" class="user-avatar">
+                    <div class="user-info">
+                    <span class="user-name">Chirag jain</span>
+                <span class="user-status">Unemployed</span>
+            </div>
+            <img src="images\img_chevron_down.svg" alt="Dropdown" class="dropdown-icon">
+            </div>
+        </div>
+
+        </div>
+        <hr>
+        <h2 class="section-title">Overview</h2>
+        <div class="filter-dropdown">
+            <span>Last 30 days</span>
+            <img src="images\img_chevron_left_14x12.svg" alt="Dropdown">
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon purple-bg">
+                    <img src="images\img_bar_chart.svg" alt="Spendings Icon">
+                </div>
+                <div class="stat-label">Spendings</div>
+                <div class="stat-value">₹50,000</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange-bg">
+                    <img src="images\img_download.svg" alt="Downloads Icon">
+                </div>
+                <div class="stat-label">Downloads</div>
+                <div class="stat-value">13 Designs</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon blue-bg">
+                    <img src="images\img_star.svg" alt="Favourites Icon">
+                </div>
+                <div class="stat-label">Favourites</div>
+                <div class="stat-value">07 Designs</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon yellow-bg">
+                    <img src="images\img_trash_2.svg" alt="Trash Icon">
+                </div>
+                <div class="stat-label">Trash</div>
+                <div class="stat-value">00 Designs</div>
+            </div>
+        </div>
+
+        <div class="tables-container">
+            <div class="table-card download-summary">
+                <div class="table-header">Download summary</div>
+                <div class="categories-dropdown">
+                    <span>Categories</span>
+                    <img src="images\img_chevron_down.svg" alt="Dropdown">
+                </div>
+                <hr>
+               <div>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+
+                            <th>Designer name</th>
+                            <th>Valid from</th>
+                            <th>Valid till</th>
+                            <th>Price</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>Nelsa car designs</td>
+                            <td class="designer-name">Om prakash rao</td>
+                            <td class="date">May 25, 2023</td>
+                            <td class="date">May 25, 2024</td>
+                            <td class="price">₹ 7,999</td>
+                        </tr>
+                        <tr>
+                            <td>Nelsa car designs</td>
+                            <td class="designer-name">Neilsan mando</td>
+                            <td class="date">Jun 20, 2023</td>
+                            <td class="date">Jun 20, 2024</td>
+                            <td class="price">₹ 3,299</td>
+                        </tr>
+                        <tr>
+                            <td>Nelsa car designs</td>
+                            <td class="designer-name">Tiruvelly priya</td>
+                            <td class="date">jul 13, 2023</td>
+                            <td class="date">jul 13, 2024</td>
+                            <td class="price">₹ 5,429</td>
+                        </tr>
+                        <tr>
+                            <td>Nelsa car designs</td>
+                            <td class="designer-name">Matte hannery</td>
+                            <td class="date">Dec 20, 2023</td>
+                            <td class="date">Dec 20, 2024</td>
+                            <td class="price">₹ 1,599</td>
+                        </tr>
+                        <tr>
+                            <td>Nelsa car designs</td>
+                            <td class="designer-name">Sukumar sandeep rao</td>
+                            <td class="date">Mar 15, 2024</td>
+                            <td class="date">Mar 15, 2025</td>
+                            <td class="price">₹ 6,549</td>
+                        </tr>
+                    </tbody>
+                </table>
+               </div>
+            </div>
+
+            <div class="offers-card">
+                <div >Exclusive offers</div>
+                <div class="offer-banner">
+                    <div class="offer-text">
+                        Unlock the ultimate upgrade with our exclusive offer Enjoy savings of up to 40% off on our
+                        latest New Arrivals
+                    </div>
+                    <div class="shop-now-btn">
+                        <span>Shop now</span>
+                    </div>
+                </div>
+                <div class="countdown-box days-box">
+                    <div class="countdown-value">06</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-box hours-box">
+                    <div class="countdown-value">18</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-box mins-box">
+                    <div class="countdown-value">03</div>
+                    <div class="countdown-label">Mins</div>
+                </div>
+            </div>
+
+            <div class="table-card top-designs">
+                <div class="table-header">Top designs</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Designer name</th>
+                            <th>Valid from</th>
+                            <th>Valid till</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <hr>
+                            <td>Nelsa car designs</td>
+                            <td class="designer-name">Om prakash rao</td>
+                            <td class="date">May 25, 2023</td>
+                            <td class="date">May 25, 2024</td>
+                            <td class="price">₹ 7,999</td>
+                        </tr>
+                        <tr>
+                            <td>Nelsa car designs</td>
+                            <td class="designer-name">Neilsan mando</td>
+                            <td class="date">Jun 20, 2023</td>
+                            <td class="date">Jun 20, 2024</td>
+                            <td class="price">₹ 3,299</td>
+                        </tr>
+                        <tr>
+                            <td>Nelsa car designs</td>
+                            <td class="designer-name">Tiruvelly priya</td>
+                            <td class="date">jul 13, 2023</td>
+                            <td class="date">jul 13, 2024</td>
+                            <td class="price">₹ 5,429</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="rewards-card">
+                <div class="rewards-header">
+                    <div class="table-header">Rewards earned</div>
+                    <img src="images\img_info.svg" alt="Info" class="info-icon">
+                </div>
+                <div class="rewards-divider"></div>
+                <div class="rewards-content">
+                    <div class="rewards-column">
+                        <div class="rewards-label">Tokens earned</div>
+                        <div class="tokens-value">₹75</div>
+                    </div>
+                    <div class="rewards-column">
+                        <div class="rewards-label">Eligible discount</div>
+                        <div class="discount-value">₹75</div>
+                    </div>
+                </div>
+                <div class="rewards-note">₹10 worth discount at each purchase</div>
+            </div>
+        </div>
+    </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const notificationBell = document.querySelector('.notification-bell');
+    const modal = document.getElementById("notificationModal");
+    const closeModal = document.getElementById("closeModal");
+
+    // Open the modal when the bell icon is clicked
+    notificationBell.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        modal.style.display = "block"; // Show the modal
+    });
+
+    // Close the modal when the close button is clicked
+    closeModal.addEventListener('click', function () {
+        modal.style.display = "none"; // Hide the modal
+    });
+
+    // Close the modal when clicking outside of the modal content
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none"; // Hide the modal
+        }
+    });
+});
+document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all menu items
+                document.querySelectorAll('.menu-item').forEach(el => {
+                    el.classList.remove('active');
+                });
+                // Add active class to the clicked item
+                item.classList.add('active');
+                // Get the link from data attribute
+                const link = item.getAttribute('data-link');
+                // Navigate after a short delay to allow animation
+                setTimeout(() => {
+                    window.location.href = link;
+                }, 300); // Adjust the delay as needed
+            });
+        });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.querySelector(".sidebar");
+    const mainContent = document.querySelector(".main-content");
+    const backButton = document.querySelector(".back-button");
+
+    // Toggle sidebar visibility
+    backButton.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+        mainContent.classList.toggle("collapsed");
+        backButton.classList.toggle("collapsed");
+    });
+
+    // Toggle active class for menu items
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // Reset all menu items to default state
+            menuItems.forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('img').style.filter = 'none'; // Reset icon color
+                i.querySelector('span').style.color = '#ffffff'; // Reset text color
+            });
+
+            // Set the clicked item to active state
+            item.classList.add('active');
+            item.querySelector('img').style.filter = 'brightness(0) saturate(100%) invert(66%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(100%)'; // Change icon color to orange
+            item.querySelector('span').style.color = '#fc8b23'; // Change text color to orange
+        });
+    });
+
+    // Set the default state for the Dashboard item
+    const dashboardItem = document.querySelector('.menu-item.active');
+    if (dashboardItem) {
+        dashboardItem.querySelector('img').style.filter = 'brightness(0) saturate(100%) invert(66%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(100%)'; // Set icon color to orange
+        dashboardItem.querySelector('span').style.color = '#fc8b23'; // Set text color to orange
+    }
+
+    // Other existing functionalities...
+
+    // Toggle active class for segment tabs
+    const segmentTabs = document.querySelectorAll('.segment-tab');
+    segmentTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            segmentTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+        });
+    });
+
+    // Dropdown functionality
+    const dropdowns = document.querySelectorAll('.filter-dropdown, .categories-dropdown, .user-profile');
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', () => {
+            // Simulate dropdown opening
+            console.log('Dropdown clicked');
+        });
+    });
+
+    // Shop now button functionality
+    const shopNowBtn = document.querySelector('.shop-now-btn');
+    shopNowBtn.addEventListener('click', () => {
+        alert('Shopping feature coming soon!');
+    });
+
+    // Countdown timer functionality
+    let days = 6;
+    let hours = 18;
+    let minutes = 3;
+
+    function updateCountdown() {
+        if (minutes > 0) {
+            minutes--;
+        } else {
+            minutes = 59;
+            if (hours > 0) {
+                hours--;
+            } else {
+                hours = 23;
+                if (days > 0) {
+                    days--;
+                }
+            }
+        }
+
+        document.querySelector('.days-box .countdown-value').textContent = days.toString().padStart(2, '0');
+        document.querySelector('.hours-box .countdown-value').textContent = hours.toString().padStart(2, '0');
+        document.querySelector('.mins-box .countdown-value').textContent = minutes.toString().padStart(2, '0');
+
+        if (days === 0 && hours === 0 && minutes === 0) {
+            clearInterval(countdownInterval);
+            alert('Offer expired!');
+        }
+    }
+
+    const countdownInterval = setInterval(updateCountdown, 60000);
+
+    // Info icon tooltip
+    const infoIcon = document.querySelector('.info-icon');
+    infoIcon.addEventListener('mouseover', () => {
+        const tooltip = document.createElement('div');
+        tooltip.style.position = 'absolute';
+        tooltip.style.backgroundColor = '#333';
+        tooltip.style.color = '#fff';
+        tooltip.style.padding = '10px';
+        tooltip.style.borderRadius = '5px';
+        tooltip.style.top = '-50px';
+        tooltip.style.right = '0';
+        tooltip.style.zIndex = '1000';
+        tooltip.style.width = '200px';
+        tooltip.textContent = 'Earn tokens with every purchase. Tokens can be redeemed for discounts on future purchases.';
+
+        infoIcon.parentNode.style.position = 'relative';
+        infoIcon.parentNode.appendChild(tooltip);
+
+        infoIcon.addEventListener('mouseout', () => {
+            tooltip.remove();
+        });
+    });
+});
+</script>
+</body>
+</html>
