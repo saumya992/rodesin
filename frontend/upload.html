@@ -433,7 +433,7 @@
           previewImage.style.display = 'block';
           
           // Update the upload box background with the image
-          fileUploadBox.style.backgroundImage = url(${e.target.result});
+          fileUploadBox.style.backgroundImage = `url(${e.target.result})`;
           fileUploadBox.innerHTML = ''; // Clear the upload icon and text
         };
         reader.readAsDataURL(file);
@@ -530,7 +530,7 @@
 
     function clearAllSaved() {
       if (confirm("Are you sure you want to delete all saved designs?")) {
-        localstorage.removeItem("savedDesigns");
+        localStorage.removeItem("savedDesigns");
         showSavedDesigns();
       }
     }
