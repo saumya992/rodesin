@@ -5,9 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Roshani Dashboard - Settings</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;600&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet" />
     <style>
         /* General Reset and Body */
         * {
@@ -36,6 +34,10 @@
             overflow: hidden;
         }
 
+        .sidebar.collapsed {
+            width: 0;
+        }
+
         .sidebar-logo {
             position: relative;
             width: 180px;
@@ -43,7 +45,6 @@
             margin: 23px 15px;
             background-color: #ebdfd7;
             border-radius: 35px;
-            box-shadow: 6px 4px 200px #EBDFD7;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -97,11 +98,6 @@
             color: #fc8b23;
         }
 
-        .menu-item.active img {
-            filter: brightness(0) saturate(100%) invert(66%) sepia(100%)
-                saturate(0%) hue-rotate(0deg) brightness(100%);
-        }
-
         /* Main content */
         .main-content {
             margin-left: 216px;
@@ -113,20 +109,140 @@
             flex-direction: column;
         }
 
+        .main-content.collapsed {
+            margin-left: 0;
+        }
+
         /* Header */
         .header {
             display: flex;
-            justify-content: start;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
+            margin-top: -16px;
+            height: 80px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button {
+            width: 30px;
+            height: 28px;
+            background-color: #ffffff;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: margin-left 0.3s ease;
+            position: relative;
+            z-index: 101;
+            margin-inline-start: -40px;
+        }
+
+        .back-button img {
+            transition: transform 0.7s ease;
+        }
+
+        .back-button.collapsed {
+            margin-left: -20px;
+        }
+
+        .back-button.collapsed img {
+            transform: rotate(180deg);
         }
 
         .page-title {
             font-size: 27px;
             font-weight: 500;
             color: #000000;
-            margin-left: 10px;
-            user-select: none;
+            margin-left: 20px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 313px;
+            height: 48px;
+            background-color: #ffffff;
+            border-radius: 24px;
+            padding: 0 10px;
+        }
+
+        .search-bar img {
+            width: 22px;
+            height: 23px;
+            margin-right: 8px;
+        }
+
+        .search-bar input {
+            border: none; /* Removed border */
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+            color: #00000066;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification-bell {
+            width: 46px;
+            height: 45px;
+            background-color: #ffffff;
+            border-radius: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            width: 182px;
+            height: 44px;
+            background-color: #ffffff;
+            border-radius: 22px;
+            border: 1px solid #d9d9d9;
+            padding: 0 3px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            margin-right: 12px;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #292d32;
+        }
+
+        .user-status {
+            font-size: 11px;
+            color: #b3b3b3;
         }
 
         /* Content wrapper splits old details and form horizontally */
@@ -135,6 +251,7 @@
             gap: 40px;
             flex-wrap: nowrap;
             flex-grow: 1;
+            padding-top: 25px;
         }
 
         /* Old details panel */
@@ -192,11 +309,6 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* Profile section inside form remains but smaller and aligned properly */
-        .profile-section {
-            display: none; /* We show profile in old details, so hide */
-        }
-
         /* Form styles */
         form {
             max-width: 100%;
@@ -217,7 +329,8 @@
 
         input[type="text"],
         input[type="email"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="file"] {
             width: 100%;
             padding: 12px 15px;
             border-radius: 8px;
@@ -229,7 +342,8 @@
 
         input[type="text"]:focus,
         input[type="email"]:focus,
-        input[type="password"]:focus {
+        input[type="password"]:focus,
+        input[type="file"]:focus {
             border-color: #fc8b23;
             outline: none;
         }
@@ -297,6 +411,7 @@
             .content-wrapper {
                 flex-direction: column;
             }
+
             .old-details,
             .settings-form-wrapper {
                 width: 100%;
@@ -320,70 +435,83 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-logo">
-            <img src="images/img_roshani_logo_1.png" alt="Roshani Technologies Logo" />
+            <img src="images\ROSHANI ka logo (1).png" alt="Roshani Technologies Logo">
         </div>
         <div class="sidebar-menu">
-            <a href="dashboard.html" class="menu-link">
-                <div class="menu-item" id="menu-dashboard">
-                    <img src="images/img_grid.svg" alt="Dashboard Icon" />
-                    <span>Dashboard</span>
-                </div>
-            </a>
-            <a href="#" class="menu-link">
-                <div class="menu-item" id="menu-spendings">
-                    <img src="images/img_bar_chart.svg" alt="Spendings Icon" />
-                    <span>Spendings</span>
-                </div>
-            </a>
-            <a href="#" class="menu-link">
-                <div class="menu-item" id="menu-downloads">
-                    <img src="images/img_download.svg" alt="Downloads Icon" />
-                    <span>Downloads</span>
-                </div>
-            </a>
-            <a href="#" class="menu-link">
-                <div class="menu-item" id="menu-favourites">
-                    <img src="images/img_star.svg" alt="Favourites Icon" />
-                    <span>Favourites</span>
-                </div>
-            </a>
-            <a href="#" class="menu-link">
-                <div class="menu-item" id="menu-deleted">
-                    <img src="images/img_trash_2.svg" alt="Deleted Icon" />
-                    <span>Deleted</span>
-                </div>
-            </a>
-            <a href="#" class="menu-link">
-                <div class="menu-item" id="menu-notifications">
-                    <img src="images/img_bell.svg" alt="Notifications Icon" />
-                    <span>Notifications</span>
-                </div>
-            </a>
-            <!-- Settings menu item active -->
-            <a href="#" class="menu-link">
-                <div class="menu-item active" id="menu-settings">
-                    <img src="images/img_settings.svg" alt="Settings Icon" />
-                    <span>Settings</span>
-                </div>
-            </a>
-            <a href="#" class="menu-link">
-                <div class="menu-item" id="menu-logout">
-                    <img src="images/img_log_out.svg" alt="Log Out Icon" />
-                    <span>Log out</span>
-                </div>
-            </a>
+            <div class="menu-item" data-link="RoshaniDashboard.html">
+                <img src="images\img_grid.svg" alt="Dashboard Icon">
+                <span>Dashboard</span>
+            </div>
+            <div class="menu-item" data-link="spendings.html">
+                <img src="images\img_bar_chart.svg" alt="Spendings Icon">
+                <span>Spendings</span>
+            </div>
+            <div class="menu-item" data-link="downloads.html">
+                <img src="images\img_download.svg" alt="Downloads Icon">
+                <span>Downloads</span>
+            </div>
+            <div class="menu-item" data-link="favourites.html">
+                <img src="images\img_star.svg" alt="Favourites Icon">
+                <span>Favourites</span>
+            </div>
+            <div class="menu-item" data-link="deleted.html">
+                <img src="images\img_trash_2.svg" alt="Deleted Icon">
+                <span>Deleted</span>
+            </div>
+            <div class="menu-item" data-link="notifications.html">
+                <img src="images\img_bell.svg" alt="Notifications Icon">
+                <span>Notifications</span>
+            </div>
+            <div class="menu-item active" data-link="settings.html">
+                <img src="images\img_settings.svg" alt="Settings Icon">
+                <span>Settings</span>
+            </div>
+            <div class="menu-item" data-link="logout.html">
+                <img src="images\img_log_out.svg" alt="Log Out Icon">
+                <span>Log out</span>
+            </div>
         </div>
     </div>
 
     <div class="main-content">
         <div class="header">
-            <h1 class="page-title">Settings</h1>
+            <div class="header-left">
+                <div class="back-button" id="backButton" onclick="toggleSidebar()">
+                    <img src="images\img_chevron_left.svg" alt="Back" />
+                </div>
+                <h1 class="page-title">Settings</h1>
+            </div>
+
+            <div class="header-right">
+                <div class="search-bar">
+                    <img src="images\img_search.svg" alt="Search" />
+                    <input type="text" placeholder="Search for anything..." style="border: none;" />
+                </div>
+
+                <div class="user-section">
+                    <div class="notification-bell">
+                        <a href="notifications.html">
+                            <img src="images\img_bell_20x20.svg" alt="Notifications" />
+                        </a>
+                    </div>
+                    <div class="user-profile">
+                        <img src="images\img_shape.png" alt="User  Avatar" class="user-avatar" />
+                        <div class="user-info">
+                            <span class="user-name" id="display-username">Chirag Jain</span>
+                            <span class="user-status">User</span>
+                        </div>
+                        <img src="images\img_chevron_down.svg" alt="Dropdown" class="dropdown-icon" />
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <hr />
 
         <div class="content-wrapper">
             <div class="old-details" aria-label="Old user details">
                 <h2>Current Details</h2>
-                <img src="images/img_shape.png" alt="User Profile Photo" class="profile-photo" />
+                <img src="images\img_shape.png" alt="User  Profile Photo" class="profile-photo" id="profilePhoto" />
                 <div class="detail-item">
                     <div class="detail-label">Username</div>
                     <div class="detail-value" id="old-username">Chirag Jain</div>
@@ -394,12 +522,17 @@
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Status</div>
-                    <div class="detail-value">Unemployed</div>
+                    <div class="detail-value">User</div>
                 </div>
             </div>
 
             <div class="settings-form-wrapper">
                 <form id="settings-form" autocomplete="off" novalidate>
+                    <div class="form-group">
+                        <label for="profile-photo">Change Profile Photo</label>
+                        <input type="file" id="profile-photo" name="profile-photo" accept="image/*" onchange="previewImage(event)" />
+                    </div>
+
                     <div class="form-group">
                         <label for="username">Edit Username</label>
                         <input type="text" id="username" name="username" placeholder="Enter new username" />
@@ -435,99 +568,169 @@
     </div>
 
     <script>
-        function isNumeric(str) {
-            return /^\d+$/.test(str);
+        // Function to preview the selected image
+function previewImage(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const profilePhoto = document.getElementById('profilePhoto');
+        profilePhoto.src = e.target.result; // Update the profile photo preview
+    }
+    reader.readAsDataURL(file); // Convert the file to a data URL
+}
+
+// Function to validate input fields
+function validateInput(username, email, oldPassword, newPassword) {
+    const usernameValidation = document.getElementById('username-validation');
+    const emailValidation = document.getElementById('email-validation');
+    const oldPasswordValidation = document.getElementById('old-password-validation');
+    const newPasswordValidation = document.getElementById('new-password-validation');
+
+    let isValid = true;
+
+    // Clear previous validation messages
+    usernameValidation.innerText = "";
+    emailValidation.innerText = "";
+    oldPasswordValidation.innerText = "";
+    newPasswordValidation.innerText = "";
+
+    // Username validation
+    const usernamePattern = /^[a-zA-Z0-9]{3,15}$/; // Alphanumeric, 3-15 characters
+    if (username && !usernamePattern.test(username)) {
+        usernameValidation.innerText = "Username must be 3-15 characters long and contain no special characters.";
+        isValid = false;
+    }
+
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email format
+    if (email && !emailPattern.test(email)) {
+        emailValidation.innerText = "Please enter a valid email address.";
+        isValid = false;
+    }
+
+    // Password validation
+    if (newPassword && newPassword.length < 6) {
+        newPasswordValidation.innerText = "New password must be at least 6 characters long.";
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+// Function to handle save changes
+document.getElementById('save-changes').addEventListener('click', () => {
+    // Get values from the form
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const oldPassword = document.getElementById('old-password').value;
+    const newPassword = document.getElementById('new-password').value;
+
+    // Check if at least one field is filled
+    if (!username && !email && !oldPassword && !newPassword && !document.getElementById('profile-photo').files.length) {
+        const usernameValidation = document.getElementById('username-validation');
+        usernameValidation.innerText = "Please fill at least one field to save changes.";
+        return; // Stop execution if no fields are filled
+    }
+
+    // Validate inputs
+    if (!validateInput(username, email, oldPassword, newPassword)) {
+        return; // Stop execution if validation fails
+    }
+
+    // Check if old password matches (assuming 'currentPassword' is the previously set password)
+    const currentPassword = "yourCurrentPassword"; // Replace with actual logic to retrieve the current password
+    if (oldPassword && oldPassword !== currentPassword) {
+        document.getElementById('old-password-validation').innerText = "Old password is incorrect.";
+        return; // Stop execution if old password does not match
+    }
+
+    // Update the displayed username if provided
+    if (username) {
+        document.getElementById('old-username').innerText = username;
+        document.getElementById('display-username').innerText = username; // Update in user profile section
+    }
+
+    // Update the displayed email if provided
+    if (email) {
+        document.getElementById('old-email').innerText = email; // Update displayed email
+    }
+
+    // Handle password change if new password is provided
+    if (newPassword) {
+        // Here you can add logic to handle password change if needed
+        // For now, we will just clear the old password field
+        document.getElementById('old-password').value = '';
+        document.getElementById('new-password').value = '';
+    }
+
+    // Update profile photo only when save is clicked
+    const profilePhotoInput = document.getElementById('profile-photo');
+    if (profilePhotoInput.files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const profilePhoto = document.getElementById('profilePhoto');
+            profilePhoto.src = e.target.result; // Update the profile photo in the left container
         }
+        reader.readAsDataURL(profilePhotoInput.files[0]); // Convert the file to a data URL
+    }
 
-        function validatePassword(password) {
-            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-            return regex.test(password);
-        }
+    // Show success message below the form
+    const successMessage = document.createElement('div');
+    successMessage.innerText = "Changes saved successfully!";
+    successMessage.style.color = "green";
+    successMessage.style.marginTop = "10px";
+    document.getElementById('settings-form').appendChild(successMessage);
 
-        function validateEmail(email) {
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(email);
-        }
+    // Clear the success message after 3 seconds
+    setTimeout(() => {
+        successMessage.remove();
+    }, 3000); // 3000 milliseconds = 3 seconds
 
-        function clearValidationMessages() {
-            document.getElementById('username-validation').textContent = '';
-            document.getElementById('email-validation').textContent = '';
-            document.getElementById('old-password-validation').textContent = '';
-            document.getElementById('new-password-validation').textContent = '';
-        }
+    // Optionally, you can reset the form fields after saving
+    document.getElementById('settings-form').reset();
+});
 
-        // Save changes handler
-        document.getElementById('save-changes').addEventListener('click', () => {
-            clearValidationMessages();
+// Function to handle cancel button
+document.getElementById('cancel').addEventListener('click', () => {
+    // Clear all input fields
+    document.getElementById('settings-form').reset();
+    // Clear validation messages
+    document.querySelectorAll('.validation-message').forEach(msg => {
+        msg.innerText = "";
+    });
+});
 
-            const usernameInput = document.getElementById('username').value.trim();
-            const emailInput = document.getElementById('email').value.trim();
-            const oldPassInput = document.getElementById('old-password').value;
-            const newPassInput = document.getElementById('new-password').value;
-
-            let valid = true;
-
-            // Validate username
-            if (usernameInput === '') {
-                document.getElementById('username-validation').textContent = 'Username cannot be empty.';
-                valid = false;
-            } else if (isNumeric(usernameInput)) {
-                document.getElementById('username-validation').textContent = 'Username cannot be numeric only.';
-                valid = false;
-            }
-
-            // Validate email if entered
-            if (emailInput !== '' && !validateEmail(emailInput)) {
-                document.getElementById('email-validation').textContent = 'Please enter a valid email address.';
-                valid = false;
-            }
-
-            // If setting new password, old password required
-            if (newPassInput !== '') {
-                if (oldPassInput === '') {
-                    document.getElementById('old-password-validation').textContent = 'Please enter your old password to set a new one.';
-                    valid = false;
-                }
-                if (!validatePassword(newPassInput)) {
-                    document.getElementById('new-password-validation').textContent =
-                        'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.';
-                    valid = false;
-                }
-            }
-
-            if (usernameInput === '' && emailInput === '' && oldPassInput === '' && newPassInput === '') {
-                alert('Please make some changes before saving or click cancel.');
-                valid = false;
-            }
-
-            if (!valid) return;
-
-            // Update displayed old details with new inputs if changed
-            if (usernameInput !== '') {
-                document.getElementById('old-username').textContent = usernameInput;
-                document.getElementById('current-username').textContent = usernameInput;
-            }
-            if (emailInput !== '') {
-                document.getElementById('old-email').textContent = emailInput;
-            }
-
-            alert('Your settings have been saved.');
+// Menu item click event listener
+document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', () => {
+        // Remove active class from all menu items
+        document.querySelectorAll('.menu-item').forEach(el => {
+            el.classList.remove('active');
         });
+        // Add active class to the clicked item
+        item.classList.add('active');
+        // Get the link from data attribute
+        const link = item.getAttribute('data-link');
+        // Navigate after a short delay to allow animation
+        setTimeout(() => {
+            window.location.href = link;
+        }, 300); // Adjust the delay as needed
+    });
+});
 
-        // Cancel handler resets form and validation messages
-        document.getElementById('cancel').addEventListener('click', () => {
-            if (confirm('Are you sure you want to cancel all changes?')) {
-                document.getElementById('settings-form').reset();
-                clearValidationMessages();
-            }
-        });
+// Function to toggle sidebar visibility
+function toggleSidebar() {
+    const sidebar = document.querySelector(".sidebar");
+    const mainContent = document.querySelector(".main-content");
+    const backButton = document.getElementById("backButton");
 
-        // Forgot password
-        document.getElementById('forgot-password').addEventListener('click', () => {
-            alert('Redirecting to Forgot Password process...');
-        });
+    sidebar.classList.toggle("collapsed");
+    mainContent.classList.toggle("collapsed");
+    backButton.classList.toggle("collapsed");
+}
+
+
     </script>
 </body>
 
 </html>
-
