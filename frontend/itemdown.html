@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Roshani Designer Car Sketch Collection</title>
     <link rel="stylesheet">
-    <style>
+</head>
+  <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
         a {
@@ -19,10 +21,10 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            line-height: 1.5;
-            padding-top: 125px;
+            background-color: #ffffff;
+            width: 100%;
+            min-height: 100vh;
+            overflow:hidden;
         }
 
         /* Header Styles */
@@ -35,6 +37,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0px 20px;
+
             position: fixed;
             top: 0;
             left: 0;
@@ -119,6 +122,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+
             position: fixed;
             top: 80px;
             left: 0;
@@ -143,48 +147,36 @@
             border-radius: 8px;
         }
 
-        .divider {
-            height: 1px;
-            width: 100%;
-            background-color: #ffcdcd;
-            margin-top: 90px;
-        }
-
         .back-button {
-            position: fixed;
-            top: 135px;
-            right: 100px;
+            display: flex;
+            align-items: center;
             background-color: #2c2c2c;
             color: #f5f5f5;
             border: 1px solid #2c2c2c;
             border-radius: 8px;
+            padding: 20px 30px;
+            cursor: pointer;
+            margin: 5px 0 0 100px;
             width: 150px;
             height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .back-button img {
-            width: 16px;
-            height: 16px;
-            margin-right: 8px;
         }
 
         .back-button span {
-            font-size: 20px;
-            font-weight: 400;
+            font-size: 15px;
+            margin-left: 8px;
+            color: white;
+            text-decoration: none;
         }
 
         .content {
             display: flex;
-            margin-top: 40px;
+            margin-top: 125px;
             padding: 0 20px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
+
+        }
+
+        body {
+            overflow-x: hidden;
         }
 
         .blueprint-thumbnails {
@@ -192,6 +184,7 @@
             flex-direction: column;
             margin-left: 50px;
             gap: 10px;
+
         }
 
         .thumbnail {
@@ -199,7 +192,6 @@
             transition: opacity 0.3s;
             height: 80px;
             width: 80px;
-            border-radius: 6px;
         }
 
         .thumbnail:hover {
@@ -207,11 +199,18 @@
         }
 
         .thumbnail.active {
-            border: 2px solid #2c2c2c;
+            border: 1px solid #2c2c2c;
+            box-shadow: 0 0 8px #2c2c2c;
+            position: relative;
+            z-index: 10;
         }
 
         .main-blueprint {
             margin-left: 50px;
+        }
+
+        /* Left Image */
+        .main-blueprint {
             position: relative;
             width: 649px;
             height: 484px;
@@ -238,7 +237,6 @@
             flex-direction: column;
             align-items: center;
             font-size: 14px;
-            user-select: none;
         }
 
         .fullscreen-icon i {
@@ -271,18 +269,92 @@
             line-height: 1.5;
         }
 
-        /* Responsive adjustments */
+        .action-buttons {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            width: 200px;
+            height: 50px;
+            border-radius: 8px;
+            background-color: #cccccc;
+            border: 1px solid #767676;
+            font-size: 20px;
+            font-weight: 800;
+            color: #1e1e1e;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background-color: #b3b3b3;
+        }
+
+        .product-price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #000000;
+            margin: 0;
+        }
+
+        .social-stats {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .stat img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .price-like-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+
+        .image-gallery {
+            display: flex;
+            gap: 20px;
+        }
+
+        .thumbnails-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+
         @media (max-width: 1200px) {
             .content {
                 flex-direction: column;
-                margin-left: 20px;
-                margin-right: 20px;
             }
 
             .blueprint-info {
                 margin-left: 0;
                 margin-top: 30px;
                 max-width: 100%;
+            }
+
+            .search-container {
+                width: 300px;
             }
         }
 
@@ -292,10 +364,9 @@
                 align-items: flex-start;
             }
 
-            .search-bar {
-                width: 100%;
+            .search-container {
                 margin-top: 20px;
-                padding: 0 10px;
+                width: 100%;
             }
 
             .blueprint-thumbnails {
@@ -304,14 +375,8 @@
                 overflow-x: auto;
                 margin-bottom: 20px;
             }
-
-            .back-button {
-                right: 10px;
-                top: 120px;
-            }
         }
     </style>
-</head>
 
 <body>
     <!-- Header -->
@@ -322,9 +387,9 @@
             <img src="images/img_search.svg" alt="Search" class="search-icon" />
         </div>
         <div class="user-cart">
-            <button class="register-btn">
+         <button class="register-btn">
                 <img src="images/img_user.svg" alt="User Account" class="user-icon" />
-                <span>Register</span>
+                <a href="dashboard.html"> <span>▼ User-name</span></a>
             </button>
             <img src="images/img_shopping_cart.svg" alt="Shopping Cart" class="cart-icon" />
         </div>
