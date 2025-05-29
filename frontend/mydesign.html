@@ -15,10 +15,11 @@
         padding: 0;
     }
 
-    a {
-        text-decoration: none;
-        color: black;
-    }
+a {
+    text-decoration: none;
+    color: #202D36;
+    transition: color 0.3s ease;
+}
 
     body {
         font-family: 'Inter', sans-serif;
@@ -77,42 +78,59 @@
         height: 20px;
     }
 
-    .user-cart {
+ .user-cart {
         display: flex;
+        flex-direction: row;
         align-items: center;
     }
 
-    .user-icon,
-    .cart-icon {
-        width: 25px;
-        height: 25px;
-        cursor: pointer;
-    }
-
-    .user-icon {
-        margin-right: 10px;
-    }
-
-    .user-btn {
+    .user-profile {
         display: flex;
-        align-items: flex-end;
-        background-color: #964f4f;
-        color: #ffffff;
-        border: none;
-        border-radius: 20px;
-        padding: 10px;
-        font-family: 'Inter', sans-serif;
-        font-size: 15px;
-        font-weight: 600;
+        align-items: center;
+        width: 182px;
+        height: 44px;
+        background-color: #ffffff;
+        border-radius: 22px;
+        border: 1px solid #d9d9d9;
+        padding: 0 3px;
         cursor: pointer;
-        height: 40px;
-        width: 100%;
-        margin-right: 20px;
-        transition: background-color 0.3s ease;
     }
 
-    .user-btn:hover {
-        background-color: #b36b6b;
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        margin-right: 12px;
+    }
+
+
+    .user-name {
+        font-size: 12px;
+        font-weight: 600;
+        color: #292d32;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .user-status {
+        font-size: 11px;
+        color: #b3b3b3;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .dropdown-icon {
+        margin-left: 30px;
+    }
+
+    .cart-icon {
+        width: 24px;
+        height: 24px;
+        margin-left: 20px;
+        transition: transform 0.3s ease;
+        color: white;
+    }
+
+    .cart-icon:hover {
+        transform: scale(1.1);
     }
 
     /* Navigation Styles */
@@ -337,22 +355,18 @@
     }
 
     .stat {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 15px;
-        font-weight: 500;
+       font-family: 'Poppins', sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: #000000;
+        margin: 0;
     }
 
-    .stat img {
+    .stat svg {
         width: 20px;
         height: 20px;
     }
 
-    .bookmark {
-        margin-left: auto;
-        cursor: pointer;
-    }
 
     /* Collection Section */
     .collection-section {
@@ -729,11 +743,28 @@
 </svg>
         </div>
         <div class="user-cart">
-            <button class="register-btn">
-                <img src="images/img_user.svg" alt="User Account" class="user-icon" />
-               <a href="dashboard.html"> <span>▼ User-name</span></a>
-            </button>
-            <a href="cart.html"><img src="images/img_shopping_cart.svg" alt="Shopping Cart" class="cart-icon" /></a>
+            <a href="dashboard.html">
+                <div class="user-profile">
+                    <img src="images\img_shape.png" alt="User Avatar" class="user-avatar" />
+                    <div class="user-info">
+                        <span class="user-name">Chirag Jain</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="dropdown-icon" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                    </svg>
+                </div>
+            </a>
+            <a href="cart.html">
+                <div class="cart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                    </svg>
+                </div>
+            </a>
         </div>
     </header>
 
@@ -750,8 +781,7 @@
 
     <!-- Back Button -->
     <div class="back-button">
-        <img src="images/img_arrow_left.svg" alt="Back Arrow">
-        <span>GO BACK</span>
+        <span>← GO BACK</span>
     </div>
 
     <!-- Hero Section -->
