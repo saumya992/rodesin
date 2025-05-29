@@ -192,7 +192,7 @@
             margin-inline-start: -40px;
         }
 
-        .back-button img {
+        .back-button svg {
             transition: transform 0.7s ease;
         }
 
@@ -200,7 +200,7 @@
             margin-left: -20px;
         }
 
-        .back-button.collapsed img {
+        .back-button.collapsed svg {
             transform: rotate(180deg);
         }
 
@@ -228,7 +228,7 @@
             padding: 0 10px;
         }
 
-        .search-bar img {
+        .search-bar svg {
             width: 22px;
             height: 23px;
             margin-right: 8px;
@@ -352,6 +352,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            color: white;
         }
 
         .purple-bg {
@@ -913,8 +914,11 @@
                 <div class="user-section">
                     <div class="notification-bell">
                         <a href="notifications.html">
-                            <img src="images\img_bell_20x20.svg" alt="Notifications" />
-                        </a>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-bell" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
+                            </svg> </a>
                     </div>
                     <div class="user-profile">
                         <img src="images\img_shape.png" alt="User Avatar" class="user-avatar" />
@@ -922,7 +926,11 @@
                             <span class="user-name">Chirag Jain</span>
                             <span class="user-status">Unemployed</span>
                         </div>
-                        <img src="images\img_chevron_down.svg" alt="Dropdown" class="dropdown-icon" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="dropdown-icon" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -931,13 +939,21 @@
         <h2 class="section-title">Overview</h2>
         <div class="filter-dropdown">
             <span>Last 30 days</span>
-            <img src="images\img_chevron_left_14x12.svg" alt="Dropdown">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+            </svg>
         </div>
 
         <div class="stats-container">
             <div class="stat-card">
                 <div class="stat-icon purple-bg">
-                    <img src="images\img_bar_chart.svg" alt="Spendings Icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-bar-chart" viewBox="0 0 16 16">
+                        <path
+                            d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
+                    </svg>
                 </div>
                 <div class="stat-label">Spendings</div>
                 <div class="stat-value">₹50,000</div>
@@ -945,7 +961,13 @@
 
             <div class="stat-card">
                 <div class="stat-icon orange-bg">
-                    <img src="images\img_download.svg" alt="Downloads Icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-download" viewBox="0 0 16 16">
+                        <path
+                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                        <path
+                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                    </svg>
                 </div>
                 <div class="stat-label">Downloads</div>
                 <div class="stat-value">13 Designs</div>
@@ -953,7 +975,11 @@
 
             <div class="stat-card">
                 <div class="stat-icon blue-bg">
-                    <img src="images\img_star.svg" alt="Favourites Icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-star" viewBox="0 0 16 16">
+                        <path
+                            d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z" />
+                    </svg>
                 </div>
                 <div class="stat-label">Favourites</div>
                 <div class="stat-value">07 Designs</div>
@@ -961,7 +987,11 @@
 
             <div class="stat-card">
                 <div class="stat-icon yellow-bg">
-                    <img src="images\img_trash_2.svg" alt="Trash Icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-trash3" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                    </svg>
                 </div>
                 <div class="stat-label">Trash</div>
                 <div class="stat-value">00 Designs</div>
@@ -973,7 +1003,11 @@
                 <div class="table-header">Download summary</div>
                 <div class="categories-dropdown">
                     <span>Categories</span>
-                    <img src="images\img_chevron_down.svg" alt="Dropdown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-chevron-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                    </svg>
                 </div>
                 <hr>
                 <div>
@@ -1098,7 +1132,12 @@
             <div class="rewards-card">
                 <div class="rewards-header">
                     <div class="table-header">Rewards earned</div>
-                    <img src="images\img_info.svg" alt="Info" class="info-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="info-icon"
+                        viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path
+                            d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                    </svg>
                 </div>
                 <div class="rewards-divider"></div>
                 <div class="rewards-content">
