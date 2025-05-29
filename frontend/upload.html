@@ -33,30 +33,35 @@
       padding: 0;
     }
 
-a {
-    text-decoration: none;
-    color: #202D36;
-    transition: color 0.3s ease;
-}
-    body {
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 1.5;
-      padding-top: 125px;
-      background-color: #ebdfd7;
+    a {
+      text-decoration: none;
+      color: #202D36;
+      transition: color 0.3s ease;
     }
 
-    /* Header Styles */
+    body {
+      font-size: 16px;
+      line-height: 1.5;
+      background-color: #ebdfd7;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      color: var(--color-text-primary);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    /* Elegant Header Styles */
     .header {
-      background: linear-gradient(90deg, #000000 0%, #3d1314 100%);
+      background: linear-gradient(135deg, #3C0007 0%, #800C1F 100%);
       height: 80px;
       width: 100%;
-      border: 1px solid #000000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0px 20px;
-
+      padding: 0 40px;
       position: fixed;
       top: 0;
       left: 0;
@@ -64,123 +69,143 @@ a {
     }
 
     .logo {
-      width: 150px;
+      width: 160px;
       height: 60px;
-      margin-left: 17px;
-      margin-top: 2px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
     }
 
     .search-bar {
       width: 500px;
-      height: 55px;
-      background-color: #ffffff;
-      border: 4px solid #964f4f;
-      border-radius: 32px;
+      height: 50px;
+      background-color: #F5F7FA;
+      /* Very light gray-blue */
+      border: 2px solid #5C7896;
+      border-radius: 30px;
       display: flex;
       align-items: center;
-      padding: 0 20px;
+      padding: 0 25px;
+      transition: all 0.3s ease;
     }
 
-    .search-bar input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      color: black;
-      background: transparent;
+    .search-bar:hover {
+      box-shadow: 0 4px 12px rgba(92, 120, 150, 0.2);
     }
 
-    .search-icon {
-      width: 20px;
-      height: 20px;
+.search-bar input {
+    flex: 1 !important; 
+    border: none !important;
+    outline: none !important;
+    font-size: 16px !important;
+    color: #202D36 !important; 
+    background: transparent !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    padding: 14px 16px !important;
     }
 
     .user-cart {
       display: flex;
+      flex-direction: row;
       align-items: center;
     }
 
-    .user-icon,
-    .cart-icon {
-      width: 25px;
-      height: 25px;
-      cursor: pointer;
-    }
-
-    .user-icon {
-      margin-right: 10px;
-    }
-
-    .user-btn {
+    .user-profile {
       display: flex;
-      align-items: flex-end;
-      background-color: #964f4f;
-      color: #ffffff;
-      border: none;
-      border-radius: 20px;
-      padding: 10px;
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
+      align-items: center;
+      width: 182px;
+      height: 44px;
+      background-color: #ffffff;
+      border-radius: 22px;
+      border: 1px solid #d9d9d9;
+      padding: 0 3px;
       cursor: pointer;
+    }
+
+    .user-avatar {
+      width: 40px;
       height: 40px;
-      width: 100%;
-      margin-right: 20px;
-      transition: background-color 0.3s ease;
+      border-radius: 20px;
+      margin-right: 12px;
     }
 
-    .user-btn:hover {
-      background-color: #b36b6b;
+
+    .user-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #292d32;
+      font-family: 'Inter', sans-serif;
     }
 
-    /* Navigation Styles */
+    .user-status {
+      font-size: 11px;
+      color: #b3b3b3;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .dropdown-icon {
+      margin-left: 30px;
+    }
+
+    .cart-icon {
+      width: 24px;
+      height: 24px;
+      margin-left: 20px;
+      transition: transform 0.3s ease;
+      color: white;
+    }
+
+    .cart-icon:hover {
+      transform: scale(1.1);
+    }
+
+    /* Sophisticated Navigation */
+
     .nav-bar {
-      background: linear-gradient(90deg, #dcdcdc 0%, #a6a6a6 100%);
-      height: 45px;
+      background: #929CAA;
+      height: 50px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-
       position: fixed;
       top: 80px;
       left: 0;
       z-index: 999;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links {
       display: flex;
-      gap: 40px;
+      gap: 30px;
     }
 
     .nav-link {
       font-size: 15px;
-      font-weight: 400;
-      color: #000000;
-      text-decoration: none;
-      padding: 8px 10px;
+      font-weight: 500;
+      color: #202D36;
+      padding: 12px 15px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(92, 120, 150, 0.2);
     }
 
     .nav-link.active {
-      background-color: #f5f5f5;
-      border-radius: 8px;
+      background-color: #5C7896;
+      color: white;
+      font-weight: 600;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: var(--color-base);
-      color: var(--color-text-primary);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
 
     .container {
       display: flex;
@@ -269,7 +294,7 @@ a {
       text-shadow: 0 0 5px var(--color-shadow-light);
     }
 
-    input,
+    <!-- input,
     select,
     textarea {
       width: 100%;
@@ -283,7 +308,7 @@ a {
       background-color: var(--color-lighter);
       color: var(--color-text-primary);
       box-shadow: inset 0 0 8px var(--color-shadow-light);
-    }
+    } -->
 
     input:focus,
     select:focus,
@@ -543,17 +568,34 @@ a {
     <img src="images/img_roshani_logo_1.png" alt="Roshani Logo" class="logo">
     <div class="search-bar">
       <input type="text" placeholder="Search here...">
-     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-</svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search"
+        viewBox="0 0 16 16">
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+      </svg>
     </div>
     <div class="user-cart">
-      <button class="user-btn">
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-</svg>        <a href="dashboard.html"> <span>▼ User-name</span></a>
-      </button>
-      <a href="cart.html"> <img src="images/img_shopping_cart.svg" alt="Shopping Cart" class="cart-icon" /></a>
+      <a href="dashboard.html">
+        <div class="user-profile">
+          <img src="images\img_shape.png" alt="User Avatar" class="user-avatar" />
+          <div class="user-info">
+            <span class="user-name">Chirag Jain</span>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="dropdown-icon"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+          </svg>
+        </div>
+      </a>
+      <a href="cart.html">
+        <div class="cart-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16">
+            <path
+              d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+          </svg>
+        </div>
+      </a>
     </div>
   </header>
 
@@ -561,7 +603,7 @@ a {
   <nav class="nav-bar">
     <div class="nav-links">
       <a href="home.html" class="nav-link">Home</a>
-      <a href="explore.html" class="nav-link ">Explore ▼</a>
+      <a href="explore.html" class="nav-link">Explore ▼</a>
       <a href="upload.html" class="nav-link active">Upload</a>
       <a href="mydesign.html" class="nav-link">Mydesign</a>
       <a href="#" class="nav-link">Contact</a>
@@ -570,8 +612,7 @@ a {
 
   <!-- Back Button -->
   <div class="back-button" onclick="history.back()">
-    <img src="images/img_arrow_left.svg" alt="Back Arrow">
-    <span>GO BACK</span>
+    <span>← GO BACK</span>
   </div>
 
   <div class="container">
