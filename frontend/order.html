@@ -25,19 +25,16 @@
         text-decoration: none;
         color: black;
     }
-
-
-    /* Header Styles */
+/* Elegant Header Styles */
     .header {
-        background: linear-gradient(90deg, #000000 0%, #3d1314 100%);
+        background: linear-gradient(135deg, #3C0007 0%, #800C1F 100%);
         height: 80px;
         width: 100%;
-        border: 1px solid #000000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0px 20px;
-
+        padding: 0 40px;
         position: fixed;
         top: 0;
         left: 0;
@@ -45,21 +42,30 @@
     }
 
     .logo {
-        width: 150px;
+        width: 160px;
         height: 60px;
-        margin-left: 17px;
-        margin-top: 2px;
+        transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+        transform: scale(1.05);
     }
 
     .search-bar {
         width: 500px;
-        height: 55px;
-        background-color: #ffffff;
-        border: 4px solid #964f4f;
-        border-radius: 32px;
+        height: 50px;
+        background-color: #F5F7FA;
+        /* Very light gray-blue */
+        border: 2px solid #5C7896;
+        border-radius: 30px;
         display: flex;
         align-items: center;
-        padding: 0 20px;
+        padding: 0 25px;
+        transition: all 0.3s ease;
+    }
+
+    .search-bar:hover {
+        box-shadow: 0 4px 12px rgba(92, 120, 150, 0.2);
     }
 
     .search-bar input {
@@ -67,85 +73,108 @@
         border: none;
         outline: none;
         font-size: 16px;
-        color: black;
+        color: #202D36;
         background: transparent;
-    }
-
-    .search-icon {
-        width: 20px;
-        height: 20px;
+        padding: 0 10px;
+        font-family: 'Inter', sans-serif;
     }
 
     .user-cart {
         display: flex;
+        flex-direction: row;
         align-items: center;
     }
 
-    .user-icon,
-    .cart-icon {
-        width: 25px;
-        height: 25px;
-        cursor: pointer;
-    }
-
-    .user-icon {
-        margin-right: 10px;
-    }
-
-    .user-btn {
+    .user-profile {
         display: flex;
-        align-items: flex-end;
-        background-color: #964f4f;
-        color: #ffffff;
-        border: none;
-        border-radius: 20px;
-        padding: 10px;
-        font-family: 'Inter', sans-serif;
-        font-size: 15px;
-        font-weight: 600;
+        align-items: center;
+        width: 182px;
+        height: 44px;
+        background-color: #ffffff;
+        border-radius: 22px;
+        border: 1px solid #d9d9d9;
+        padding: 0 3px;
         cursor: pointer;
+    }
+
+    .user-avatar {
+        width: 40px;
         height: 40px;
-        width: 100%;
-        margin-right: 20px;
-        transition: background-color 0.3s ease;
+        border-radius: 20px;
+        margin-right: 12px;
     }
 
-    .user-btn:hover {
-        background-color: #b36b6b;
+
+    .user-name {
+        font-size: 12px;
+        font-weight: 600;
+        color: #292d32;
+        font-family: 'Inter', sans-serif;
     }
 
-    /* Navigation Styles */
+    .user-status {
+        font-size: 11px;
+        color: #b3b3b3;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .dropdown-icon {
+        margin-left: 30px;
+    }
+
+    .cart-icon {
+        width: 24px;
+        height: 24px;
+        margin-left: 20px;
+        transition: transform 0.3s ease;
+        color: white;
+    }
+
+    .cart-icon:hover {
+        transform: scale(1.1);
+    }
+    /* Sophisticated Navigation */
+
     .nav-bar {
-        background: linear-gradient(90deg, #dcdcdc 0%, #a6a6a6 100%);
-        height: 45px;
+        background: #929CAA;
+        height: 50px;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-
         position: fixed;
         top: 80px;
         left: 0;
         z-index: 999;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links {
         display: flex;
-        gap: 40px;
+        gap: 30px;
     }
 
     .nav-link {
         font-size: 15px;
-        font-weight: 400;
-        color: #000000;
-        text-decoration: none;
-        padding: 8px 10px;
+        font-weight: 500;
+        color: #202D36;
+        padding: 12px 15px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .nav-link:hover {
+        background-color: rgba(92, 120, 150, 0.2);
     }
 
     .nav-link.active {
-        background-color: #f5f5f5;
-        border-radius: 8px;
+        background-color: #5C7896;
+        color: white;
+        font-weight: 600;
     }
+
 
 
       body.order {
@@ -345,34 +374,53 @@
   </head>
 
 <body>
-  <!-- Header -->
-  <header class="header">
-    <img src="images/img_roshani_logo_1.png" alt="Roshani Logo" class="logo">
-    <div class="search-bar">
-      <input type="text" placeholder="Search here...">
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-</svg>
-    </div>
-    <div class="user-cart">
-      <button class="user-btn">
-        <img src="images/img_user.svg" alt="User Account" class="user-icon" />
-        <a href="dashboard.html"> <span>▼ User-name</span></a>
-      </button>
-    </div>
-  </header>
+ <!-- Header -->
+    <header class="header">
+        <img src="images/img_roshani_logo_1.png" alt="Roshani Logo" class="logo">
+        <div class="search-bar">
+            <input type="text" placeholder="Search here...">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search"
+                viewBox="0 0 16 16">
+                <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+            </svg>
+        </div>
+        <div class="user-cart">
+            <a href="dashboard.html">
+                <div class="user-profile">
+                    <img src="images\img_shape.png" alt="User Avatar" class="user-avatar" />
+                    <div class="user-info">
+                        <span class="user-name">Chirag Jain</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="dropdown-icon" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                    </svg>
+                </div>
+            </a>
+            <a href="cart.html">
+                <div class="cart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                    </svg>
+                </div>
+            </a>
+        </div>
+    </header>
 
-  <!-- Navigation -->
-  <nav class="nav-bar">
-    <div class="nav-links">
-      <a href="home.html" class="nav-link">Home</a>
-      <a href="explore.html" class="nav-link active">Explore ▼</a>
-      <a href="upload.html" class="nav-link">Upload</a>
-      <a href="mydesign.html" class="nav-link">Mydesign</a>
-      <a href="#" class="nav-link">Contact</a>
-    </div>
-  </nav>
-
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-links">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="explore.html" class="nav-link active">Explore ▼</a>
+            <a href="upload.html" class="nav-link">Upload</a>
+            <a href="mydesign.html" class="nav-link">Mydesign</a>
+            <a href="#" class="nav-link">Contact</a>
+        </div>
+    </nav>
   <div class="container">
     <!-- LEFT CONTAINER -->
     <div class="left-box">
