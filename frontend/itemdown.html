@@ -2,12 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Roshani Designer Car Sketch Collection</title>
-    <link rel="stylesheet">
-</head>
-  <style>
+
+    <title>Roshani Technologies - Car Coupe Blueprint</title>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -20,187 +17,189 @@
             color: black;
         }
 
-     body {
-        font-family: 'Inter', sans-serif;
-        font-size: 16px;
-        line-height: 1.6;
-        padding-top: 125px;
-        background-color: #F0F4F8;
-        /* Very light blue-gray */
-        color: #333;
-    }
-  /* Elegant Header Styles */
-    .header {
-        background: linear-gradient(135deg, #3C0007 0%, #800C1F 100%);
-        height: 80px;
-        width: 100%;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 40px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            padding-top: 125px;
+            background-color: #F0F4F8;
+            /* Very light blue-gray */
+            color: #333;
+        }
 
-    .logo {
-        width: 160px;
-        height: 60px;
-        transition: transform 0.3s ease;
-    }
+        /* Elegant Header Styles */
+        .header {
+            background: linear-gradient(135deg, #3C0007 0%, #800C1F 100%);
+            height: 80px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
 
-    .logo:hover {
-        transform: scale(1.05);
-    }
+        .logo {
+            width: 160px;
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
 
-    .search-bar {
-        width: 500px;
-        height: 50px;
-        background-color: #F5F7FA;
-        /* Very light gray-blue */
-        border: 2px solid #5C7896;
-        border-radius: 30px;
-        display: flex;
-        align-items: center;
-        padding: 0 25px;
-        transition: all 0.3s ease;
-    }
+        .logo:hover {
+            transform: scale(1.05);
+        }
 
-    .search-bar:hover {
-        box-shadow: 0 4px 12px rgba(92, 120, 150, 0.2);
-    }
+        .search-bar {
+            width: 500px;
+            height: 50px;
+            background-color: #F5F7FA;
+            /* Very light gray-blue */
+            border: 2px solid #5C7896;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+            transition: all 0.3s ease;
+        }
 
-    .search-bar input {
-        flex: 1;
-        border: none;
-        outline: none;
-        font-size: 16px;
-        color: #202D36;
-        background: transparent;
-        padding: 0 10px;
-        font-family: 'Inter', sans-serif;
-    }
+        .search-bar:hover {
+            box-shadow: 0 4px 12px rgba(92, 120, 150, 0.2);
+        }
 
-    .user-cart {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #202D36;
+            background: transparent;
+            padding: 0 10px;
+            font-family: 'Inter', sans-serif;
+        }
 
-    .user-profile {
-        display: flex;
-        align-items: center;
-        width: 182px;
-        height: 44px;
-        background-color: #ffffff;
-        border-radius: 22px;
-        border: 1px solid #d9d9d9;
-        padding: 0 3px;
-        cursor: pointer;
-    }
+        .user-cart {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
 
-    .user-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 20px;
-        margin-right: 12px;
-    }
+        .user-profile {
+            display: flex;
+            align-items: center;
+            width: 182px;
+            height: 44px;
+            background-color: #ffffff;
+            border-radius: 22px;
+            border: 1px solid #d9d9d9;
+            padding: 0 3px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            margin-right: 12px;
+        }
 
 
-    .user-name {
-        font-size: 12px;
-        font-weight: 600;
-        color: #292d32;
-        font-family: 'Inter', sans-serif;
-    }
+        .user-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #292d32;
+            font-family: 'Inter', sans-serif;
+        }
 
-    .user-status {
-        font-size: 11px;
-        color: #b3b3b3;
-        font-family: 'Inter', sans-serif;
-    }
+        .user-status {
+            font-size: 11px;
+            color: #b3b3b3;
+            font-family: 'Inter', sans-serif;
+        }
 
-    .dropdown-icon {
-        margin-left: 30px;
-    }
+        .dropdown-icon {
+            margin-left: 30px;
+        }
 
-    .cart-icon {
-        width: 24px;
-        height: 24px;
-        margin-left: 20px;
-        transition: transform 0.3s ease;
-        color: white;
-    }
+        .cart-icon {
+            width: 24px;
+            height: 24px;
+            margin-left: 20px;
+            transition: transform 0.3s ease;
+            color: white;
+        }
 
-    .cart-icon:hover {
-        transform: scale(1.1);
-    }
-    /* Sophisticated Navigation */
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
 
-    .nav-bar {
-        background: #929CAA;
-        height: 50px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 80px;
-        left: 0;
-        z-index: 999;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
+        /* Sophisticated Navigation */
 
-    .nav-links {
-        display: flex;
-        gap: 30px;
-    }
+        .nav-bar {
+            background: #929CAA;
+            height: 50px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-    .nav-link {
-        font-size: 15px;
-        font-weight: 500;
-        color: #202D36;
-        padding: 12px 15px;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
 
-    .nav-link:hover {
-        background-color: rgba(92, 120, 150, 0.2);
-    }
+        .nav-link {
+            font-size: 15px;
+            font-weight: 500;
+            color: #202D36;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-    .nav-link.active {
-        background-color: #5C7896;
-        color: white;
-        font-weight: 600;
-    }
+        .nav-link:hover {
+            background-color: rgba(92, 120, 150, 0.2);
+        }
 
-      /* Refined Back Button */
-    .back-button {
-        position: fixed;
-        top: 140px;
-        right: 100px;
-        background-color: #3C0007;
-        color: #ffffff;
-        border: none;
-        border-radius: 8px;
-        width: 150px;
-        height: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 10;
-        gap: 10px;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(60, 0, 7, 0.3);
-    }
+        .nav-link.active {
+            background-color: #5C7896;
+            color: white;
+            font-weight: 600;
+        }
 
-         .back-button span {
+        /* Refined Back Button */
+        .back-button {
+            position: fixed;
+            top: 140px;
+            right: 100px;
+            background-color: #3C0007;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            width: 150px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(60, 0, 7, 0.3);
+        }
+
+        .back-button span {
             font-size: 15px;
             margin-left: 8px;
             color: white;
@@ -209,7 +208,7 @@
 
         .content {
             display: flex;
-            margin-top: 125px;
+            margin-top: 50px;
             padding: 0 20px;
 
         }
@@ -296,38 +295,41 @@
         }
 
         .blueprint-title {
+            font-family: 'Playfair Display', serif;
             color: #1e1e1e;
             font-size: 23px;
             font-weight: 600;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
+
         }
 
         .blueprint-description {
-            color: #000000;
-            font-size: 22px;
+            color: #5C7896;
+            font-size: 18px;
             line-height: 1.5;
         }
 
         .action-buttons {
             display: flex;
             gap: 60px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         .btn {
-            width: 200px;
-            height: 50px;
-            border-radius: 8px;
-            background-color: #cccccc;
-            border: 1px solid #767676;
-            font-size: 20px;
-            font-weight: 800;
-            color: #1e1e1e;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            background: linear-gradient(135deg, #5C7896 0%, #7598B9 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 40px auto 0;
+    box-shadow: 0 4px 12px rgba(92, 120, 150, 0.3);
+}
+        
 
         .btn:hover {
             background-color: #b3b3b3;
@@ -350,9 +352,10 @@
         .stat {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 1px;
             font-size: 18px;
-            font-weight: 500;
+            font-weight: 700;
+            color: #3C0007;
         }
 
         .stat img {
@@ -360,14 +363,26 @@
             height: 20px;
         }
 
+        p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            unicode-bidi: isolate;
+        }
+
         .price-like-container {
             display: flex;
             justify-content: space-between;
-            width: 100%;
-            padding: 0 10px;
-            box-sizing: border-box;
-            margin-top: 5px;
         }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #3C0007;
+        }
+        
 
         .image-gallery {
             display: flex;
@@ -416,6 +431,7 @@
             }
         }
     </style>
+</head>
 
 <body>
     <!-- Header -->
@@ -459,35 +475,42 @@
     <nav class="nav-bar">
         <div class="nav-links">
             <a href="home.html" class="nav-link">Home</a>
-            <a href="explore.html" class="nav-link active">Explore ▼</a>
+            <a href="explore.html" class="nav-link">Explore ▼</a>
             <a href="upload.html" class="nav-link">Upload</a>
-            <a href="mydesign.html" class="nav-link">Mydesign</a>
+            <a href="mydesign.html" class="nav-link  active">Mydesign</a>
             <a href="#" class="nav-link">Contact</a>
         </div>
     </nav>
-    
 
-   <div class="back-button">
+    <div class="divider"></div>
+
+
+    <div class="back-button">
         <span>← GO BACK</span>
     </div>
 
 
     <div class="content">
         <div class="blueprint-thumbnails">
-            <img src="images/img_image_6.png" alt="Side View" class="thumbnail active" onclick="changeView(this, 'images/img_image_6.png')">
-            <img src="images/img_image_7.png" alt="Front View" class="thumbnail" onclick="changeView(this, 'images/img_image_7.png')">
-            <img src="images/img_image_8.png" alt="Rear View" class="thumbnail" onclick="changeView(this, 'images/img_image_8.png')">
-            <img src="images/img_image_9.png" alt="Top View" class="thumbnail" onclick="changeView(this, 'images/img_image_9.png')">
-            <img src="images/img_image_12.png" alt="Interior View" class="thumbnail" onclick="changeView(this, 'images/img_image_12.png')">
+            <img src="images/img_image_6.png" alt="Side View" class="thumbnail active"
+                onclick="changeView(this, 'images/img_image_6.png')">
+            <img src="images/img_image_7.png" alt="Front View" class="thumbnail"
+                onclick="changeView(this, 'images/img_image_7.png')">
+            <img src="images/img_image_8.png" alt="Rear View" class="thumbnail"
+                onclick="changeView(this, 'images/img_image_8.png')">
+            <img src="images/img_image_9.png" alt="Top View" class="thumbnail"
+                onclick="changeView(this, 'images/img_image_9.png')">
+            <img src="images/img_image_12.png" alt="Interior View" class="thumbnail"
+                onclick="changeView(this, 'images/img_image_12.png')">
         </div>
-
         <div class="main-blueprint">
-            <img src="images/img_image_6.png" alt="Car Coupe Blueprint" id="mainImage" width="649" height="484" />
+            <img src="images/img_image_6.png" alt="Car Coupe Blueprint" id="mainImage" width="649" height="484">
             <div class="fullscreen-icon" onclick="openFullscreen()">
                 <i>⛶</i>
                 <span>Full Screen</span>
             </div>
         </div>
+
 
         <div class="blueprint-info">
             <div class="breadcrumb">Explore / Car / Coupe</div>
@@ -499,9 +522,11 @@
                 uses dynamic lines, shading, and highlights to emphasize speed, style, and performance. The sketch
                 serves as an early concept for car design development.
             </p>
+
+            
+
         </div>
     </div>
-
     <script>
         function goBack() {
             // In a real application, this would navigate back
@@ -527,8 +552,8 @@
             if (e.key === 'Enter') {
                 const searchTerm = this.value.trim();
                 if (searchTerm) {
-                alert(`Searching for: ${searchTerm}`);
-                // In a real application, this would trigger a search
+                    alert(`Searching for: ${searchTerm}`);
+                    // In a real application, this would trigger a search
                 }
             }
         });
