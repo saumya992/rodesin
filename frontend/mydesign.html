@@ -188,35 +188,48 @@
     }
 
     /* Refined Back Button */
-    .back-button {
-        position: fixed;
-        top: 140px;
-        right: 100px;
-        background-color: #3C0007;
-        color: #ffffff;
-        border: none;
-        border-radius: 8px;
-        width: 150px;
-        height: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 10;
-        gap: 10px;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(60, 0, 7, 0.3);
-    }
+      .back-button {
+    color: #ffffff;
+    position: fixed;
+    top: 140px;
+    right: 100px;
+    border: none;
+    border-radius: 8px;
+    width: 150px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    gap: 10px;
+    overflow: hidden; /* Essential for the sliding effect */
+    background: linear-gradient(135deg, #5C7896 0%, #7598B9 100%);
+    box-shadow: 0 2px 8px rgba(60, 0, 7, 0.3);
+    transition: all 0.3s ease;
+}
 
-    .back-button:hover {
-        background-color: #800C1F;
-        transform: translateY(-2px);
-    }
+.back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #7E1824 0%, #660911 100%);
+    transition: all 0.5s ease;
+    z-index: -1;
+}
 
-    .back-button span {
-        font-size: 16px;
-        font-weight: 500;
-    }
+.back-button:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(60, 0, 7, 0.4);
+}
+
+.back-button:hover::before {
+    left: 0;
+}
 
     /* Elegant Section Styling */
     .best-selling-section,
@@ -261,6 +274,7 @@
         max-width: 700px;
         line-height: 1.6;
     }
+
 
     /* Product Grid - Elegant Layout */
     .product-grid {
@@ -446,8 +460,8 @@
         color: #202D36;
     }
 
-    .shop-now-btn {
-        background-color: #800C1F;
+   .shop-now-btn {
+        background-color: #3C0007;
         width: 238px;
         height: 75px;
         display: flex;
@@ -456,20 +470,48 @@
         cursor: pointer;
         border-radius: 25px;
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .shop-now-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        transition: all 0.5s ease;
+        z-index: -1;
+        background: #7598B9;
+        ;
     }
 
     .shop-now-btn:hover {
-        background-color: #3C0007;
+        color: white;
         transform: translateY(-3px);
         box-shadow: 0 8px 20px rgba(60, 0, 7, 0.4);
+    }
+
+    .shop-now-btn:hover::before {
+        left: 0;
     }
 
     .shop-now-btn span {
         font-family: 'Poppins', sans-serif;
         font-size: 25px;
         font-weight: 600;
-        line-height: 3px;
+        line-height: 30px;
         color: #ffffff;
+    }
+
+   .tabs-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
     }
 
     .tab {
@@ -479,11 +521,31 @@
         font-weight: 500;
         color: #5C7896;
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        background: transparent;
+    }
+
+    .tab::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        transition: all 0.5s ease;
+        z-index: -1;
+        background: #5C7896;
     }
 
     .tab:hover {
+        color: white;
         background: rgba(92, 120, 150, 0.1);
-        color: #3C0007;
+    }
+
+    .tab:hover::before {
+        left: 0;
     }
 
     .tab.active {
@@ -491,8 +553,14 @@
         color: white;
     }
 
+    .tab.active::before {
+        left: 0;
+        background: #5C7896;
+    }
+  
+
     /* Buttons */
-    .see-more-btn {
+     .see-more-btn {
         background: linear-gradient(135deg, #5C7896 0%, #7598B9 100%);
         color: white;
         border: none;
@@ -505,11 +573,31 @@
         display: block;
         margin: 40px auto 0;
         box-shadow: 0 4px 12px rgba(92, 120, 150, 0.3);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .see-more-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        transition: all 0.5s ease;
+        z-index: -1;
+        background: linear-gradient(135deg, #7E1824 0%, #660911 100%);
     }
 
     .see-more-btn:hover {
+        color: white;
         transform: translateY(-3px);
         box-shadow: 0 8px 20px rgba(92, 120, 150, 0.4);
+    }
+
+    .see-more-btn:hover::before {
+        left: 0;
     }
 
     /* Elegant Footer */
