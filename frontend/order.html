@@ -338,21 +338,6 @@
         font-weight: bold;
         font-size: 18px;
       }
-
-      .pay-button,
-      .pay-btn {
-        width: 100%;
-        padding: 12px;
-        background-color: black;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        margin-top: 20px;
-      }
-
       .view-btn {
         margin-top: 5%;
         width: 100%;
@@ -369,41 +354,36 @@
         cursor: pointer;
         font-weight: bold;
       }
-  </style>
-  <script src="checkout.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <style>
+
     /* QR Overlay Styles */
     #qrOverlay {
+      display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0,0,0,0.6);
-      display: none;
+      background: rgba(0, 0, 0, 0.6);
       justify-content: center;
       align-items: center;
       z-index: 2000;
     }
+
     #qrContainer {
       background: white;
       padding: 20px 30px;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       max-width: 400px;
       width: 90%;
       box-sizing: border-box;
       text-align: center;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    #qrContainer h2 {
-      margin-bottom: 20px;
-      color: #1f2937;
-    }
-    #qrCode {
-      margin: 0 auto;
-    }
+
     #closeQrBtn {
       position: absolute;
       top: 10px;
@@ -414,7 +394,12 @@
       cursor: pointer;
       color: #555;
     }
+
+    #qrCode {
+      margin: 0 auto
+    }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 
 <body>
