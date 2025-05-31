@@ -369,12 +369,38 @@
         cursor: pointer;
         font-weight: bold;
       }
+      /* Wrapper - Animated Gradient */
+     .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 100px 20px 40px;
+      background: linear-gradient(-45deg, #5C7896, #7598B9, #3C0007, #800C1F);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
     </style>
     <script src="checkout.js"></script>
   </head>
 
 <body>
  <!-- Header -->
+<div class="wapper">
     <header class="header">
         <img src="images/img_roshani_logo_1.png" alt="Roshani Logo" class="logo">
         <div class="search-bar">
@@ -385,6 +411,7 @@
                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
             </svg>
         </div>
+        
         <div class="user-cart">
             <a href="dashboard.html">
                 <div class="user-profile">
@@ -458,6 +485,8 @@
       <button class="back-btn"><a href=""></a>← GO BACK</button>
     </div>
   </div>
+  </div>
+  
 </body>
 
 </html>
