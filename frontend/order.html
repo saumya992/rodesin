@@ -7,7 +7,7 @@
 
     <style>
       * {
-        margin: 5;
+        margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
@@ -181,41 +181,43 @@
         background: url('https://i.imgur.com/eaKdG4B.png');
       }
 
-      .container {
-        display: flex;
-        justify-content: space-between;
-        padding: 0;
-        gap: 0;
-        width: 100vw;
-        height: 100vh;
-        margin-top: 10%;
-        box-sizing: border-box;
-      }
-
+  
+   .container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    gap: 2vw;
+    width: 95vw;
+    height: 87vh;
+    margin-top: 3%;
+    box-sizing: border-box;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
       .left-box,
       .right-box {
         padding: 30px;
-        border-radius: 10px;
         width: 50vw;
-        height: 100vh;
-        overflow-y: auto;
+        height: 75vh;
         display: flex;
         flex-direction: column;
+       background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 20px;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .left-box:hover,
+      .right-box:hover {
+        transform: translateY(-5px);
+      box-shadow: 0 30px 50px rgba(60, 0, 7, 0.4);
       }
 
-      .left-box {
-        background-color: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-radius: 0;
-        box-shadow: none;
-        border: none;
-        padding: 30px;
-      }
 
-      .right-box {
-        background-color: #ededf5;
-      }
 
       h2 {
         border-bottom: 1px solid black;
@@ -313,7 +315,7 @@
         font-weight: bold;
         border-radius: 5px;
         cursor: pointer;
-        margin-bottom: 30px;
+        margin-bottom: 15px;
       }
 
       .summary-box,
@@ -398,13 +400,41 @@
     #qrCode {
       margin: 0 auto
     }
+    
+       /* Wrapper - Animated Gradient */
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 100px 20px 40px;
+      background: linear-gradient(-45deg, #5C7896, #7598B9, #3C0007, #800C1F);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 
 <body>
  <!-- Header -->
-<div class="wapper">
+<div class="wrapper">
     <header class="header">
         <img src="images/img_roshani_logo_1.png" alt="Roshani Logo" class="logo">
         <div class="search-bar">
@@ -489,10 +519,6 @@
       <button class="back-btn"><a href=""></a>← GO BACK</button>
     </div>
   </div>
-<<<<<<< HEAD
-  </div>
-  
-=======
 
   <!-- QR Code Overlay -->
   <div id="qrOverlay">
@@ -548,7 +574,6 @@
       qrCodeDiv.innerHTML = '';
     });
   </script>
->>>>>>> 1a53d5c6f1e90a6ef8e2a51b23efe6f2c06b8ab3
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 <head>
 
     <title>Roshani Technologies - Car Coupe Blueprint</title>
-    <style>
+  <style>
         * {
             margin: 0;
             padding: 0;
@@ -18,21 +18,25 @@
         }
 
         body {
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #F8F1F1 0%, #FFFFFF 100%);
             font-family: 'Inter', sans-serif;
             font-size: 16px;
             line-height: 1.6;
             padding-top: 125px;
-            background-color: #F0F4F8;
-            /* Very light blue-gray */
+            background-color: #F8F1F1;
+            /* Soft light background with pinkish tint */
             color: #333;
+             overflow-x: hidden;
+            background: linear-gradient(135deg, #F8F1F1 0%, #FFFFFF 100%);
         }
 
-        /* Elegant Header Styles */
+        /* Header Styles */
         .header {
-            background: linear-gradient(135deg, #3C0007 0%, #800C1F 100%);
+            background: linear-gradient(to right, #2A0508 0%, #7E1824 100%);
             height: 80px;
             width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(42, 5, 8, 0.3);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -46,28 +50,27 @@
         .logo {
             width: 160px;
             height: 60px;
-            transition: transform 0.3s ease;
+            /* Make logo white */
         }
 
         .logo:hover {
-            transform: scale(1.05);
+            opacity: 0.9;
         }
 
         .search-bar {
             width: 500px;
             height: 50px;
-            background-color: #F5F7FA;
-            /* Very light gray-blue */
-            border: 2px solid #5C7896;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid #7E1824;
             border-radius: 30px;
             display: flex;
             align-items: center;
             padding: 0 25px;
-            transition: all 0.3s ease;
         }
 
         .search-bar:hover {
-            box-shadow: 0 4px 12px rgba(92, 120, 150, 0.2);
+            border-color: #660911;
+            background-color: white;
         }
 
         .search-bar input {
@@ -75,7 +78,7 @@
             border: none;
             outline: none;
             font-size: 16px;
-            color: #202D36;
+            color: #2A0508;
             background: transparent;
             padding: 0 10px;
             font-family: 'Inter', sans-serif;
@@ -92,7 +95,7 @@
             align-items: center;
             width: 182px;
             height: 44px;
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 22px;
             border: 1px solid #d9d9d9;
             padding: 0 3px;
@@ -106,38 +109,36 @@
             margin-right: 12px;
         }
 
-
         .user-name {
             font-size: 12px;
             font-weight: 600;
-            color: #292d32;
+            color: #2A0508;
             font-family: 'Inter', sans-serif;
         }
 
         .user-status {
             font-size: 11px;
-            color: #b3b3b3;
+            color: #7E1824;
             font-family: 'Inter', sans-serif;
         }
 
         .dropdown-icon {
             margin-left: 30px;
+            color: #7E1824;
         }
 
         .cart-icon {
             width: 24px;
             height: 24px;
             margin-left: 20px;
-            transition: transform 0.3s ease;
             color: white;
         }
 
         .cart-icon:hover {
-            transform: scale(1.1);
+            color: #F8F1F1;
         }
 
-        /* Sophisticated Navigation */
-
+        /* Navigation */
         .nav-bar {
             background: #929CAA;
             height: 50px;
@@ -149,7 +150,7 @@
             top: 80px;
             left: 0;
             z-index: 999;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(42, 5, 8, 0.3);
         }
 
         .nav-links {
@@ -160,101 +161,128 @@
         .nav-link {
             font-size: 15px;
             font-weight: 500;
-            color: #202D36;
+            color: white;
             padding: 12px 15px;
             border-radius: 8px;
-            transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .nav-link:hover {
-            background-color: rgba(92, 120, 150, 0.2);
+            background-color: #2A0508;
         }
 
         .nav-link.active {
-            background-color: #5C7896;
+            background-color: #7E1824;
             color: white;
             font-weight: 600;
         }
 
         /* Refined Back Button */
-        .back-button {
-            position: fixed;
-            top: 140px;
-            right: 100px;
-            background-color: #3C0007;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            width: 150px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            gap: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(60, 0, 7, 0.3);
-        }
+    .back-button {
+    color: #ffffff;
+    position: fixed;
+    top: 140px;
+    right: 100px;
+    border: none;
+    border-radius: 8px;
+    width: 150px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    gap: 10px;
+    overflow: hidden; /* Essential for the sliding effect */
+    background: linear-gradient(135deg, #5C7896 0%, #7598B9 100%);
+    box-shadow: 0 2px 8px rgba(60, 0, 7, 0.3);
+    transition: all 0.3s ease;
+}
 
-        .back-button span {
-            font-size: 15px;
-            margin-left: 8px;
-            color: white;
-            text-decoration: none;
-        }
+.back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #7E1824 0%, #660911 100%);
+    transition: all 0.5s ease;
+    z-index: -1;
+}
+
+.back-button:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(60, 0, 7, 0.4);
+}
+
+.back-button:hover::before {
+    left: 0;
+}
+
+.back-button span {
+    font-size: 16px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover span {
+    transform: translateX(5px);
+}
+
 
         .content {
             display: flex;
-            margin-top: 50px;
+            margin-top: 20px;
             padding: 0 20px;
-
+            background-color: white;
+            border-radius: 15px;
+            margin: 15px 20px 20px;
+            box-shadow: 0 4px 15px rgba(126, 24, 36, 0.1);
         }
 
-        body {
-            overflow-x: hidden;
-        }
+     
 
         .blueprint-thumbnails {
             display: flex;
             flex-direction: column;
             margin-left: 50px;
             gap: 10px;
-
+            padding: 20px 0;
         }
 
         .thumbnail {
             cursor: pointer;
-            transition: opacity 0.3s;
             height: 80px;
             width: 80px;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
         }
 
         .thumbnail:hover {
             opacity: 0.8;
+            border-color: #7E1824;
         }
 
         .thumbnail.active {
-            border: 1px solid #2c2c2c;
-            box-shadow: 0 0 8px #2c2c2c;
+            border: 2px solid #7E1824;
+            box-shadow: 0 0 8px rgba(126, 24, 36, 0.4);
             position: relative;
             z-index: 10;
         }
 
+        /* Main Blueprint */
         .main-blueprint {
-            margin-left: 50px;
-        }
-
-        /* Left Image */
-        .main-blueprint {
+            margin: 20px 0 20px 50px;
             position: relative;
             width: 649px;
             height: 484px;
-            background-color: #ddd;
+            background-color: #f5f5f5;
             border-radius: 10px;
             overflow: hidden;
+            border: 1px solid #e0e0e0;
         }
 
         .main-blueprintimg {
@@ -267,7 +295,8 @@
             position: absolute;
             bottom: 10px;
             right: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(42, 5, 8, 0.8);
+            color: white;
             padding: 6px 12px;
             border-radius: 6px;
             cursor: pointer;
@@ -277,18 +306,18 @@
             font-size: 14px;
         }
 
-        .fullscreen-icon i {
-            font-size: 20px;
-            margin-bottom: 4px;
+        .fullscreen-icon:hover {
+            background-color: rgba(126, 24, 36, 0.9);
         }
 
         .blueprint-info {
             margin-left: 30px;
             max-width: 485px;
+            padding: 20px;
         }
 
         .breadcrumb {
-            color: #959494;
+            color: #7E1824;
             font-size: 22px;
             font-weight: 600;
             margin-bottom: 30px;
@@ -296,50 +325,76 @@
 
         .blueprint-title {
             font-family: 'Playfair Display', serif;
-            color: #1e1e1e;
+            color: #2A0508;
             font-size: 23px;
             font-weight: 600;
             margin-bottom: 10px;
-
         }
 
         .blueprint-description {
-            color: #5C7896;
-            font-size: 18px;
+            color: #660911;
+            font-size: 17px;
             line-height: 1.5;
         }
 
         .action-buttons {
             display: flex;
-            gap: 60px;
-            margin-bottom: 20px;
+            gap: 80px;
+            margin-bottom: 5px;
         }
 
         .btn {
+            position: relative;
+            overflow: hidden;
             background: linear-gradient(135deg, #5C7896 0%, #7598B9 100%);
-    color: white;
-    border: none;
-    border-radius: 30px;
-    padding: 15px 30px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: block;
-    margin: 40px auto 0;
-    box-shadow: 0 4px 12px rgba(92, 120, 150, 0.3);
-}
-        
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+            margin: 40px auto 0;
+            box-shadow: 0 4px 12px rgba(92, 120, 150, 0.3);
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #7E1824 0%, #660911 100%);
+            border-radius: 30px;
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
 
         .btn:hover {
-            background-color: #b3b3b3;
+            color: white;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        #addToCartBtn::before {
+            background: linear-gradient(135deg, #7E1824 0%, #660911 100%);
+        }
+
+        #buyNowBtn::before {
+            background: linear-gradient(135deg, #660911 0%, #2A0508 100%);
         }
 
         .product-price {
             font-family: 'Poppins', sans-serif;
             font-size: 18px;
-            font-weight: 600;
-            color: #000000;
+            font-weight: 700;
+            color: #7E1824;
             margin: 0;
         }
 
@@ -354,47 +409,21 @@
             align-items: center;
             gap: 1px;
             font-size: 18px;
-            font-wseight: 700;
-            color: #3C0007;
+            font-weight: 700;
+            color: #7E1824;
         }
 
-        .stat img {
-            width: 20px;
-            height: 20px;
-        }
-
-        p {
-            display: block;
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
-            unicode-bidi: isolate;
+        .stat svg {
+            fill: #7E1824;
         }
 
         .price-like-container {
+            margin-left: 65px;
             display: flex;
-            justify-content: space-between;
+            gap: 150px;
+            padding: 15px 0;
+            border-top: 1px solid #f0e0e0;
         }
-
-        .product-price {
-            font-size: 18px;
-            font-weight: 700;
-            color: #3C0007;
-        }
-        
-
-        .image-gallery {
-            display: flex;
-            gap: 20px;
-        }
-
-        .thumbnails-column {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
 
         @media (max-width: 1200px) {
             .content {
@@ -407,7 +436,7 @@
                 max-width: 100%;
             }
 
-            .search-container {
+            .search-bar {
                 width: 300px;
             }
         }
@@ -416,10 +445,12 @@
             .header {
                 flex-direction: column;
                 align-items: flex-start;
+                height: auto;
+                padding: 15px;
             }
 
-            .search-container {
-                margin-top: 20px;
+            .search-bar {
+                margin-top: 15px;
                 width: 100%;
             }
 
@@ -428,8 +459,16 @@
                 margin-left: 0;
                 overflow-x: auto;
                 margin-bottom: 20px;
+                padding: 15px;
             }
-        }
+
+            .main-blueprint {
+                margin: 0 auto;
+                width: 100%;
+                height: auto;
+            }
+
+    }
     </style>
 </head>
 
@@ -475,9 +514,9 @@
     <nav class="nav-bar">
         <div class="nav-links">
             <a href="home.html" class="nav-link">Home</a>
-            <a href="explore.html" class="nav-link">Explore ▼</a>
+            <a href="explore.html" class="nav-link active">Explore ▼</a>
             <a href="upload.html" class="nav-link">Upload</a>
-            <a href="mydesign.html" class="nav-link  active">Mydesign</a>
+            <a href="mydesign.html" class="nav-link">Mydesign</a>
             <a href="#" class="nav-link">Contact</a>
         </div>
     </nav>
@@ -485,9 +524,10 @@
     <div class="divider"></div>
 
 
-    <div class="back-button">
+   <div class="back-button">
         <span>← GO BACK</span>
     </div>
+
 
 
     <div class="content">
@@ -523,8 +563,8 @@
                 serves as an early concept for car design development.
             </p>
 
-            
-
+          
+            </div>
         </div>
     </div>
     <script>

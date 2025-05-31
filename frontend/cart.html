@@ -174,18 +174,32 @@
 
     .container {
       display: flex;
-      margin-top: 7%;
-      padding: 50px;
+     margin-top: 3%;
       gap: 30px;
+      
     }
 
     .left-container,
-    .right-container {
-      background-color: #ebdfd7;
-      padding: 20px;
-      border-radius: 10px;
-      width: 50%;
-    }
+      .right-container {
+        padding: 30px;
+        width: 40vw;
+        height: 55vh;
+        display: flex;
+        flex-direction: column;
+       background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 20px;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .left-box:hover,
+      .right-box:hover {
+        transform: translateY(-5px);
+      box-shadow: 0 30px 50px rgba(60, 0, 7, 0.4);
+      }
 
     h2,
     h3 {
@@ -342,10 +356,34 @@
     #qrCode {
       margin: 0 auto
     }
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height:77.9vh;
+      padding: 100px 20px 40px;
+      background: linear-gradient(-45deg, #5C7896, #7598B9, #3C0007, #800C1F);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+     @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <div class="wrapper">
   <!-- Header -->
   <header class="header">
     <img src="images/img_roshani_logo_1.png" alt="Roshani Logo" class="logo">
@@ -386,23 +424,13 @@
   <nav class="nav-bar">
     <div class="nav-links">
       <a href="home.html" class="nav-link">Home</a>
-      <a href="explore.html" class="nav-link">Explore ▼</a>
+      <a href="explore.html" class="nav-link active">Explore ▼</a>
       <a href="upload.html" class="nav-link">Upload</a>
-      <a href="mydesign.html" class="nav-link active">Mydesign</a>
+      <a href="mydesign.html" class="nav-link ">Mydesign</a>
       <a href="#" class="nav-link">Contact</a>
     </div>
   </nav>
 
-  <!-- Navigation -->
-  <nav class="nav-bar">
-    <div class="nav-links">
-      <a href="home.html" class="nav-link">Home</a>
-      <a href="explore.html" class="nav-link active">Explore ▼</a>
-      <a href="upload.html" class="nav-link">Upload</a>
-      <a href="mydesign.html" class="nav-link">Mydesign</a>
-      <a href="#" class="nav-link">Contact</a>
-    </div>
-  </nav>
   <div class="container">
     <!-- Left Container: Cart -->
     <div class="left-container">
@@ -477,6 +505,7 @@
       <div id="qrCode" style="margin: 0 auto;"></div>
       <p>Scan this QR to pay</p>
     </div>
+  </div>
   </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
