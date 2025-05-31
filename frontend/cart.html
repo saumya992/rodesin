@@ -297,6 +297,51 @@
       color: white;
       cursor: pointer;
     }
+    
+    /* QR Overlay Styles */
+
+    #qrOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    #qrContainer {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      max-width: 400px;
+      width: 90%;
+      box-sizing: border-box;
+      text-align: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #closeQrBtn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #555;
+    }
+
+    #qrCode {
+      margin: 0 auto
+    }
   </style>
 </head>
 
@@ -416,46 +461,99 @@
         <p class="final-total">Total <span>₹600</span></p>
       </div>
 
-      <a href="qr.html"><button class="qr-btn">Generate QR Scanner</button></a>
+      <button class="qr-btn" id="openQrBtn">Generate QR Scanner</button>
       <button class="back-btn"><a href=""></a>← GO BACK</button>
     </div>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const checkboxes = document.querySelectorAll(".cart-item input[type='checkbox']");
-      const summaryItems = document.querySelector(".summary h3");
-      const totalPrice = document.querySelector(".summary p:nth-of-type(1) span");
-      const discount = document.querySelector(".summary p:nth-of-type(2) span");
-      const finalTotal = document.querySelector(".final-total span");
+  <!-- QR Code Overlay -->
+  <div id="qrOverlay"
+    style="display:none; position: fixed; top:0; left:0; width:100vw; height:100vh; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 2000;">
+    <div id="qrContainer"
+      style="background: white; padding: 20px 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); max-width: 400px; width: 90%; box-sizing: border-box; text-align: center; position: relative; display: flex; flex-direction: column; align-items: center;">
+      <button id="closeQrBtn" title="Close QR Code"
+        style="position: absolute; top: 10px; right: 15px; background: transparent; border: none; font-size: 24px; cursor: pointer; color: #555;">&times;</button>
+      <h2>Google Pay via UPI</h2>
+      <div id="qrCode" style="margin: 0 auto;"></div>
+      <p>Scan this QR to pay</p>
+    </div>
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll(".cart-item input[type='checkbox']");
+    const summaryItems = document.querySelector(".summary h3");
+    const totalPrice = document.querySelector(".summary p:nth-of-type(1) span");
+    const discount = document.querySelector(".summary p:nth-of-type(2) span");
+    const finalTotal = document.querySelector(".final-total span");
+    const openQrBtn = document.getElementById("openQrBtn");
+    const qrOverlay = document.getElementById("qrOverlay");
+    const closeQrBtn = document.getElementById("closeQrBtn");
+    const qrCodeDiv = document.getElementById("qrCode");
+    let qrCodeInstance = null;
 
-      function updateSummary() {
-        let itemCount = 0;
-        let total = 0;
-
-        checkboxes.forEach((checkbox) => {
-          if (checkbox.checked) {
-            itemCount++;
-            total += 300; // Price per item
-          }
-        });
-
-        const discountAmount = itemCount * 100;
-        const finalAmount = total - discountAmount;
-
-        summaryItems.textContent = `Summary(${itemCount} Item${itemCount !== 1 ? 's' : ''})`;
-        totalPrice.textContent = `₹${total}`;
-        discount.textContent = `₹${discountAmount}`;
-        finalTotal.textContent = `₹${finalAmount}`;
-      }
+    function updateSummary() {
+      let itemCount = 0;
+      let total = 0;
 
       checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener("change", updateSummary);
+        if (checkbox.checked) {
+          itemCount++;
+          total += 300; // Price per item
+        }
       });
 
-      updateSummary();
+      const discountAmount = itemCount * 100;
+      const finalAmount = total - discountAmount;
+
+      summaryItems.textContent = `Summary(${itemCount} Item${itemCount !== 1 ? 's' : ''})`;
+      totalPrice.textContent = `₹${total}`;
+      discount.textContent = `₹${discountAmount}`;
+      finalTotal.textContent = `₹${finalAmount}`;
+    }
+
+    function getTotalAmount() {
+      if (!finalTotal) return null;
+      const amountText = finalTotal.textContent.trim();
+      const amount = amountText.replace(/[^\d.]/g, '');
+      return amount;
+    }
+
+    function generateQrCode(amount) {
+      const upiId = 'ohmp1015@okhdfcbank';
+      const name = 'Your Business Name';
+      const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+      qrCodeDiv.innerHTML = '';
+      qrCodeInstance = new QRCode(qrCodeDiv, {
+        text: upiUrl,
+        width: 200,
+        height: 200,
+      });
+    }
+
+    openQrBtn.addEventListener("click", () => {
+      const amount = getTotalAmount();
+      if (!amount) {
+        alert('Total amount not found.');
+        return;
+      }
+      generateQrCode(amount);
+      qrOverlay.style.display = 'flex';
     });
-  </script>
-</body>
+
+    closeQrBtn.addEventListener("click", () => {
+      qrOverlay.style.display = 'none';
+      qrCodeDiv.innerHTML = '';
+    });
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", updateSummary);
+    });
+
+    updateSummary();
+  });
+</script>
+
 
 </html>

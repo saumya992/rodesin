@@ -1269,6 +1269,17 @@
             </div>
         </div>
     </footer>
+<script>
+  // Add click event listener to all images on the page
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default action if inside a link
+      if (confirm('First login for viewing the product. Do you want to login now?')) {
+        window.location.href = 'login.html';
+      }
+    });
+  });
+</script>
 </body>
 
 </html>

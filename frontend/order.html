@@ -338,21 +338,6 @@
         font-weight: bold;
         font-size: 18px;
       }
-
-      .pay-button,
-      .pay-btn {
-        width: 100%;
-        padding: 12px;
-        background-color: black;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        margin-top: 20px;
-      }
-
       .view-btn {
         margin-top: 5%;
         width: 100%;
@@ -369,34 +354,53 @@
         cursor: pointer;
         font-weight: bold;
       }
-      /* Wrapper - Animated Gradient */
-     .wrapper {
-      display: flex;
+
+    /* QR Overlay Styles */
+    #qrOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      padding: 100px 20px 40px;
-      background: linear-gradient(-45deg, #5C7896, #7598B9, #3C0007, #800C1F);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
+      z-index: 2000;
     }
 
-    @keyframes gradientBG {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
+    #qrContainer {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      max-width: 400px;
+      width: 90%;
+      box-sizing: border-box;
+      text-align: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    </style>
-    <script src="checkout.js"></script>
-  </head>
+
+    #closeQrBtn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #555;
+    }
+
+    #qrCode {
+      margin: 0 auto
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
 
 <body>
  <!-- Header -->
@@ -481,12 +485,70 @@
         <p class="final-total">Total <span>₹600</span></p>
       </div>
 
-      <a href="qr.html"><button class="qr-btn">Generate QR Scanner</button></a>
+      <button class="qr-btn" id="openQrBtn">Generate QR Scanner</button>
       <button class="back-btn"><a href=""></a>← GO BACK</button>
     </div>
   </div>
+<<<<<<< HEAD
   </div>
   
+=======
+
+  <!-- QR Code Overlay -->
+  <div id="qrOverlay">
+    <div id="qrContainer">
+      <button id="closeQrBtn" title="Close QR Code">&times;</button>
+      <h2>Google Pay via UPI</h2>
+      <div id="qrCode"></div>
+      <p>Scan this QR to pay</p>
+    </div>
+  </div>
+
+  <script>
+    const upiId = 'ohmp1015@okhdfcbank';
+    const name = 'Your Business Name';
+
+    const openQrBtn = document.getElementById('openQrBtn');
+    const qrOverlay = document.getElementById('qrOverlay');
+    const closeQrBtn = document.getElementById('closeQrBtn');
+    const qrCodeDiv = document.getElementById('qrCode');
+    let qrCodeInstance = null;
+
+    function getTotalAmount() {
+      const finalTotalSpan = document.querySelector('.final-total span');
+      if (!finalTotalSpan) return null;
+      // Extract numeric value from text like "₹600"
+      const amountText = finalTotalSpan.textContent.trim();
+      const amount = amountText.replace(/[^\d.]/g, '');
+      return amount;
+    }
+
+    function generateQrCode(amount) {
+      const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+      qrCodeDiv.innerHTML = '';
+      qrCodeInstance = new QRCode(qrCodeDiv, {
+        text: upiUrl,
+        width: 200,
+        height: 200,
+      });
+    }
+
+    openQrBtn.addEventListener('click', () => {
+      const amount = getTotalAmount();
+      if (!amount) {
+        alert('Total amount not found.');
+        return;
+      }
+      generateQrCode(amount);
+      qrOverlay.style.display = 'flex';
+    });
+
+    closeQrBtn.addEventListener('click', () => {
+      qrOverlay.style.display = 'none';
+      qrCodeDiv.innerHTML = '';
+    });
+  </script>
+>>>>>>> 1a53d5c6f1e90a6ef8e2a51b23efe6f2c06b8ab3
 </body>
 
 </html>
