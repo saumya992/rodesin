@@ -190,28 +190,16 @@
         transition: all 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
     }
 
     .nav-link:hover {
-        color: white;
-    }
-
-    .nav-link:hover::before {
-        left: 0;
+        background-color: rgba(92, 120, 150, 0.2);
     }
 
     .nav-link.active {
         background-color: #5C7896;
         color: white;
         font-weight: 600;
-    }
-
-    .nav-link.active::before {
-        left: 0;
-        background: #5C7896;
     }
 
     /* Enhanced Button Styles with Slide Transition */
@@ -956,9 +944,9 @@
     <nav class="nav-bar">
         <div class="nav-links">
             <a href="home.html" class="nav-link">Home</a>
-            <a href="explore.html" class="nav-link active">Explore ▼</a>
+            <a href="explore.html" class="nav-link ">Explore ▼</a>
             <a href="upload.html" class="nav-link">Upload</a>
-            <a href="mydesign.html" class="nav-link">Mydesign</a>
+            <a href="mydesign.html" class="nav-link active">Mydesign</a>
             <a href="#" class="nav-link">Contact</a>
         </div>
     </nav>
