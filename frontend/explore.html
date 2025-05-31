@@ -8,11 +8,13 @@
     <link rel="stylesheet" />
 </head>
 <style>
+    
     /* Enhanced CSS with elegant styling */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 a {
@@ -26,15 +28,31 @@ a:hover {
     /* Crimson Red for hover states */
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    padding-top: 125px;
-    background-color: #F0F4F8;
-    /* Very light blue-gray */
-    color: #333;
-}
+ body {
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        padding-top: 125px;
+        background: linear-gradient(135deg,#3C0007  0%, #202D36 100%);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        /* Very light blue-gray */
+        color: #333;
+    }
+
+    @keyframes gradientBG {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
 
 /* Elegant Header Styles */
 .header {
@@ -87,7 +105,7 @@ body {
     color: #202D36;
     background: transparent;
     padding: 0 10px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .user-cart {
@@ -119,13 +137,13 @@ body {
     font-size: 12px;
     font-weight: 600;
     color: #292d32;
-    font-family: 'Inter', sans-serif;
+     font-family: 'Poppins', sans-serif;
 }
 
 .user-status {
     font-size: 11px;
     color: #b3b3b3;
-    font-family: 'Inter', sans-serif;
+     font-family: 'Poppins', sans-serif;
 }
 
 .dropdown-icon {
@@ -177,7 +195,7 @@ body {
     overflow: hidden;
     z-index: 1;
 }
-  
+
 .nav-link::before {
     content: '';
     position: absolute;
@@ -276,7 +294,7 @@ body {
 
 .section-title,
 .collection-title {
-    font-family: 'Playfair Display', serif;
+     font-family: 'Poppins', sans-serif;
     font-size: 48px;
     font-weight: 600;
     line-height: 1.2;
@@ -308,12 +326,25 @@ body {
 }
 
 /* Product Grid - Elegant Layout */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-    margin: 40px 0;
-}
+ .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+        background: rgba(255, 255, 255, 0.1);/*morphism colour update*/
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 20px;
+
+        box-shadow: 0 25px 45px #2A0508,;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-grid:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 30px 50px rgba(60, 0, 7, 0.4);
+    }
 
 .product-card,
 .collection-card {
@@ -378,20 +409,27 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
-    margin: 40px 0;
+    margin: 40px 0;background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      padding: 40px;
+      border-radius: 20px;
+      
+      box-shadow: 0 25px 45px #2A0508;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .collection-card {
     background: white;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
 }
 
 .collection-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 30px 50px rgba(132, 11, 25, 0.4);;
 }
 
 .collection-image {
@@ -441,7 +479,7 @@ body {
 }
 
 .offer-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 42px;
     font-weight: 600;
     line-height: 1.3;
