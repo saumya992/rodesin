@@ -144,71 +144,46 @@ body {
     transform: scale(1.1);
 }
 
-/* Sophisticated Navigation */
-.nav-bar {
-    background: #929CAA;
-    height: 50px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 80px;
-    left: 0;
-    z-index: 999;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+  /* Sophisticated Navigation */
+    .nav-bar {
+        background: #929CAA;
+        height: 50px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        z-index: 999;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
 
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
+    .nav-links {
+        display: flex;
+        gap: 30px;
+    }
 
-.nav-link {
-    font-size: 15px;
-    font-weight: 500;
-    color: #202D36;
-    padding: 12px 15px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-  
-.nav-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    transition: all 0.5s ease;
-    z-index: -1;
-    background: linear-gradient(135deg, #7E1824 0%, #660911 100%);
-}
+    .nav-link {
+        font-size: 15px;
+        font-weight: 500;
+        color: #202D36;
+        padding: 12px 15px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
 
-.nav-link:hover {
-    color: white;
-}
+    .nav-link:hover {
+        background-color: rgba(92, 120, 150, 0.2);
+    }
 
-.nav-link:hover::before {
-    left: 0;
-}
-
-.nav-link.active {
-    background-color: #5C7896;
-    color: white;
-    font-weight: 600;
-}
-
-.nav-link.active::before {
-    left: 0;
-    background: #5C7896;
-}
-
+    .nav-link.active {
+        background-color: #5C7896;
+        color: white;
+        font-weight: 600;
+    }
 /* Enhanced Button Styles with Slide Transition */
 .back-button {
     color: #ffffff;
