@@ -344,18 +344,57 @@
         margin-top: 5%;
         width: 100%;
       }
-      .back-button,
-      .back-btn {
-        margin-top: 10px;
-        padding: 10px;
-        width: 150px;
-        border: none;
-        border-radius: 5px;
-        background-color: black;
-        color: white;
-        cursor: pointer;
-        font-weight: bold;
-      }
+          .back-button {
+    color: #ffffff;
+    top: 140px;
+    right: 100px;
+    border: none;
+    border-radius: 8px;
+    width: 150px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    gap: 10px;
+    overflow: hidden; /* Essential for the sliding effect */
+    background: linear-gradient(135deg, #5C7896 0%, #7598B9 100%);
+    box-shadow: 0 2px 8px rgba(60, 0, 7, 0.3);
+    transition: all 0.3s ease;
+}
+
+.back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #7E1824 0%, #660911 100%);
+    transition: all 0.5s ease;
+    z-index: -1;
+}
+
+.back-button:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(60, 0, 7, 0.4);
+}
+
+.back-button:hover::before {
+    left: 0;
+}
+
+.back-button span {
+    font-size: 16px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover span {
+    transform: translateX(5px);
+}
 
     /* QR Overlay Styles */
     #qrOverlay {
@@ -516,7 +555,7 @@
       </div>
 
       <button class="qr-btn" id="openQrBtn">Generate QR Scanner</button>
-      <button class="back-btn"><a href=""></a>← GO BACK</button>
+      <button class="back-button"><a href="itempur.html"></a>← GO BACK</button>
     </div>
   </div>
 
