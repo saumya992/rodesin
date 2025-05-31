@@ -91,6 +91,8 @@
             transition: all 0.3s ease-in-out;
         }
 
+        /**/
+
         
 
         .main-content.collapsed {
@@ -454,30 +456,15 @@
             margin-bottom: 30px;
             border: 1px solid white;
         }
-        
 
         .download-summary {
             width: 675px;
             height: 324px;
         }
-        .download-summary {
-            transition: transform 0.3s ease 0.1s;
-        }
-        .download-summary:hover {
-            transform: translateY(-8px);
-            transition: transform 0.3s ease 0.1ms;
-        }
 
         .top-designs {
             width: 675px;
             height: 237px;
-        }
-        .top-designs {
-            transition: transform 0.3s ease 0.1s;
-        }
-        .top-designs:hover {
-            transform: translateY(-8px);
-            transition: transform 0.3s ease 0.1ms;
         }
 
         .table-header {
@@ -546,13 +533,6 @@
             padding: 20px;
             position: relative;
             border: 1px solid white;
-        }
-        .offers-card {
-            transition: transform 0.3s ease 0.1s;
-        }
-        .offers-card:hover {
-            transform: translateY(-8px);
-            transition: transform 0.3s ease 0.1ms;
         }
 
         .offer-banner {
@@ -645,13 +625,6 @@
             padding: 20px;
             position: relative;
             border: 1px solid white;
-        }
-        .rewards-card {
-            transition: transform 0.3s ease 0.1s;
-        }
-        .rewards-card:hover {
-            transform: translateY(-8px);
-            transition: transform 0.3s ease 0.1ms;
         }
 
         .rewards-header {
@@ -1003,28 +976,18 @@
                                     d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
                             </svg> </a>
                     </div>
-        <div class="user-profile" id="userProfile">
-            <img src="images\img_shape.png" alt="User Avatar" class="user-avatar" />
-            <div class="user-info">
-                <span class="user-name">Chirag Jain</span>
-                <span class="user-status">Unemployed</span>
-            </div>
-        </div>
-        <hr style="border: none; height: 2px; background-color: #02070a8e">
-        <h2 class="section-title">Overview</h2>
-        <div class="filter-dropdown">
-            <span>Last 30 days</span>
-       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="dropdown-icon" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
-            </svg>
-            <div class="user-dropdown" id="userDropdown" style="display:none; position:absolute; right:0; top:60px; background:#fff; border:1px solid #ccc; border-radius:5px; width:150px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 10000; cursor: default;">
-                <a href="settings.html" style="display:block; padding:10px; color:#3C0007; text-decoration:none; border-bottom:1px solid #ccc;">Settings</a>
-                <a href="notifications.html" style="display:block; padding:10px; color:#3C0007; text-decoration:none; border-bottom:1px solid #ccc;">Notifications</a>
-                <a href="logout.html" style="display:block; padding:10px; color:#3C0007; text-decoration:none;">Logout</a>
-            </div>
-        </div>
+                    <div class="user-profile">
+                        <img src="images\img_shape.png" alt="User Avatar" class="user-avatar" />
+                        <div class="user-info">
+                            <span class="user-name">Chirag Jain</span>
+                            <span class="user-status">Unemployed</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="dropdown-icon" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1288,10 +1251,6 @@
             // Toggle sidebar visibility
             backButton.addEventListener("click", () => {
                 sidebar.classList.toggle("collapsed");
-                mainContent.classList.toggle("collapsed");
-                backButton.classList.toggle("collapsed");
-                header.classList.toggle("collapsed");
-            });
 
             // Toggle active class for menu items
             const menuItems = document.querySelectorAll('.menu-item');
@@ -1398,25 +1357,6 @@
                     tooltip.remove();
                 });
             });
-        });
-
-        // Toggle user profile dropdown
-        const userProfile = document.getElementById('userProfile');
-        const userDropdown = document.getElementById('userDropdown');
-
-        userProfile.addEventListener('click', (e) => {
-            e.stopPropagation();
-            console.log('User profile clicked');
-            if (userDropdown.style.display === 'none' || userDropdown.style.display === '') {
-                userDropdown.style.display = 'block';
-            } else {
-                userDropdown.style.display = 'none';
-            }
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
-            userDropdown.style.display = 'none';
         });
     </script>
 </body>
