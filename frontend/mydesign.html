@@ -8,7 +8,6 @@
     <link rel="stylesheet" />
 </head>
 <style>
-    
     /* Enhanced CSS with elegant styling */
     * {
         box-sizing: border-box;
@@ -29,13 +28,29 @@
     }
 
     body {
-         font-family: 'Poppins', sans-serif;
+        font-family: 'Poppins', sans-serif;
         font-size: 16px;
         line-height: 1.6;
         padding-top: 125px;
-        background-color: #F0F4F8;
+        background: linear-gradient(135deg, #3C0007 0%, #202D36 100%);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
         /* Very light blue-gray */
         color: #333;
+    }
+
+    @keyframes gradientBG {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
     }
 
     /* Elegant Header Styles */
@@ -117,12 +132,11 @@
         margin-right: 12px;
     }
 
-
     .user-name {
         font-size: 12px;
         font-weight: 600;
         color: #292d32;
-         font-family: 'Poppins', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
 
     .user-status {
@@ -148,7 +162,6 @@
     }
 
     /* Sophisticated Navigation */
-
     .nav-bar {
         background: #929CAA;
         height: 50px;
@@ -177,10 +190,17 @@
         transition: all 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
     }
 
     .nav-link:hover {
-        background-color: rgba(92, 120, 150, 0.2);
+        color: white;
+    }
+
+    .nav-link:hover::before {
+        left: 0;
     }
 
     .nav-link.active {
@@ -189,49 +209,65 @@
         font-weight: 600;
     }
 
-    /* Refined Back Button */
-      .back-button {
-    color: #ffffff;
-    position: fixed;
-    top: 140px;
-    right: 100px;
-    border: none;
-    border-radius: 8px;
-    width: 150px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    gap: 10px;
-    overflow: hidden; /* Essential for the sliding effect */
-    background: linear-gradient(135deg, #5C7896 0%, #7598B9 100%);
-    box-shadow: 0 2px 8px rgba(60, 0, 7, 0.3);
-    transition: all 0.3s ease;
-}
+    .nav-link.active::before {
+        left: 0;
+        background: #5C7896;
+    }
 
-.back-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #7E1824 0%, #660911 100%);
-    transition: all 0.5s ease;
-    z-index: -1;
-}
+    /* Enhanced Button Styles with Slide Transition */
+    .back-button {
+        color: #ffffff;
+        position: fixed;
+        top: 140px;
+        right: 100px;
+        border: none;
+        border-radius: 8px;
+        width: 150px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        gap: 10px;
+        overflow: hidden;
+        /* Essential for the sliding effect */
+        background: linear-gradient(135deg, #5C7896 0%, #7598B9 100%);
+        box-shadow: 0 2px 8px rgba(60, 0, 7, 0.3);
+        transition: all 0.3s ease;
+    }
 
-.back-button:hover {
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(60, 0, 7, 0.4);
-}
+    .back-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #7E1824 0%, #660911 100%);
+        transition: all 0.5s ease;
+        z-index: -1;
+    }
 
-.back-button:hover::before {
-    left: 0;
-}
+    .back-button:hover {
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(60, 0, 7, 0.4);
+    }
+
+    .back-button:hover::before {
+        left: 0;
+    }
+
+    .back-button span {
+        font-size: 16px;
+        font-weight: 500;
+        transition: transform 0.3s ease;
+    }
+
+    .back-button:hover span {
+        transform: translateX(5px);
+    }
 
     /* Elegant Section Styling */
     .best-selling-section,
@@ -240,7 +276,7 @@
         padding: 60px 100px;
         max-width: 1600px;
         margin: 0 auto;
-        background-color: #E8ECF1;
+        background-color: transparent;
         /* Light version of #929CAA (Cool Gray) */
     }
 
@@ -250,7 +286,7 @@
         font-size: 48px;
         font-weight: 600;
         line-height: 1.2;
-        color: #202D36;
+        color: white;
         margin-bottom: 20px;
         position: relative;
         padding-bottom: 15px;
@@ -271,12 +307,11 @@
     .collection-description,
     .offer-description {
         font-size: 18px;
-        color: #5C7896;
+        color: white;
         margin-bottom: 40px;
         max-width: 700px;
         line-height: 1.6;
     }
-
 
     /* Product Grid - Elegant Layout */
     .product-grid {
@@ -284,11 +319,25 @@
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 30px;
         margin: 40px 0;
+        background: rgba(255, 255, 255, 0.1);
+        /*morphism colour update*/
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 20px;
+
+        box-shadow: 0 25px 45px #2A0508, ;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-grid:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 30px 50px rgba(60, 0, 7, 0.4);
     }
 
     .product-card,
     .collection-card {
-        background-color: #FFFFFF;
+        background-color: transparent;
         /* Keeping cards white for contrast */
         border-radius: 12px;
         overflow: hidden;
@@ -300,7 +349,7 @@
     .product-card:hover,
     .collection-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 12px 24px #872632d1;
     }
 
     .product-image {
@@ -313,7 +362,7 @@
     .product-name {
         font-size: 18px;
         font-weight: 600;
-        color: #202D36;
+        color: white;
         margin: 15px 20px 5px;
     }
 
@@ -327,7 +376,7 @@
     .product-price {
         font-size: 18px;
         font-weight: 700;
-        color: #3C0007;
+        color: white;
     }
 
     .social-stats {
@@ -341,7 +390,7 @@
         gap: 5px;
         font-size: 18px;
         font-weight: 700;
-        color: #3C0007;
+        color: white;
     }
 
     /* Collection Section */
@@ -350,19 +399,28 @@
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
         gap: 30px;
         margin: 40px 0;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        padding: 40px;
+        border-radius: 20px;
+
+        box-shadow: 0 25px 45px #2A0508;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .collection-card {
         background: white;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         transition: all 0.3s ease;
     }
 
     .collection-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 30px 50px rgba(132, 11, 25, 0.4);
+        ;
     }
 
     .collection-image {
@@ -386,7 +444,6 @@
     }
 
     /* Offer Section - Premium Look */
-    /* Offer Section */
     .offer-section {
         padding: 80px 100px;
         background: linear-gradient(135deg, #202D36 0%, #3C0007 100%);
@@ -397,72 +454,61 @@
     }
 
     .offer-image {
-        width: 481px;
-        height: 465px;
-        border-radius: 25px;
-        object-fit: cover;
-        border: 5px solid #7598B9;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        width: 45%;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     }
 
     .offer-content {
-        max-width: 600px;
-        margin-left: 50px;
+        width: 50%;
+        color: white;
     }
 
     .offer-title {
         font-family: 'Poppins', sans-serif;
-        font-size: 46px;
+        font-size: 42px;
         font-weight: 600;
-        line-height: 61px;
-        color: #ffffff;
-        margin-bottom: 20px;
+        line-height: 1.3;
+        margin-bottom: 25px;
     }
 
     .offer-description {
-        font-family: 'Poppins', sans-serif;
-        font-size: 24px;
-        font-weight: 500;
-        line-height: 31px;
-        color: #929CAA;
-        margin-bottom: 40px;
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 30px;
+        line-height: 1.6;
     }
 
     .countdown-container {
         display: flex;
-        gap: 20px;
+        gap: 15px;
         margin-bottom: 40px;
     }
 
     .countdown-box {
-        background-color: rgba(255, 255, 255, 0.9);
-        width: 101px;
-        height: 100px;
-        border-radius: 25px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        border-radius: 8px;
+        padding: 15px 20px;
+        text-align: center;
+        min-width: 80px;
     }
 
     .countdown-number {
-        font-family: 'Poppins', sans-serif;
         font-size: 32px;
         font-weight: 700;
-        line-height: 48px;
-        color: #800C1F;
+        display: block;
+        color: white;
     }
 
     .countdown-label {
-        font-family: 'Poppins', sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 24px;
-        color: #202D36;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
 
-   .shop-now-btn {
+    .shop-now-btn {
         background-color: #3C0007;
         width: 238px;
         height: 75px;
@@ -487,7 +533,6 @@
         transition: all 0.5s ease;
         z-index: -1;
         background: #7598B9;
-        ;
     }
 
     .shop-now-btn:hover {
@@ -507,7 +552,8 @@
         line-height: 30px;
         color: #ffffff;
     }
-     /* Tabs Section */
+
+    /* Tabs Section */
     .tabs-container {
         display: flex;
         gap: 10px;
@@ -515,15 +561,7 @@
         border-bottom: 1px solid #eee;
         padding-bottom: 10px;
     }
-   
-   .tabs-container {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 30px;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 10px;
-    }
-   
+
     .tab {
         padding: 10px 25px;
         border-radius: 30px;
@@ -567,10 +605,9 @@
         left: 0;
         background: #5C7896;
     }
-  
 
     /* Buttons */
-     .see-more-btn {
+    .see-more-btn {
         background: linear-gradient(135deg, #5C7896 0%, #7598B9 100%);
         color: white;
         border: none;
@@ -758,7 +795,7 @@
         }
     }
 </style>
-<script>
+<script src="">
     // Countdown Timer Functionality
     function updateCountdown() {
         const days = document.querySelector('.countdown-box:nth-child(1) .countdown-number');
@@ -874,6 +911,7 @@
             card.style.transform = 'scale(1)';
         });
     });
+
 </script>
 
 <body>
@@ -918,9 +956,9 @@
     <nav class="nav-bar">
         <div class="nav-links">
             <a href="home.html" class="nav-link">Home</a>
-            <a href="explore.html" class="nav-link">Explore ▼</a>
+            <a href="explore.html" class="nav-link active">Explore ▼</a>
             <a href="upload.html" class="nav-link">Upload</a>
-            <a href="mydesign.html" class="nav-link active">Mydesign</a>
+            <a href="mydesign.html" class="nav-link">Mydesign</a>
             <a href="#" class="nav-link">Contact</a>
         </div>
     </nav>
@@ -938,7 +976,7 @@
         <h2 class="section-title">Best Selling</h2>
         <p class="section-subtitle">Get in on the trend with our curated selection of best-selling styles.</p>
 
-  <div class="product-grid">
+        <div class="product-grid">
             <div class="product-card">
                 <a href="Itempur.html">
                     <img src="images/img_image_10.png" alt="Car Sketch" class="product-image">
@@ -949,22 +987,27 @@
             <div class="product-card">
                 <img src="images/img_image_11.png" alt="Car Sketch" class="product-image">
                 <h3 class="product-name">Name of the product</h3>
+               
             </div>
             <div class="product-card">
                 <img src="images/img_image_13.png" alt="Car Sketch" class="product-image">
                 <h3 class="product-name">Name of the product</h3>
+               
             </div>
             <div class="product-card">
                 <img src="images/img_image_12.png" alt="Car Sketch" class="product-image">
                 <h3 class="product-name">Name of the product</h3>
+               
             </div>
             <div class="product-card">
                 <img src="images/img_image_13.png" alt="Car Sketch" class="product-image">
                 <h3 class="product-name">Name of the product</h3>
+               
             </div>
             <div class="product-card">
                 <img src="images/img_image_12.png" alt="Car Sketch" class="product-image">
                 <h3 class="product-name">Name of the product</h3>
+               
             </div>
             <div class="product-card">
                 <a href="Itempur.html">
@@ -976,9 +1019,9 @@
             <div class="product-card">
                 <img src="images/img_image_11.png" alt="Car Sketch" class="product-image">
                 <h3 class="product-name">Name of the product</h3>
+               
             </div>
         </div>
-
 
         <button class="see-more-btn">SEE MORE</button>
     </section>
@@ -1055,22 +1098,23 @@
             <div class="product-card">
                 <img src="images/img_image_6.png" alt="Car Sketch" class="product-image">
                 <h3 class="product-name">Name of the product</h3>
-                
+               
             </div>
             <div class="product-card">
                 <img src="images/img_image_12.png" alt="Car Sketch" class="product-image">
                 <h3 class="product-name">Name of the product</h3>
-                
+               
             </div>
             <div class="product-card">
                 <img src="images/img_image_6.png" alt="Car Sketch" class="product-image">
                 <h3 class="product-name">Name of the product</h3>
-                
+               
             </div>
             <div class="product-card">
-                <a href="Itemdown.html">
+                <a href="Itempur.html">
                     <img src="images/img_image_10.png" alt="Car Sketch" class="product-image">
-                    <h3 class="product-name">Name of the product</h3>   
+                    <h3 class="product-name">Name of the product</h3>
+                    
                 </a>
             </div>
         </div>
