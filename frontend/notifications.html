@@ -18,7 +18,8 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #ebdfd7;
+            background: linear-gradient(-45deg, #5C7896, #0d2337);
+            animation: gradientBG 15s ease infinite;
             position: relative;
             overflow-x: hidden;
         }
@@ -33,7 +34,7 @@
             position: fixed;
             width: 216px;
             height: 100vh;
-            background-color: #000000;
+            background-color: #3c0007;
             left: 0;
             top: 0;
             z-index: 100;
@@ -101,11 +102,11 @@
         }
 
         .menu-item.active svg {
-            color: #fc8b23;
+            color: #3c0007;
         }
 
         .dashboard-active {
-            color: orange !important;
+            color: #3c0007 !important;
         }
 
         .main-content {
@@ -164,7 +165,7 @@
         .page-title {
             font-size: 27px;
             font-weight: 500;
-            color: #000000;
+            color: #3c0007;
         }
 
         /* Right group: search bar and user section */
@@ -179,7 +180,7 @@
             align-items: center;
             width: 313px;
             height: 48px;
-            background-color: #ffffff;
+            background-color: #202d36;
             border-radius: 24px;
             border: 1px solid #d9d9d9;
             padding: 0 10px;
@@ -196,7 +197,8 @@
             outline: none;
             width: 100%;
             font-size: 16px;
-            color: #00000066;
+            color: #174d76;
+            background-color: rgba(90, 137, 185, 0);
         }
 
         .user-section {
@@ -257,7 +259,7 @@
         .section-title {
             font-size: 20px;
             font-weight: 500;
-            color: #000000;
+            color: #3c0007;
             margin-top: 10px;
             margin-bottom: 20px;
         }
@@ -265,12 +267,13 @@
         .notifications-table {
             width: 100%;
             border-collapse: collapse;
+
         }
 
         .notifications-table th {
             font-size: 14px;
             font-weight: 500;
-            color: #131212;
+            color: #7d0f13;
             text-align: left;
             padding: 10px 0;
         }
@@ -281,12 +284,13 @@
             padding: 10px 0;
         }
 
+
         .notifications-table tr:nth-child(even) {
-            background-color: #f2f2f2;
+           background-color: rgb(56, 83, 170);
         }
 
         .view-button {
-            background-color: #fc8b23;
+            background-color:  #050f2f;
             color: white;
             border: none;
             border-radius: 5px;
@@ -417,7 +421,8 @@
             </div>
         </div>
 
-        <hr /> <!-- Separator line added back -->
+        <hr style="border: 1px solid #3c0007;"> <!-- Separator line added back -->
+
 
         <h2 class="section-title">Notifications</h2>
 
