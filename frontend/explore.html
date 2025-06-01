@@ -956,10 +956,16 @@
     // Navigation Menu Toggle
     const menuIcon = document.querySelector('.menu-icon');
     const navLinks = document.querySelector('.nav-links');
+    const tabsContainer = document.querySelector('.tabs-container');
 
-    menuIcon.addEventListener('click', () => {
-        navLinks.style.display = navLinks.style.display === 'none' ? 'flex' : 'none';
-    });
+    if (menuIcon) {
+        menuIcon.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'none' ? 'flex' : 'none';
+            if (tabsContainer) {
+                tabsContainer.style.display = tabsContainer.style.display === 'none' ? 'flex' : 'none';
+            }
+        });
+    }
 
     // Back Button Functionality
     const backButton = document.querySelector('.back-button');
