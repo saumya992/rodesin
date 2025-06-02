@@ -9,7 +9,6 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;600&display=swap"
         rel="stylesheet" />
     <style>
-        /* General Reset and Body */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -18,22 +17,43 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #ebdfd7;
+            background: linear-gradient(135deg, #5C7896 0%, #3C0007 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             position: relative;
             overflow-x: hidden;
+            color: #3C0007;
         }
-        a {
-    text-decoration: none;
-    color: #202D36;
-    transition: color 0.3s ease;
-}
 
-        /* Sidebar styles */
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: #3C0007;
+            transition: color 0.3s ease;
+        }
+
         .sidebar {
             position: fixed;
             width: 216px;
             height: 100vh;
-            background-color: #000000;
+            background: rgba(60, 0, 7, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(60, 0, 7, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             left: 0;
             top: 0;
             z-index: 100;
@@ -42,7 +62,7 @@
         }
 
         .sidebar.collapsed {
-            width: 0;
+            width: 70px;
         }
 
         .sidebar-logo {
@@ -50,7 +70,7 @@
             width: 180px;
             height: 75px;
             margin: 23px 15px;
-            background-color: #ebdfd7;
+            background-color: transparent;
             border-radius: 35px;
             display: flex;
             justify-content: center;
@@ -62,11 +82,10 @@
             height: 75px;
         }
 
-          .sidebar-menu {
+        .sidebar-menu {
             position: relative;
             margin-top: 20px;
         }
-
 
         .menu-item {
             display: flex;
@@ -96,44 +115,61 @@
             border-radius: 23px;
             width: 140px;
             height: 45px;
-            border: 1px solid #d9d9d9;
+            border: 1px solid #929CAA;
             margin-left: 34px;
         }
 
         .menu-item.active svg {
-            color: #fc8b23;
+            color: #800C1F;
         }
 
         .dashboard-active {
-            color: orange !important;
+            color: #800C1F !important;
         }
 
-
-        /* Main content */
         .main-content {
             margin-left: 216px;
-            padding: 20px 30px;
+            padding: 100px 30px 30px;
             position: relative;
-            transition: margin-left 0.3s ease;
+            transition: margin-left 0.3s ease, width 0.3s ease;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            color: #3C0007;
+            width: calc(100% - 216px);
         }
 
         .main-content.collapsed {
-            margin-left: 0;
+            margin-left: 70px;
+            width: calc(100% - 70px);
         }
 
-        /* Header */
         .header {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             justify-content: space-between;
             gap: 10px;
+            position: fixed;
+            top: 0;
+            left: 216px;
+            right: 0;
+            height: 80px;
+            background: rgba(92, 120, 150, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(60, 0, 7, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 0 30px;
+            transition: left 0.47s ease, width 0.47s ease;
+            color: #3C0007;
+            width: calc(100% - 216px);
         }
 
-        /* Left group: back button and title */
+        .header.collapsed {
+            left: 70px;
+            width: calc(100% - 70px);
+        }
+
         .header-left {
             display: flex;
             align-items: center;
@@ -141,7 +177,7 @@
         }
 
         .back-button {
-            width: 30px;
+            width: 28px;
             height: 28px;
             background-color: #ffffff;
             border-radius: 14px;
@@ -152,7 +188,8 @@
             transition: margin-left 0.3s ease;
             position: relative;
             z-index: 101;
-            margin-inline-start: -40px;
+            margin-inline-start: -45px;
+            margin-top: 10px;
         }
 
         .back-button svg {
@@ -168,12 +205,13 @@
         }
 
         .page-title {
+            font-family: 'Playfair Display', serif;
             font-size: 27px;
-            font-weight: 500;
-            color: #000000;
+            font-weight: 600;
+            line-height: 1.2;
+            color: #3C0007;
         }
 
-        /* Right group: search bar and user section */
         .header-right {
             display: flex;
             align-items: center;
@@ -186,15 +224,16 @@
             width: 313px;
             height: 48px;
             background-color: #ffffff;
+            border: 2px solid #4A5B6B;
             border-radius: 24px;
-            border: 1px solid #d9d9d9;
-            padding: 0 10px;
+            padding: 0 15px;
         }
 
-        .search-bar img {
-            width: 22px;
+        .search-bar svg {
+            width: 23px;
             height: 23px;
-            margin-right: 8px;
+            color: #0a1e34;
+            padding-right: 4px;
         }
 
         .search-bar input {
@@ -202,13 +241,13 @@
             outline: none;
             width: 100%;
             font-size: 16px;
-            color: #00000066;
+            color: rgb(23, 22, 22);
+            background-color: #ffffff00;
         }
 
         .user-section {
             display: flex;
             align-items: center;
-            gap: 10px;
         }
 
         .notification-bell {
@@ -219,6 +258,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-right: 10px;
             cursor: pointer;
         }
 
@@ -229,7 +269,7 @@
             height: 44px;
             background-color: #ffffff;
             border-radius: 22px;
-            border: 1px solid #d9d9d9;
+            border: 1px solid #929CAA;
             padding: 0 3px;
             cursor: pointer;
         }
@@ -249,54 +289,113 @@
         .user-name {
             font-size: 12px;
             font-weight: 600;
-            color: #292d32;
+            color: #3C0007;
+            font-family: 'Inter', sans-serif;
         }
 
         .user-status {
             font-size: 11px;
-            color: #b3b3b3;
+            color: #929CAA;
+            font-family: 'Inter', sans-serif;
         }
 
-        .dropdown-icon {
-            margin-left: 30px;
+        .dropdown-icon2 {
+            margin-left: 3px;
         }
-        /* Transaction Overview */
+
         .section-title {
-            font-size: 20px;
-            font-weight: 500;
-            color: #000000;
-            margin-top: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 25px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: #3C0007;
             margin-bottom: 20px;
         }
 
-        .spendings-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
 
-        .spendings-table th,
-        .spendings-table td {
-            border: 1px solid #d9d9d9;
-            padding: 10px;
-            text-align: left;
+        .product-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 15px;
+            width: 220px;
+            border: 1px solid white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease 0.1s;
         }
 
-        .spendings-table th {
-            background-color: #f2eae5;
+        .product-card:hover {
+            transform: translateY(-8px);
+            transition: transform 0.3s ease 0.1ms;
         }
 
-        .total-spent {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
+        .product-thumbnail {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: white;
         }
 
-        .no-transactions {
+        .product-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 5px;
             text-align: center;
-            margin-top: 50px;
-            font-size: 18px;
-            color: #888;
+            color: #3C0007;
+        }
+
+        .product-category {
+            font-size: 14px;
+            color: #800C1F;
+            margin-bottom: 5px;
+        }
+
+        .product-date {
+            font-size: 12px;
+            color: #929CAA;
+            margin-bottom: 5px;
+        }
+
+        .product-amount {
+            font-size: 14px;
+            font-weight: 600;
+            color: #3C0007;
+        }
+
+        .month-spendings {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 40px;
+            border: 1px solid white;
+            max-width: 600px;
+        }
+
+        .month-spendings h3 {
+            margin-bottom: 15px;
+            color: #3C0007;
+        }
+
+        .month-spendings ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .month-spendings li {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #3C0007;
         }
     </style>
 </head>
@@ -304,7 +403,7 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-logo">
-            <img src="images\ROSHANI ka logo (1).png" alt="Roshani Technologies Logo" />
+            <img src="images/ROSHANI ka logo (1).png" alt="Roshani Technologies Logo" />
         </div>
         <div class="sidebar-menu">
             <div class="menu-item" data-link="dashboard.html">
@@ -362,15 +461,6 @@
                         d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
                 </svg> <span>Settings</span>
             </div>
-            <div class="menu-item" data-link="logout.html">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
-                    <path fill-rule="evenodd"
-                        d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
-                </svg> <span>Log out</span>
-            </div>
         </div>
     </div>
 
@@ -396,7 +486,7 @@
                     </svg> <input type="text" placeholder="Search for anything..." />
                 </div>
 
-                 <div class="user-section">
+                <div class="user-section">
                     <div class="notification-bell">
                         <a href="notifications.html">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -405,98 +495,62 @@
                                     d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
                             </svg> </a>
                     </div>
-                    <div class="user-profile">
-                        <img src="images\img_shape.png" alt="User Avatar" class="user-avatar" />
+                    <div class="user-profile" id="userProfile">
+                        <img src="images/img_shape.png" alt="User Avatar" class="user-avatar" />
                         <div class="user-info">
                             <span class="user-name">Chirag Jain</span>
                             <span class="user-status">Unemployed</span>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="dropdown-icon" viewBox="0 0 16 16">
+                            class="dropdown-icon2" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
                                 d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
                         </svg>
+                        <div class="user-dropdown" id="userDropdown"
+                            style="display:none; position:absolute; right:0; top:60px; background:#fff; border:1px solid #ccc; border-radius:5px; width:150px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); z-index: 10000; cursor: default;">
+                            <a href="settings.html"
+                                style="display:block; padding:10px; color:#3C0007; text-decoration:none; border-bottom:1px solid #ccc;">Settings</a>
+                            <a href="notifications.html"
+                                style="display:block; padding:10px; color:#3C0007; text-decoration:none; border-bottom:1px solid #ccc;">Notifications</a>
+                            <a href="logout.html"
+                                style="display:block; padding:10px; color:#3C0007; text-decoration:none;">Logout</a>
+                        </div>
                     </div>
                 </div>
             </div>
+
+        <h2 class="section-title">Products Bought</h2>
+        <div class="product-list">
+            <div class="product-card">
+                <img src="images/img_car1_1.png" alt="Product 1" class="product-thumbnail" />
+                <div class="product-name">Car Model 1</div>
+                <div class="product-category">Category: Vehicles</div>
+                <div class="product-date">Purchased on: 2023-05-10</div>
+                <div class="product-amount">Amount Spent: ₹15,000</div>
+            </div>
+            <div class="product-card">
+                <img src="images/img_group_173.png" alt="Product 2" class="product-thumbnail" />
+                <div class="product-name">Group Design</div>
+                <div class="product-category">Category: Design</div>
+                <div class="product-date">Purchased on: 2023-06-15</div>
+                <div class="product-amount">Amount Spent: ₹7,500</div>
+            </div>
+            <div class="product-card">
+                <img src="images/img_image_6.png" alt="Product 3" class="product-thumbnail" />
+                <div class="product-name">Image Pack</div>
+                <div class="product-category">Category: Images</div>
+                <div class="product-date">Purchased on: 2023-07-20</div>
+                <div class="product-amount">Amount Spent: ₹3,200</div>
+            </div>
         </div>
 
-        <hr />
-        <h2 class="section-title">Transaction Overview</h2>
-
-        <table class="spendings-table">
-            <thead>
-                <tr>
-                    <th>Transaction ID</th>
-                    <th>Date</th>
-                    <th>Item</th>
-                    <th>Category</th>
-                    <th>Amount Spent</th>
-                    <th>Payment Method</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>TXN001</td>
-                    <td>2023-10-01</td>
-                    <td>Graphic Design Software</td>
-                    <td>Software</td>
-                    <td>₹3,499</td>
-                    <td>Credit Card</td>
-                    <td>Completed</td>
-                    <td>Annual subscription</td>
-                </tr>
-                <tr>
-                    <td>TXN002</td>
-                    <td>2023-10-05</td>
-                    <td>Online Course Subscription</td>
-                    <td>Education</td>
-                    <td>₹1,200</td>
-                    <td>PayPal</td>
-                    <td>Completed</td>
-                    <td>Monthly subscription</td>
-                </tr>
-                <tr>
-                    <td>TXN003</td>
-                    <td>2023-10-10</td>
-                    <td>New Laptop</td>
-                    <td>Electronics</td>
-                    <td>₹45,000</td>
-                    <td>Credit Card</td>
-                    <td>Completed</td>
-                    <td>Purchased for work</td>
-                </tr>
-                <tr>
-                    <td>TXN004</td>
-                    <td>2023-10-15</td>
-                    <td>Office Supplies</td>
-                    <td>Office</td>
-                    <td>₹1,500</td>
-                    <td>Debit Card</td>
-                    <td>Completed</td>
-                    <td>Stationery items</td>
-                </tr>
-                <tr>
-                    <td>TXN005</td>
-                    <td>2023-10-20</td>
-                    <td>Website Hosting</td>
-                    <td>Web Services</td>
-                    <td>₹2,000</td>
-                    <td>Credit Card</td>
-                    <td>Completed</td>
-                    <td>Annual hosting fee</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="total-spent">
-            Total Amount Spent: ₹53,199
-        </div>
-
-        <div class="no-transactions" style="display: none;">
-            No transactions available.
+        <h2 class="section-title">Total Amount Spent Month-wise</h2>
+        <div class="month-spendings">
+            <ul>
+                <li>May 2023: ₹15,000</li>
+                <li>June 2023: ₹7,500</li>
+                <li>July 2023: ₹3,200</li>
+            </ul>
         </div>
     </div>
 
@@ -514,25 +568,21 @@
                 // Navigate after a short delay to allow animation
                 setTimeout(() => {
                     window.location.href = link;
-                }, 300); // Adjust the delay as needed
+                }, 300);
             });
         });
-
-
 
         function toggleSidebar() {
             const sidebar = document.querySelector(".sidebar");
             const mainContent = document.querySelector(".main-content");
             const backButton = document.getElementById("backButton");
+            const header = document.querySelector(".header");
 
             sidebar.classList.toggle("collapsed");
             mainContent.classList.toggle("collapsed");
             backButton.classList.toggle("collapsed");
+            header.classList.toggle("collapsed");
         }
-
-
-
-
     </script>
 </body>
 
