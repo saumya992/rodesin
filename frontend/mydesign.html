@@ -33,7 +33,7 @@
         font-size: 16px;
         line-height: 1.6;
         padding-top: 125px;
-        background: linear-gradient(135deg, #3C0007 0%, #202D36 100%);
+        background: linear-gradient(135deg, #5c7896 0%, #3c0007 100%);
         background-size: 400% 400%;
         animation: gradientBG 15s ease infinite;
         /* Very light blue-gray */
@@ -263,7 +263,7 @@
 
     /* Hero Section */
     .hero-section {
-        background-color: #424242;
+        background-color: transparent;
         /*change here to update colours*/
         height: 740px;
         width: 100%;
@@ -479,13 +479,14 @@
         -webkit-backdrop-filter: blur(15px);
         padding: 40px;
         border-radius: 20px;
+
         box-shadow: 0 25px 45px #2A0508;
         border: 1px solid rgba(255, 255, 255, 0.2);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    
+
     .collection-card {
-        background: transparent;
+        background: white;
         border-radius: 12px;
         overflow: hidden;
         transition: all 0.3s ease;
@@ -501,6 +502,7 @@
         width: 100%;
         height: 250px;
         object-fit: contain;
+        border-radius: 12px;
     }
 
     .collection-card-title {
@@ -883,7 +885,17 @@
     }
 </style>
 <script src="">
+      
 
+    // Add click event listener to all model-viewer elements on the page
+    document.querySelectorAll('model-viewer').forEach(modelViewer => {
+        modelViewer.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default action if inside a link
+            if (confirm('First login for viewing the product. Do you want to login now?')) {
+                window.location.href = 'login.html';
+            }
+        });
+    });
     // Countdown Timer Functionality
     function updateCountdown() {
         const days = document.querySelector('.countdown-box:nth-child(1) .countdown-number');
@@ -945,25 +957,17 @@
     // Navigation Menu Toggle
     const menuIcon = document.querySelector('.menu-icon');
     const navLinks = document.querySelector('.nav-links');
-    const tabsContainer = document.querySelector('.tabs-container');
 
-    if (menuIcon) {
-        menuIcon.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'none' ? 'flex' : 'none';
-            if (tabsContainer) {
-                tabsContainer.style.display = tabsContainer.style.display === 'none' ? 'flex' : 'none';
-            }
-        });
-    }
+    menuIcon.addEventListener('click', () => {
+        navLinks.style.display = navLinks.style.display === 'none' ? 'flex' : 'none';
+    });
 
     // Back Button Functionality
-    const backButton = document.querySelector('.back-button');
-
-    backButton.addEventListener('click', () => {
-        // In a real app, this would navigate back
-        // For this demo, we'll just show an alert
-        alert('Going back to previous page!');
-    });
+     function goBack() {
+                // In a real application, this would navigate back
+                console.log('Going back to previous page');
+                window.history.back();
+            }
 
     // See More Button Functionality
     const seeMoreBtn = document.querySelector('.see-more-btn');
@@ -980,6 +984,7 @@
     shopNowBtn.addEventListener('click', () => {
         // In a real app, this would navigate to the shop
         // For this demo, we'll just show an alert
+        alert('Redirecting to exclusive offers!');
         alert('Redirecting to exclusive offers!');
     });
 
@@ -1049,19 +1054,19 @@
     <nav class="nav-bar">
         <div class="nav-links">
             <a href="home.html" class="nav-link ">Home</a>
-            <a href="explore.html" class="nav-link">Explore ▼</a>
+            <a href="explore.html" class="nav-link ">Explore</a>
             <a href="upload.html" class="nav-link">Upload</a>
-            <a href="mydesign.html" class="nav-link active">Mydesign</a>
+            <a href="mydesign.html" class="nav-link active">Mydesign ▼</a>
             <a href="#" class="nav-link">Contact</a>
         </div>
     </nav>
 
-    <!-- Back Button -->
-    <div class="back-button">
-        <span>← GO BACK</span>
-    </div>
+   <!-- Back Button -->
+  <div class="back-button" onclick="history.back()">
+    <span>← GO BACK</span>
+  </div>
 
-    <!-- Hero Section -->
+  
 
     <!-- Best Selling Section -->
     <section class="best-selling-section">
@@ -1070,66 +1075,125 @@
 
         <div class="product-grid">
             <div class="product-card">
-                <a href="Itempur.html">
-                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate
-                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+<a href="itemdown.html?model=1">
+                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
                     <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        
+                        <div class="social-stats">
+                            <div class="stat">
 
+                               
+                            </div>
+                        </div>
+                    </div>
                 </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate
-                    camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                <a href="itemdown.html?model=2">
+                <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
                 <h3 class="product-name">Name of the product</h3>
-
-            </div>
-            <div class="product-card">
-                <model-viewer src="3dmodels/cars/og.glb" alt="3D Car Model" class="product-image" auto-rotate
-                    camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-
-            </div>
-            <div class="product-card">
-                <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate
-                    camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-
-            </div>
-            <div class="product-card">
-                <a href="Itempur.html">
-                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate
-                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                    <h3 class="product-name">Name of the product</h3>
-
+                <div class="price-like-container">
+                
+                    <div class="social-stats">
+                        <div class="stat">
+                            
+                           
+                        </div>
+                    </div>
+                </div>
                 </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate
-                    camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-
+<a href="itemdown.html?model=3">
+                    <model-viewer src="3dmodels/cars/f1.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                       
+                        <div class="social-stats">
+                            <div class="stat">
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/og.glb" alt="3D Car Model" class="product-image" auto-rotate
-                    camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-
+<a href="itemdown.html?model=4">
+                    <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        
+                        <div class="social-stats">
+                            <div class="stat">
+                                
+                               
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate
-                    camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-
+                <a href="itemdown.html?model=1">
+                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                      
+                        <div class="social-stats">
+                            <div class="stat">
+                               
+                               
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
+             <div class="product-card">
+                <a href="itemdown.html?model=2">
+                <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                <h3 class="product-name">Name of the product</h3>
+                <div class="price-like-container">
+                 
+                    <div class="social-stats">
+                        <div class="stat">
+                            
+                           
+                        </div>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="product-card">
+<a href="itemdown.html?model=5">
+                    <model-viewer src="3dmodels/cars/og.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                     
+                        <div class="social-stats">
+                            <div class="stat">
+                                
+                               
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+              <div class="product-card">
+<a href="itemdown.html?model=4">
+                    <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                     
+                        <div class="social-stats">
+                            <div class="stat">
+                                
+                               
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
         <button class="see-more-btn">SEE MORE</button>
     </section>
@@ -1142,25 +1206,25 @@
 
         <div class="collection-grid">
             <div class="collection-card">
-                <model-viewer src="3dmodels/humans/astronaut.glb" alt="Human Model" class="collection-image" auto-rotate
-                    camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:250px; object-fit: contain; border-radius: 12px;"></model-viewer>
+                <a href="itemdown.html?model=6">
+                    <model-viewer src="3dmodels/humans/astronaut.glb" alt="Human Model" class="collection-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:250px; object-fit: contain; border-radius: 12px;"></model-viewer>
+                </a>
                 <h3 class="collection-card-title">Accessories</h3>
                 <p class="collection-card-description">Complete your ensemble with designer accessories such as
                     handbags, scarves, belts, and hats.</p>
             </div>
             <div class="collection-card">
-                <model-viewer src="3dmodels/cars/f1.glb" alt="Car Model" class="collection-image" auto-rotate
-                    camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:250px; object-fit: contain; border-radius: 12px;"></model-viewer>
+                <a href="itemdown.html?model=1">
+                    <model-viewer src="3dmodels/cars/bmw.glb" alt="Car Model" class="collection-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:250px; object-fit: contain; border-radius: 12px;"></model-viewer>
+                </a>
                 <h3 class="collection-card-title">Accessories</h3>
                 <p class="collection-card-description">Complete your ensemble with designer accessories such as
                     handbags, scarves, belts, and hats.</p>
             </div>
             <div class="collection-card">
-                <model-viewer src="3dmodels/pokemon/charmander.glb" alt="Pokemon Model" class="collection-image"
-                    auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:250px; object-fit: contain; border-radius: 12px;"></model-viewer>
+                <a href="itemdown.html?model=7">
+                    <model-viewer src="3dmodels/pokemon/charmander.glb" alt="Pokemon Model" class="collection-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:250px; object-fit: contain; border-radius: 12px;"></model-viewer>
+                </a>
                 <h3 class="collection-card-title">Accessories</h3>
                 <p class="collection-card-description">Complete your ensemble with designer accessories such as
                     handbags, scarves, belts, and hats.</p>
@@ -1171,9 +1235,7 @@
     <!-- Offer Section -->
     <section class="offer-section">
         <!-- Replaced image with 3D model viewer for offer-section -->
-        <model-viewer src="3dmodels/wepons/sniper-rifle.glb" alt="Special Offer Model" class="offer-image" auto-rotate
-            camera-controls ar ar-modes="webxr scene-viewer quick-look"
-            style="width:481px; height:465px; border-radius: 25px; border: 5px solid #7598B9; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); object-fit: cover;"></model-viewer>
+        <model-viewer src="3dmodels/wepons/sniper-rifle.glb" alt="Special Offer Model" class="offer-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:481px; height:465px; border-radius: 25px; border: 5px solid #7598B9; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); object-fit: cover;"></model-viewer>
         <div class="offer-content">
             <h2 class="offer-title">Exclusive Offer</h2>
             <p class="offer-description">Unlock the ultimate upgrade with our exclusive offer Enjoy savings of up to 40%
@@ -1213,36 +1275,65 @@
 
         <div class="product-grid">
             <div class="product-card">
-                <a href="Itempur.html">
-                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate
-                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+<a href="itemdown.html?model=1">
+                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
                     <h3 class="product-name">Name of the product</h3>
-
+                    <div class="price-like-container">
+                        
+                        <div class="social-stats">
+                            <div class="stat">
+                                
+                              
+                            </div>
+                        </div>
+                    </div>
                 </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate
-                    camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                <a href="itemdown.html?model=2">
+                <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
                 <h3 class="product-name">Name of the product</h3>
-
+                <div class="price-like-container">
+                   
+                    <div class="social-stats">
+                        <div class="stat">
+                           
+                          
+                        </div>
+                    </div>
+                </div>
+                </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/og.glb" alt="3D Car Model" class="product-image" auto-rotate
-                    camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-
+<a href="itemdown.html?model=3">
+                    <model-viewer src="3dmodels/cars/f1.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        
+                        <div class="social-stats">
+                            <div class="stat">
+                               
+                              
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate
-                    camera-controls ar ar-modes="webxr scene-viewer quick-look"
-                    style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-
+<a href="itemdown.html?model=4">
+                    <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        
+                        <div class="social-stats">
+                            <div class="stat">
+                               
+                              
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
     </section>
 
     <!-- Footer -->
