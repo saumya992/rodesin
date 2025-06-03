@@ -697,6 +697,13 @@
                 });
                 element.classList.add('active');
 
+
+                // Change main model source
+                document.getElementById('mainModel').src = modelSrc;
+
+                // Update price, likes, and description
+                updateModelInfo(modelSrc);
+
                 const mainModel = document.getElementById('mainModel');
                 mainModel.src = modelSrc;
                 mainModel.cameraOrbit = '0deg 75deg 2.5m';
@@ -713,6 +720,7 @@
 
                 document.querySelectorAll('.view-button').forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
+
             }
 
             document.querySelector('.search-bar input').addEventListener('keypress', function (e) {
@@ -735,19 +743,24 @@
                 }
             }
 
+
+            // On page load, check URL parameter and set main model and active thumbnail
             window.addEventListener('DOMContentLoaded', () => {
                 const urlParams = new URLSearchParams(window.location.search);
                 let modelParam = urlParams.get('model');
 
+                // Support alternative query parameter 'id'
                 if (!modelParam) {
                     modelParam = urlParams.get('id');
                 }
 
+                // Support URL hash as model id
                 if (!modelParam && window.location.hash) {
                     modelParam = window.location.hash.substring(1);
                 }
 
                 if (modelParam) {
+                    // Map modelParam to model src and thumbnail element
                     const modelMap = {
                         '1': '3dmodels/cars/bmw.glb',
                         '2': '3dmodels/cars/dodge.glb',
@@ -758,6 +771,11 @@
 
                     const modelSrc = modelMap[modelParam];
                     if (modelSrc) {
+                        // Change main model
+                        const mainModel = document.getElementById('mainModel');
+                        mainModel.src = modelSrc;
+
+                        // Remove active class from all thumbnails
                         const mainModel = document.getElementById('mainModel');
                         mainModel.src = modelSrc;
 
@@ -765,11 +783,17 @@
                             thumb.classList.remove('active');
                         });
 
+                        // Add active class to the thumbnail with matching src
                         const activeThumb = Array.from(document.querySelectorAll('.thumbnail')).find(thumb => thumb.src.includes(modelSrc));
                         if (activeThumb) {
                             activeThumb.classList.add('active');
                         }
 
+                        // Update price, likes, and description
+                        updateModelInfo(modelSrc);
+                    }
+                } else {
+                    // If no model param, update info for default model
                         updateModelInfo(modelSrc);
 
                         mainModel.cameraOrbit = '0deg 75deg 2.5m';
