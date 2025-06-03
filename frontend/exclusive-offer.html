@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Exclusive Offer - Roshani Designer Car Sketch Collection</title>
+    <link rel="stylesheet" />
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        /* Copied styles from home.html for consistency */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: #202D36;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #800C1F;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            padding-top: 1px;
+            background: linear-gradient(135deg, #3C0007 0%, #202D36 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #333;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Header and Navbar styles copied exactly */
+        .header {
+            background: linear-gradient(135deg, #3C0007 0%, #800C1F 100%);
+            height: 80px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 160px;
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .search-bar {
+            width: 500px;
+            height: 50px;
+            background-color: #F5F7FA;
+            border: 2px solid #5C7896;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:hover {
+            box-shadow: 0 4px 12px rgba(92, 120, 150, 0.2);
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #202D36;
+            background: transparent;
+            padding: 0 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .user-cart {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            width: 182px;
+            height: 44px;
+            background-color: #ffffff;
+            border-radius: 22px;
+            border: 1px solid #d9d9d9;
+            padding: 0 3px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            margin-right: 12px;
+        }
+
+        .user-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #292d32;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .user-status {
+            font-size: 11px;
+            color: #b3b3b3;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bi.bi-person-fill {
+            margin-left: 30px;
+            width: 24px;
+            height: 24px;
+            border-radius: 20px;
+            margin-right: 12px;
+        }
+
+        .cart-icon {
+            width: 24px;
+            height: 24px;
+            margin-left: 20px;
+            transition: transform 0.3s ease;
+            color: white;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-bar {
+            background: #929CAA;
+            height: 50px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-size: 15px;
+            font-weight: 500;
+            color: #202D36;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(92, 120, 150, 0.2);
+        }
+
+        .nav-link.active {
+            background-color: #5C7896;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Exclusive Offer Page Styles */
+        .exclusive-container {
+            max-width: 1200px;
+            margin: 150px auto 50px;
+            padding: 0 40px;
+            color: white;
+        }
+
+        .subheading {
+            font-size: 38px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: left;
+            color: #ffffff;
+            margin-top: 0;
+        }
+
+        .offer-main {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .offer-left {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        .left-buttons {
+            margin-top: 5%;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .like-view-container {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .like-icon, .view-icon {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: #800C1F;
+            cursor: pointer;
+        }
+
+        .offer-thumbnail {
+            width: 50vw;
+            height: 60vh;
+            object-fit: cover;
+            border-radius: 20px;
+            /* Removed border as per user request */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        .offer-left {
+            /* Removed border as per user request */
+            border: none;
+            position: relative;
+            width: 50vw;
+            height: 60vh;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        /* Fullscreen button styles */
+        .fullscreen-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(42, 5, 8, 0.8);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 14px;
+            z-index: 10;
+            user-select: none;
+        }
+        .fullscreen-icon:hover {
+            background-color: rgba(126, 24, 36, 0.9);
+        }
+
+        .offer-heading {
+            font-size: 40px;
+            font-weight: 700;
+            color: white;
+            margin-top: 0;
+        }
+
+        .timer {
+            display: flex;
+            gap: 15px;
+            margin-top: 60px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            flex: 0.6;
+        }
+        .catchy-line {
+            font-size: 18px;
+            font-weight: 500;
+            color: #ccc;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
+        .timer-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            color: #800C1F;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .timer-number {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 36px;
+        }
+
+        .timer-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #202D36;
+        }
+
+        .buy-now-btn {
+            background-color: #3C0007;
+            width: 180px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin-top: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .buy-now-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            transition: all 0.5s ease;
+            z-index: -1;
+            background: #7598B9;
+        }
+
+        .buy-now-btn:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(60, 0, 7, 0.4);
+        }
+
+        .buy-now-btn:hover::before {
+            left: 0;
+        }
+
+        .offer-description {
+            margin-top: 40px;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.5;
+            max-width: 100%;
+            color: #929CAA;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .offer-main {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .offer-left {
+                align-items: center;
+                text-align: center;
+            }
+
+            .offer-thumbnail {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <img src="images/img_roshani_logo_1.png" alt="Roshani Logo" class="logo">
+        <div class="search-bar">
+            <input type="text" placeholder="Search here...">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search"
+                viewBox="0 0 16 16">
+                <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+            </svg>
+        </div>
+        <div class="user-cart">
+            <a href="login.html">
+                <div class="user-profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                    </svg>
+                    <div class="user-info">
+                        <span class="user-name">Login</span>
+                    </div>
+
+                </div>
+            </a>
+            <a href="cart.html">
+                <div class="cart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                    </svg>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-links">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="explore.html" class="nav-link">Explore ▼</a>
+            <a href="upload.html" class="nav-link">Upload</a>
+            <a href="mydesign.html" class="nav-link">Mydesign</a>
+            <a href="#" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Exclusive Offer Content -->
+        <div class="exclusive-container">
+        <div class="subheading">Exclusive offers</div>
+        <div class="offer-main">
+            <div class="offer-left">
+            <div style="position: relative; width: 50vw; height: 60vh; border-radius: 20px; border: 5px solid #7598B9; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);">
+                <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="offer-thumbnail" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width: 100%; height: 100%; border-radius: 20px;"></model-viewer>
+                <div class="fullscreen-icon" onclick="openFullscreen()" title="Full Screen" style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(42, 5, 8, 0.8); color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-size: 14px; z-index: 10;">
+                    <i>⛶</i>
+                    <span>Full Screen</span>
+                </div>
+            </div>
+            <div class="left-buttons" style="margin-top: 20px; display: flex; gap: 15px; align-items: center;">
+                <button class="buy-now-btn" onclick="buyNowClicked()">Buy now</button>
+                <div class="like-view-container">
+                    <div class="like-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#800C1F" viewBox="0 0 16 16">
+                            <path d="M8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01z"/>
+                        </svg>
+                        <span class="like-count">2.5k</span>
+                    </div>
+                    <div class="view-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#800C1F" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8z"/>
+                            <path d="M8 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+                        </svg>
+                        <span class="view-count">1.2k</span>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="offer-right">
+                <h2 class="offer-heading">Limited Time Luxury Car Sketch</h2>
+                <p class="catchy-line">Don't miss out on this exclusive opportunity to own a masterpiece!</p>
+                <div class="timer" id="timer">
+                    <div class="timer-box">
+                        <div class="timer-number" id="days">06</div>
+                        <div class="timer-label">Days</div>
+                    </div>
+                    <div class="timer-box">
+                        <div class="timer-number" id="hours">18</div>
+                        <div class="timer-label">Hours</div>
+                    </div>
+                    <div class="timer-box">
+                        <div class="timer-number" id="minutes">48</div>
+                        <div class="timer-label">Min</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="offer-description" style="max-width:none;">
+            Unlock the elegance and power of our exclusive luxury car sketch offer. This limited-time deal brings you
+            a unique design crafted with precision and passion. Don't miss your chance to own a masterpiece that
+            defines sophistication and style.
+        </p>
+    </div>
+
+    <script>
+        // Countdown Timer Functionality
+        function updateCountdown() {
+            const daysElem = document.getElementById('days');
+            const hoursElem = document.getElementById('hours');
+            const minutesElem = document.getElementById('minutes');
+
+            let daysValue = parseInt(daysElem.textContent);
+            let hoursValue = parseInt(hoursElem.textContent);
+            let minutesValue = parseInt(minutesElem.textContent);
+
+            setInterval(() => {
+                minutesValue--;
+
+                if (minutesValue < 0) {
+                    minutesValue = 59;
+                    hoursValue--;
+
+                    if (hoursValue < 0) {
+                        hoursValue = 23;
+                        daysValue--;
+
+                        if (daysValue < 0) {
+                            // Reset countdown when it reaches zero
+                            daysValue = 6;
+                            hoursValue = 18;
+                            minutesValue = 48;
+                        }
+                    }
+                }
+
+                daysElem.textContent = daysValue.toString().padStart(2, '0');
+                hoursElem.textContent = hoursValue.toString().padStart(2, '0');
+                minutesElem.textContent = minutesValue.toString().padStart(2, '0');
+            }, 60000); // Update every minute
+        }
+
+        updateCountdown();
+
+        function buyNowClicked() {
+            alert('Thank you for your interest! Proceeding to purchase.');
+            // Here you can add redirection or other logic
+        }
+
+        function openFullscreen() {
+            const modelViewer = document.querySelector('.offer-thumbnail');
+            if (modelViewer.requestFullscreen) {
+                modelViewer.requestFullscreen();
+            } else if (modelViewer.webkitRequestFullscreen) { /* Safari */
+                modelViewer.webkitRequestFullscreen();
+            } else if (modelViewer.msRequestFullscreen) { /* IE11 */
+                modelViewer.msRequestFullscreen();
+            } else {
+                alert('Fullscreen API is not supported by your browser.');
+            }
+        }
+    </script>
+</body>
+
+</html>
