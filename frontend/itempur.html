@@ -699,28 +699,33 @@
     }
 
     const modelData = {
-        '3dmodels/cars/bmw.glb': {
-
-            description: 'BMW – The Ultimate Driving Machine Experience the perfect blend of luxury, performance, and innovation with BMW. Renowned for its bold design, precision engineering, and cutting-edge technology, every BMW car is crafted to deliver sheer driving pleasure. From the sporty 3 Series to the luxurious 7 Series and powerful X range of SUVs, BMW vehicles offer dynamic performance, advanced safety features, and premium comfort.'
-        },
-        '3dmodels/cars/dodge.glb': {
-
-            description: 'Dodge – Power, Performance, and Pure American MuscleUnleash the beast with Dodge. Built for thrill-seekers and bold drivers, Dodge vehicles are engineered to dominate the road with raw power, aggressive styling, and heart-pounding performance. From the iconic Dodge Charger and Challenger to the versatile and powerful Durango SUV, every Dodge car is a symbol of strength and attitude.'
-        },
-        '3dmodels/cars/f1.glb': {
-
-            description: 'Formula 1 – The Pinnacle of Motorsport Engineering Welcome to the world of Formula 1, where cutting-edge technology meets extreme performance. F1 cars are the fastest, most advanced race machines on the planet—designed for precision, built for speed, and engineered for victory. Every component is sculpted for aerodynamic efficiency, every second is measured in milliseconds, and every race pushes the limits of man and machine.'
-        },
-        '3dmodels/cars/lambo.glb': {
-
-            description: 'Lamborghini – Dare to Dream, Built to Thrill Lamborghini is not just a car—its a statement of power, prestige, and pure passion. Crafted in Italy with precision and bold artistry, Lamborghini supercars are the ultimate expression of automotive excellence. From the razor-sharp Aventador to the cutting-edge Revuelto and the dynamic Urus SUV, every Lambo delivers an electrifying experience both on the road and on the track.'
-        },
-        '3dmodels/cars/og.glb': {
-
-            description: 'Ford Vintage – Where History Rides in Style Step back in time with Ford’s legendary vintage cars—icons that helped shape the history of the automobile. From the groundbreaking Model T that put the world on wheels to the classic lines of the Ford Mustang Fastback and the rugged charm of early F-Series pickups, vintage Ford vehicles are a tribute to American ingenuity and timeless design.'
-        }
-    };
-
+                '3dmodels/cars/bmw.glb': {
+                    price: '$38.99',
+                    likes: '2.5k',
+                    description: 'BMW – The Ultimate Driving Machine Experience the perfect blend of luxury, performance, and innovation with BMW. Renowned for its bold design, precision engineering, and cutting-edge technology, every BMW car is crafted to deliver sheer driving pleasure. From the sporty 3 Series to the luxurious 7 Series and powerful X range of SUVs, BMW vehicles offer dynamic performance, advanced safety features, and premium comfort.'
+                },
+                '3dmodels/cars/dodge.glb': {
+                    price: '$42.50',
+                    likes: '3.1k',
+                    description: 'Dodge – Power, Performance, and Pure American MuscleUnleash the beast with Dodge. Built for thrill-seekers and bold drivers, Dodge vehicles are engineered to dominate the road with raw power, aggressive styling, and heart-pounding performance. From the iconic Dodge Charger and Challenger to the versatile and powerful Durango SUV, every Dodge car is a symbol of strength and attitude.'
+                },
+                '3dmodels/cars/f1.glb': {
+                    price: '$55.00',
+                    likes: '4.2k',
+                    description: 'Formula 1 – The Pinnacle of Motorsport Engineering Welcome to the world of Formula 1, where cutting-edge technology meets extreme performance. F1 cars are the fastest, most advanced race machines on the planet—designed for precision, built for speed, and engineered for victory. Every component is sculpted for aerodynamic efficiency, every second is measured in milliseconds, and every race pushes the limits of man and machine.'
+                },
+                '3dmodels/cars/lambo.glb': {
+                    price: '$60.00',
+                    likes: '5.0k',
+                    description: 'Lamborghini – Dare to Dream, Built to Thrill Lamborghini is not just a car—its a statement of power, prestige, and pure passion. Crafted in Italy with precision and bold artistry, Lamborghini supercars are the ultimate expression of automotive excellence. From the razor-sharp Aventador to the cutting-edge Revuelto and the dynamic Urus SUV, every Lambo delivers an electrifying experience both on the road and on the track.'
+                },
+                '3dmodels/cars/og.glb': {
+                    price: '$35.75',
+                    likes: '2.0k',
+                    description: 'Ford Vintage – Where History Rides in Style Step back in time with Ford’s legendary vintage cars—icons that helped shape the history of the automobile. From the groundbreaking Model T that put the world on wheels to the classic lines of the Ford Mustang Fastback and the rugged charm of early F-Series pickups, vintage Ford vehicles are a tribute to American ingenuity and timeless design.'
+                }
+            };
+            
     function updateModelInfo(modelSrc) {
         const data = modelData[modelSrc];
         if (data) {
