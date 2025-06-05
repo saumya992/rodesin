@@ -145,20 +145,22 @@
         font-family: 'Inter', sans-serif;
     }
 
-    .bi.bi-person-fill {
-        margin-left: 30px;
-        width: 24px;
-        height: 24px;
-        border-radius: 20px;
-        margin-right: 12px;
-    }
-
     .cart-icon {
         width: 24px;
         height: 24px;
         margin-left: 20px;
         transition: transform 0.3s ease;
         color: white;
+    }
+
+    .cart-icon:hover {
+        transform: scale(1.1);
+    }
+
+    /* Sophisticated Navigation */
+    .nav-bar {
+        background: #929CAA;
+        height: 50px;
     }
 
     .cart-icon:hover {
@@ -433,7 +435,7 @@
 
     .product-card,
     .collection-card {
-        background-color: transparent;
+        background: transparent;
         /* Keeping cards white for contrast */
         border-radius: 12px;
         overflow: hidden;
@@ -507,7 +509,6 @@
     }
 
     .collection-card {
-        background: white;
         border-radius: 12px;
         overflow: hidden;
         transition: all 0.3s ease;
@@ -911,11 +912,25 @@
         const backToTopBtn = document.getElementById("backToTopBtn");
         const backButton = document.querySelector('.back-button');
 
+<<<<<<< HEAD
         window.addEventListener('scroll', function () {
             if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
                 backToTopBtn.style.display = "block";
             } else {
                 backToTopBtn.style.display = "none";
+=======
+    function goBack() {
+        // In a real application, this would navigate back
+        console.log('Going back to previous page');
+        window.history.back();
+    }
+    // Add click event listener to all model-viewer elements on the page
+    document.querySelectorAll('model-viewer').forEach(modelViewer => {
+        modelViewer.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default action if inside a link
+            if (confirm('First login for viewing the product. Do you want to login now?')) {
+                window.location.href = 'login.html';
+>>>>>>> 39085fd0cf61d96fba29e64fae3b42ddc47357b6
             }
         });
 
@@ -1065,16 +1080,17 @@
             </svg>
         </div>
         <div class="user-cart">
-            <a href="login.html">
+            <a href="dashboard.html">
                 <div class="user-profile">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-person-fill" viewBox="0 0 16 16">
-                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                    </svg>
+                    <img src="images\img_shape.png" alt="User Avatar" class="user-avatar" />
                     <div class="user-info">
-                        <span class="user-name">Login</span>
+                        <span class="user-name">Chirag Jain</span>
                     </div>
-
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="dropdown-icon" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                    </svg>
                 </div>
             </a>
             <a href="cart.html">
@@ -1099,9 +1115,8 @@
             <a href="#" class="nav-link">Contact</a>
         </div>
     </nav>
-
     <!-- Back Button -->
-    <div class="back-button">
+    <div class="back-button" onclick="history.back()">
         <span>← GO BACK</span>
     </div>
     <!-- Back to Top Button -->
@@ -1113,7 +1128,7 @@
             <h1 class="hero-title">Discover And Find Your Own Design</h1>
             <p class="hero-description">Explore Our Curated Collection Of Stylish Clothing And Accessories Tailored To
                 Your Unique Taste.</p>
-            <button class="explore-btn">Explore now</button>
+            <a href="explore.html"><button class="explore-btn">Explore now</button></a>
         </div>
         <model-viewer src="3dmodels/cars/lambo.glb" alt="Luxury Car Design" class="hero-image" auto-rotate
             camera-controls ar ar-modes="webxr scene-viewer quick-look"
@@ -1297,8 +1312,13 @@
                 </a>
             </div>
 
+<<<<<<< HEAD
             <button class="see-more-btn">SEE MORE</button>
     </section>
+=======
+        </section>
+        <button class="see-more-btn">SEE MORE</button>
+>>>>>>> 39085fd0cf61d96fba29e64fae3b42ddc47357b6
 
     <!-- Collection Section -->
     <section class="collection-section">
