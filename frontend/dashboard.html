@@ -71,6 +71,7 @@
             transition: width 0.5s ease;
             /* Smooth transition for width */
             overflow: hidden;
+            
         }
 
         .sidebar.collapsed {
@@ -129,7 +130,7 @@
             cursor: pointer; /* Add cursor pointer for hover */
             transition: transform 0.3s ease; /* Smooth transition for hover effect */
         }
-
+        
         .sidebar-logo:hover {
             transform: scale(1.05); /* Slightly enlarge on hover */
         }
@@ -231,6 +232,7 @@
             z-index: 101;
             margin-inline-start: -45px;
             margin-top: 10px;
+            border: 2px solid #4A5B6B;
         }
 
         .back-button svg {
@@ -302,6 +304,7 @@
             align-items: center;
             margin-right: 10px;
             cursor: pointer;
+            border: 2px solid #4A5B6B;
         }
 
         .user-profile {
@@ -314,6 +317,7 @@
             border: 1px solid #929CAA;
             padding: 0 3px;
             cursor: pointer;
+            border: 2px solid #4A5B6B;
         }
 
         .user-avatar {
@@ -341,9 +345,7 @@
             font-family: 'Inter', sans-serif;
         }
 
-        .dropdown-icon {
-            margin-left: 3px;
-        }
+        
         .dropdown-icon2{
             margin-left: 30px;
         }
@@ -356,9 +358,6 @@
             color: #ffffff;
             position: absolute;
             left: 50px;
-            
-
-
         }
 
         .filter-dropdown {
@@ -375,13 +374,15 @@
             padding: 0 12px;
             cursor: pointer;
         }
+        .dropdown-icon {
+            margin-left: 3px;
+        }
 
         .filter-dropdown span {
             font-size: 13px;
             font-weight: 400;
             color: #3C0007;
             margin-right: auto;
-
         }
 
         .stats-container {
@@ -895,8 +896,11 @@
             padding-left: 15px;
             font-weight: 900;
         }
-
-
+        .search-highlight {
+            background-color: rgba(37, 120, 162, 0.74);
+            transition: background-color 1.5s ease;
+            
+        }
 
 
         /* Responsive styles */
@@ -919,66 +923,7 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 70px;
-            }
 
-            .sidebar-menu span {
-                display: none;
-            }
-
-            .main-content {
-                margin-left: 70px;
-            }
-
-            .stat-card {
-                width: 100%;
-            }
-
-            .user-profile {
-                width: auto;
-            }
-
-            .user-info {
-                display: none;
-            }
-        }
-
-        /* Extra Small Devices (Phones) */
-        @media (max-width: 480px) {
-            /* Styles for mobile devices */
-        }
-
-        /* Small Devices (Phones) */
-        @media (min-width: 481px) and (max-width: 600px) {
-            /* Styles for small phones */
-        }
-
-        /* Portrait Tablets */
-        @media (min-width: 601px) and (max-width: 768px) {
-            /* Styles for portrait tablets */
-        }
-
-        /* Landscape Tablets */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            /* Styles for landscape tablets */
-        }
-
-        /* Small Laptops */
-        @media (min-width: 1025px) and (max-width: 1280px) {
-            /* Styles for small laptops */
-        }
-
-        /* Medium Laptops */
-        @media (min-width: 1281px) and (max-width: 1440px) {
-            /* Styles for medium laptops */
-        }
-
-        /* Large Desktops */
-        @media (min-width: 1441px) {
-            /* Styles for large desktops */
-        }
 
         @keyframes fadeIn {
             from {
@@ -1103,7 +1048,7 @@
                         <path
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
-                    <input type="text" placeholder="Search for anything..." />
+                    <input id="dashboardSearchInput" type="text" placeholder="Search for anything..." />
                 </div>
 
                 <div class="user-section">
@@ -1541,7 +1486,77 @@
         document.addEventListener('click', () => {
             userDropdown.style.display = 'none';
         });
-    </script>
-</body>
 
+        // Search functionality
+        document.getElementById('dashboardSearchInput').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                performSearch();
+            }
+        });
+
+        function performSearch() {
+            const searchInput = document.getElementById('dashboardSearchInput');
+            const query = searchInput.value.trim().toLowerCase();
+            if (!query) return;
+
+            // Clear the search input after search is done
+            searchInput.value = '';
+
+            // Remove previous highlights
+            const prevHighlights = document.querySelectorAll('.search-highlight');
+            prevHighlights.forEach(el => {
+                el.classList.remove('search-highlight');
+            });
+
+            // Find all elements that can contain searchable text
+            // We will search in table cells, stat-label, stat-value, and other text containers
+            const searchableSelectors = [
+                'td',
+                '.stat-label',
+                '.stat-value',
+                '.table-header',
+                '.table-headerr',
+                '.designer-name',
+                '.date',
+                '.price',
+                '.offer-text',
+                '.tokens-value',
+                '.discount-value',
+                '.rewards-label',
+                '.eligible-label',
+                '.section-title',
+                '.page-title'
+            ];
+
+            let foundElement = null;
+
+            for (const selector of searchableSelectors) {
+                const elements = document.querySelectorAll(selector);
+                for (const el of elements) {
+                    if (el.textContent.toLowerCase().includes(query)) {
+                        foundElement = el;
+                        break;
+                    }
+                }
+                if (foundElement) break;
+            }
+
+            if (foundElement) {
+                // Scroll to the element smoothly
+                foundElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Highlight the element
+                foundElement.classList.add('search-highlight');
+                // Remove highlight after 3 seconds
+                setTimeout(() => {
+                    foundElement.classList.remove('search-highlight');
+                }, 3000);
+            } else {
+                alert('No matching results found.');
+            }
+        }
+
+    </script>
+    
+</body>
 </html>

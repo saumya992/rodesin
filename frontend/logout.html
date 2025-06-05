@@ -16,27 +16,48 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #ebdfd7;
+            background: linear-gradient(135deg, #5C7896 0%, #3C0007 100%);
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
             position: relative;
             overflow-x: hidden;
         }
-        
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         a {
-    text-decoration: none;
-    color: #202D36;
-    transition: color 0.3s ease;
-}
+            text-decoration: none;
+            color: #3C0007;
+            transition: color 0.3s ease;
+        }
 
         /* Sidebar styles */
         .sidebar {
             position: fixed;
             width: 216px;
             height: 100vh;
-            background-color: #000000;
+            background: rgba(60, 0, 7, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(60, 0, 7, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             left: 0;
             top: 0;
             z-index: 100;
             transition: width 0.5s ease;
+            /* Smooth transition for width */
             overflow: hidden;
         }
 
@@ -48,24 +69,29 @@
             position: relative;
             width: 180px;
             height: 75px;
-            margin: 23px 15px;
-            background-color: #ebdfd7;
+            margin: 23px 20px;
+            background-color: transparent;
             border-radius: 35px;
-            display: flex;
+            display: relative;
             justify-content: center;
             align-items: center;
+            cursor: pointer; /* Add cursor pointer for hover */
+            transition: transform 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .sidebar-logo:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
         }
 
         .sidebar-logo img {
-            width: 180px;
-            height: 75px;
+            width: 170px;
+            height: 70px;
         }
 
-   .sidebar-menu {
+        .sidebar-menu {
             position: relative;
             margin-top: 20px;
         }
-
 
         .menu-item {
             display: flex;
@@ -95,29 +121,33 @@
             border-radius: 23px;
             width: 140px;
             height: 45px;
-            border: 1px solid #d9d9d9;
+            border: 1px solid #929CAA;
             margin-left: 34px;
         }
 
         .menu-item.active svg {
-            color: #fc8b23;
+            color: #800C1F;
         }
 
         .dashboard-active {
-            color: orange !important;
+            color: #800C1F !important;
         }
-
 
         /* Main content */
         .main-content {
             margin-left: 216px;
-            padding: 20px 30px;
+            padding-top: 140px;
+            padding-bottom: 0px;
             position: relative;
-            transition: margin-left 0.3s ease;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        }
+
+        .main-content.collapsed {
+            margin-left: 0;
+            width: 500%;
+        }
+
+        .container {
+            transition: all 0.3s ease-in-out;
         }
 
         .main-content.collapsed {
@@ -128,9 +158,27 @@
         .header {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             justify-content: space-between;
             gap: 10px;
+            position: fixed;
+            top: 0;
+            left: 216px;
+            right: 0;
+            height: 80px;
+            background: rgba(92, 120, 150, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(60, 0, 7, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 0 30px;
+            transition: left 0.47s ease, width 0.47s ease;
+        }
+
+        .header.collapsed {
+            left: 0;
+            width: 100%;
         }
 
         /* Left group: back button and title */
@@ -141,7 +189,7 @@
         }
 
         .back-button {
-            width: 30px;
+            width: 28px;
             height: 28px;
             background-color: #ffffff;
             border-radius: 14px;
@@ -152,7 +200,9 @@
             transition: margin-left 0.3s ease;
             position: relative;
             z-index: 101;
-            margin-inline-start: -40px;
+            margin-inline-start: -45px;
+            margin-top: 10px;
+            border: 2px solid #4A5B6B;
         }
 
         .back-button svg {
@@ -168,20 +218,27 @@
         }
 
         .page-title {
-            font-size: 27px;
-            font-weight: 500;
-            color: #000000;
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: #ffffff;
         }
 
         /* Profile Section */
         .profile-section {
-            background-color: white;
+            background: hsla(0, 19%, 71%, 0.603);
+            backdrop-filter: blur(9px);
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 600px;
             text-align: center;
+            margin: 0 auto; 
+            position: relative;
+            top: 10px; 
+            border: 2px solid white;
         }
 
         .profile-photo {
@@ -189,7 +246,7 @@
             height: 100px;
             border-radius: 50%;
             margin-bottom: 20px;
-            border: 3px solid #fc8b23;
+            border: 3px solid #640000;
             object-fit: cover;
         }
 
@@ -201,7 +258,7 @@
             display: block;
             font-size: 18px;
             font-weight: 600;
-            color: #292d32;
+            color: #ffffff;
         }
 
         /* Buttons */
@@ -218,7 +275,7 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: 0.3s ease;
             font-family: 'Poppins', sans-serif;
             user-select: none;
         }
@@ -233,12 +290,12 @@
         }
 
         #logout {
-            background-color: #fc8b23;
+            background-color: #9c0000;
             color: #fff;
         }
 
-        #logout:hover {
-            background-color: #e07b1a;
+        #logout:hover { 
+            background-color: #560000;
         }
 
         /* Confirmation Modal */
