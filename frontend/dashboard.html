@@ -20,15 +20,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px 20px 40px;
+            padding: 10px 20px 10px;
             background: linear-gradient(135deg, #5C7896 0%, #3C0007 100%);
-            background-size: 400% 400%;
+            background-size: 300% 300%;
             animation: gradientBG 15s ease infinite;
             position: relative;
             overflow-x: hidden;
-            /* Ensure body background is visible */
         }
-
 
         .section-title,
         .filter-dropdown {
@@ -81,20 +79,19 @@
 
         .main-content {
             margin-left: 216px;
-            padding: 150px 30px;
+            padding-top: 140px;
+            padding-bottom: 0px;
             position: relative;
         }
 
         .main-content.collapsed {
             margin-left: 0;
-            width: 100%;
+            width: 500%;
         }
 
         .container {
             transition: all 0.3s ease-in-out;
         }
-
-
 
         .main-content.collapsed {
             margin-left: 0;
@@ -123,17 +120,23 @@
             position: relative;
             width: 180px;
             height: 75px;
-            margin: 23px 15px;
+            margin: 23px 20px;
             background-color: transparent;
             border-radius: 35px;
             display: relative;
             justify-content: center;
             align-items: center;
+            cursor: pointer; /* Add cursor pointer for hover */
+            transition: transform 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .sidebar-logo:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
         }
 
         .sidebar-logo img {
-            width: 180px;
-            height: 75px;
+            width: 170px;
+            height: 70px;
         }
 
         .sidebar-menu {
@@ -384,7 +387,7 @@
         .stats-container {
             display: flex;
             margin-bottom: 40px;
-            justify-content: space-around;
+            justify-content: space-evenly;
         }
 
         .stat-card {
@@ -459,7 +462,7 @@
         }
 
         .table-card {
-            background: rgba(255, 255, 255, 0.15);
+            background: hsla(0, 19%, 71%, 0.603);
             backdrop-filter: blur(5px);
             border-radius: 15px;
             padding: 20px;
@@ -469,7 +472,7 @@
 
 
         .download-summary {
-            width: 675px;
+            width: 650px;
             height: 324px;
         }
 
@@ -500,13 +503,20 @@
             font-size: 14px;
             font-weight: 500;
             color: #3C0007;
-            margin-bottom: 10px;
+            margin-bottom: 0px;
+        }
+        .table-headerr{
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 20px;
         }
 
         .categories-dropdown {
             position: relative;
-            left: 500px;
-            bottom: 35px;
+            left: 480px;
+        
+            bottom: 20px;
             display: flex;
             align-items: center;
             width: 129px;
@@ -556,7 +566,7 @@
         .offers-card {
             width: 409px;
             height: 324px;
-            background: rgba(255, 255, 255, 0.15);
+            background: hsla(0, 19%, 71%, 0.603);
             backdrop-filter: blur(5px);
             border-radius: 15px;
             padding: 20px;
@@ -657,10 +667,10 @@
         .rewards-card {
             width: 409px;
             height: 236px;
-            background: rgba(255, 255, 255, 0.15);
+            background: hsla(0, 19%, 71%, 0.603);
             backdrop-filter: blur(5px);
             border-radius: 15px;
-            padding: 20px;
+            padding: 25px;
             position: relative;
             border: 1px solid white;
         }
@@ -682,15 +692,20 @@
         }
 
         .info-icon {
-            width: 20px;
-            height: 20px;
+            width: 25px;
+            height: 25px;
             cursor: pointer;
+            stroke: rgb(255, 255, 255);
+            stroke-width: 0.2;
+            fill: white;
+            margin-bottom: 5px;
+            padding-right: 10px;
         }
 
         .rewards-divider {
             width: 100%;
             height: 1px;
-            background-color: #929CAA;
+            background-color: #ffffff;
             margin-bottom: 10px;
         }
 
@@ -727,7 +742,7 @@
         .rewards-note {
             font-size: 11px;
             font-weight: 500;
-            color: #929CAA;
+            color: #ffffff;
             margin-top: 40px;
             text-align: center;
         }
@@ -765,6 +780,124 @@
             font-family: 'Roboto', sans-serif;
             color: #929CAA;
         }
+
+
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1000;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Black w/ opacity */
+            animation: fadeIn 0.5s;
+            /* Fade in animation */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            /* Could be more or less, depending on screen size */
+            animation: slideIn 0.5s;
+            /* Slide in animation */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* Internal CSS for inline styles in dashboard.html */
+        /* Styles for user-dropdown */
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 60px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 150px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 10000;
+            cursor: default;
+        }
+
+        /* Custom styles to change tables and cards text color to white inside main-content */
+        .main-content table th,
+        .main-content table td {
+            color: white !important;
+        }
+
+        .main-content .stat-card,
+        .main-content .offers-card,
+        /* Removed rewards-card from white color override */
+        .main-content .table-card {
+            color: white !important;
+        }
+
+        /* Override specific text colors inside cards if needed */
+        .main-content .stat-value {
+            color: white !important;
+        }
+
+        .main-content .stat-label {
+            color: white !important;
+        }
+
+        .main-content .table-header {
+            color: white !important;
+        }
+
+        .main-content .designer-name,
+        .main-content .date,
+        .main-content .price {
+            color: white !important;
+        }
+
+        .main-content .offer-text {
+            color: white !important;
+        }
+
+        .main-content .shop-now-btn span {
+            color: white !important;
+        }
+
+        
+        .rewards-label{
+            color: #00203b;
+            padding-left: 15px;
+            font-weight: 900;
+        }
+        .eligible-label{
+            color: #02430a;
+            padding-left: 15px;
+            font-weight: 900;
+        }
+
+
+
 
         /* Responsive styles */
         @media (max-width: 1200px) {
@@ -847,39 +980,6 @@
             /* Styles for large desktops */
         }
 
-        .modal {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1000;
-            /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.5);
-            /* Black w/ opacity */
-            animation: fadeIn 0.5s;
-            /* Fade in animation */
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            /* Could be more or less, depending on screen size */
-            animation: slideIn 0.5s;
-            /* Slide in animation */
-        }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -902,41 +1002,17 @@
             }
         }
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        /* Internal CSS for inline styles in dashboard.html */
-        /* Styles for user-dropdown */
-        .user-dropdown {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 60px;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 150px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            z-index: 10000;
-            cursor: default;
-        }
+        
+        
     </style>
 </head>
 
 <body>
     <div class="sidebar">
         <div class="sidebar-logo">
-            <img src="images\ROSHANI ka logo (1).png" alt="Roshani Technologies Logo">
+            <a href="home.html">
+                <img src="images\ROSHANI ka logo (1).png" alt="Roshani Technologies Logo">
+            </a>
         </div>
         <div class="sidebar-menu">
             <div class="menu-item active" data-link="dashboard.html">
@@ -1087,7 +1163,7 @@
                 </div>
                 <div class="stat-label">Spendings</div>
                 <div class="stat-value">₹50,000</div>
-            </div> '
+            </div>
              
 
             <div class="stat-card">
@@ -1134,8 +1210,8 @@
                 <div class="table-header">Download summary</div>
                 <div class="categories-dropdown">
                     <span>Categories</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
+                        class="bi-bi-chevron-down" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
                             d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
                     </svg>
@@ -1222,7 +1298,7 @@
             </div>
 
             <div class="table-card top-designs">
-                <div class="table-header">Top designs</div>
+                <div class="table-headerr">Top designs</div>
                 <table>
                     <thead>
                         <tr>
@@ -1277,7 +1353,7 @@
                         <div class="tokens-value">₹75</div>
                     </div>
                     <div class="rewards-column">
-                        <div class="rewards-label">Eligible discount</div>
+                        <div class="eligible-label">Eligible discount</div>
                         <div class="discount-value">₹75</div>
                     </div>
                 </div>

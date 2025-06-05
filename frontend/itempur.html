@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <title>Roshani Technologies - Car Coupe Blueprint</title>
     <style>
         * {
@@ -23,7 +22,6 @@
             line-height: 1.6;
             padding-top: 125px;
             background-color: #F8F1F1;
-            /* Soft light background with pinkish tint */
             color: #333;
             overflow-x: hidden;
             background: linear-gradient(135deg, #F8F1F1 0%, #FFFFFF 100%);
@@ -48,7 +46,6 @@
         .logo {
             width: 160px;
             height: 60px;
-            /* Make logo white */
         }
 
         .logo:hover {
@@ -148,6 +145,9 @@
             left: 0;
             z-index: 999;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            visibility: visible !important;
+            opacity: 1 !important;
+            transition: none !important;
         }
 
         .nav-links {
@@ -176,7 +176,6 @@
             font-weight: 600;
         }
 
-        /* Refined Back Button */
         .back-button {
             color: #ffffff;
             position: fixed;
@@ -193,7 +192,6 @@
             z-index: 10;
             gap: 10px;
             overflow: hidden;
-            /* Essential for the sliding effect */
             background: linear-gradient(135deg, #5C7896 0%, #7598B9 100%);
             box-shadow: 0 2px 8px rgba(60, 0, 7, 0.3);
             transition: all 0.3s ease;
@@ -231,7 +229,6 @@
             transform: translateX(5px);
         }
 
-
         .content {
             display: flex;
             margin-top: 3%;
@@ -242,7 +239,6 @@
             box-shadow: 0 4px 15px rgba(126, 24, 36, 0.1);
             backdrop-filter: blur(15px);
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             padding: 40px;
             border-radius: 20px;
@@ -279,15 +275,12 @@
             }
         }
 
-
-
         .blueprint-thumbnails {
             display: flex;
             flex-direction: column;
             margin-left: 50px;
             gap: 10px;
             padding: 20px 0;
-
         }
 
         .thumbnail {
@@ -303,7 +296,6 @@
             box-shadow: 0 30px 50px rgba(60, 0, 7, 0.4);
         }
 
-
         .thumbnail:hover {
             opacity: 0.8;
             border-color: #7E1824;
@@ -316,7 +308,6 @@
             z-index: 10;
         }
 
-        /* Main Blueprint */
         .main-blueprint {
             margin: 20px 0 20px 50px;
             position: relative;
@@ -332,7 +323,6 @@
             transform: translateY(-5px);
             box-shadow: 0 30px 50px rgba(60, 0, 7, 0.4);
         }
-
 
         .main-blueprint img {
             width: 100%;
@@ -353,6 +343,7 @@
             flex-direction: column;
             align-items: center;
             font-size: 14px;
+            z-index: 10;
         }
 
         .fullscreen-icon:hover {
@@ -373,7 +364,6 @@
             transform: translateY(-5px);
             box-shadow: 0 30px 50px rgba(60, 0, 7, 0.4);
         }
-
 
         .breadcrumb {
             color: #7E1824;
@@ -484,49 +474,50 @@
             border-top: 1px solid #f0e0e0;
         }
 
-        @media (max-width: 1200px) {
-            .content {
-                flex-direction: column;
-            }
-
-            .blueprint-info {
-                margin-left: 0;
-                margin-top: 30px;
-                max-width: 100%;
-            }
-
-            .search-bar {
-                width: 300px;
-            }
+        /* Fixed view buttons styles */
+        .view-buttons-container {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 10;
         }
 
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                height: auto;
-                padding: 15px;
-            }
+        .view-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 10px 15px;
+            background-color: rgba(42, 5, 8, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
 
-            .search-bar {
-                margin-top: 15px;
-                width: 100%;
-            }
+        .view-button {
+            background: linear-gradient(135deg, #5C7896 0%, #7598B9 100%);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(92, 120, 150, 0.3);
+            transition: all 0.3s ease;
+            font-size: 14px;
+            min-width: 70px;
+            text-align: center;
+        }
 
-            .blueprint-thumbnails {
-                flex-direction: row;
-                margin-left: 0;
-                overflow-x: auto;
-                margin-bottom: 20px;
-                padding: 15px;
-            }
+        .view-button:hover {
+            background: linear-gradient(135deg, #7E1824 0%, #660911 100%);
+            transform: translateY(-2px);
+        }
 
-            .main-blueprint {
-                margin: 0 auto;
-                width: 100%;
-                height: auto;
-            }
-
+        .view-button.active {
+            background: linear-gradient(135deg, #7E1824 0%, #660911 100%);
+            box-shadow: 0 2px 4px rgba(126, 24, 36, 0.4);
         }
     </style>
 </head>
@@ -583,12 +574,9 @@
 
         <div class="divider"></div>
 
-
         <div class="back-button" onclick="goBack()">
             <span>← GO BACK</span>
         </div>
-
-
 
         <div class="content">
             <div class="blueprint-thumbnails">
@@ -608,17 +596,27 @@
                     touch-action="pan-y" style="width: 80px; height: 80px;"
                     onclick="changeModel('3dmodels/cars/og.glb', this)"></model-viewer>
             </div>
+
             <div class="main-blueprint" style="position: relative;">
                 <model-viewer id="mainModel" src="3dmodels/cars/bmw.glb" alt="Car Coupe 3D Model" camera-controls
                     touch-action="pan-y" style="width: 649px; height: 484px;">
                 </model-viewer>
-                <div class="fullscreen-icon" onclick="openFullscreen()"
-                    style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(42, 5, 8, 0.8); color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-size: 14px; z-index: 10;">
+
+                <div class="view-buttons-container">
+                    <div class="view-buttons" id="viewButtons">
+                        <button class="view-button active" onclick="changeView('0deg 75deg 2.5m', this)">Front</button>
+                        <button class="view-button" onclick="changeView('90deg 75deg 2.5m', this)">Side</button>
+                        <button class="view-button" onclick="changeView('180deg 75deg 2.5m', this)">Back</button>
+                        <button class="view-button" onclick="changeView('270deg 75deg 2.5m', this)">Other Side</button>
+                        <button class="view-button" onclick="changeView('0deg 0deg 2.5m', this)">Top</button>
+                    </div>
+                </div>
+
+                <div class="fullscreen-icon" onclick="openFullscreen()">
                     <i>⛶</i>
                     <span>Full Screen</span>
                 </div>
             </div>
-
 
             <div class="blueprint-info">
                 <h1 class="blueprint-title">Coupe Blueprint</h1>
@@ -648,17 +646,10 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
-        <script>
-            function goBack() {
-                // In a real application, this would navigate back
-                console.log('Going back to previous page');
-                window.history.back();
-            }
 
+<<<<<<< HEAD
             const modelData = {
                 '3dmodels/cars/bmw.glb': {
                     price: '$38.99',
@@ -698,10 +689,125 @@
 
             function changeModel(modelSrc, element) {
                 // Remove active class from all thumbnails
+=======
+    </div>
+</body>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+
+    const modelData = {
+        '3dmodels/cars/bmw.glb': {
+
+            description: 'BMW – The Ultimate Driving Machine Experience the perfect blend of luxury, performance, and innovation with BMW. Renowned for its bold design, precision engineering, and cutting-edge technology, every BMW car is crafted to deliver sheer driving pleasure. From the sporty 3 Series to the luxurious 7 Series and powerful X range of SUVs, BMW vehicles offer dynamic performance, advanced safety features, and premium comfort.'
+        },
+        '3dmodels/cars/dodge.glb': {
+
+            description: 'Dodge – Power, Performance, and Pure American MuscleUnleash the beast with Dodge. Built for thrill-seekers and bold drivers, Dodge vehicles are engineered to dominate the road with raw power, aggressive styling, and heart-pounding performance. From the iconic Dodge Charger and Challenger to the versatile and powerful Durango SUV, every Dodge car is a symbol of strength and attitude.'
+        },
+        '3dmodels/cars/f1.glb': {
+
+            description: 'Formula 1 – The Pinnacle of Motorsport Engineering Welcome to the world of Formula 1, where cutting-edge technology meets extreme performance. F1 cars are the fastest, most advanced race machines on the planet—designed for precision, built for speed, and engineered for victory. Every component is sculpted for aerodynamic efficiency, every second is measured in milliseconds, and every race pushes the limits of man and machine.'
+        },
+        '3dmodels/cars/lambo.glb': {
+
+            description: 'Lamborghini – Dare to Dream, Built to Thrill Lamborghini is not just a car—its a statement of power, prestige, and pure passion. Crafted in Italy with precision and bold artistry, Lamborghini supercars are the ultimate expression of automotive excellence. From the razor-sharp Aventador to the cutting-edge Revuelto and the dynamic Urus SUV, every Lambo delivers an electrifying experience both on the road and on the track.'
+        },
+        '3dmodels/cars/og.glb': {
+
+            description: 'Ford Vintage – Where History Rides in Style Step back in time with Ford’s legendary vintage cars—icons that helped shape the history of the automobile. From the groundbreaking Model T that put the world on wheels to the classic lines of the Ford Mustang Fastback and the rugged charm of early F-Series pickups, vintage Ford vehicles are a tribute to American ingenuity and timeless design.'
+        }
+    };
+
+    function updateModelInfo(modelSrc) {
+        const data = modelData[modelSrc];
+        if (data) {
+            document.querySelector('.product-price').textContent = data.price;
+            document.querySelector('.social-stats .stat span').textContent = data.likes;
+            document.querySelector('.blueprint-description').textContent = data.description;
+        }
+    }
+
+    function changeModel(modelSrc, element) {
+        document.querySelectorAll('.thumbnail').forEach(thumb => {
+            thumb.classList.remove('active');
+        });
+        element.classList.add('active');
+
+        const mainModel = document.getElementById('mainModel');
+        mainModel.src = modelSrc;
+        mainModel.cameraOrbit = '0deg 75deg 2.5m';
+        mainModel.jumpCameraToGoal();
+
+        updateModelInfo(modelSrc);
+
+        document.querySelectorAll('.view-button').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.view-button').classList.add('active');
+    }
+
+    function changeView(orbit, button) {
+        const mainModel = document.getElementById('mainModel');
+        mainModel.cameraOrbit = orbit;
+        mainModel.jumpCameraToGoal();
+
+        document.querySelectorAll('.view-button').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+    }
+
+    document.querySelector('.search-bar input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const searchTerm = this.value.trim();
+            if (searchTerm) {
+                alert(`Searching for: ${searchTerm}`);
+            }
+        }
+    });
+
+    function openFullscreen() {
+        const modelViewer = document.getElementById('mainModel');
+        if (modelViewer.requestFullscreen) {
+            modelViewer.requestFullscreen();
+        } else if (modelViewer.webkitRequestFullscreen) {
+            modelViewer.webkitRequestFullscreen();
+        } else if (modelViewer.msRequestFullscreen) {
+            modelViewer.msRequestFullscreen();
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        let modelParam = urlParams.get('model');
+
+        if (!modelParam) {
+            modelParam = urlParams.get('id');
+        }
+
+        if (!modelParam && window.location.hash) {
+            modelParam = window.location.hash.substring(1);
+        }
+
+        if (modelParam) {
+            const modelMap = {
+                '1': '3dmodels/cars/bmw.glb',
+                '2': '3dmodels/cars/dodge.glb',
+                '3': '3dmodels/cars/f1.glb',
+                '4': '3dmodels/cars/lambo.glb',
+                '5': '3dmodels/cars/og.glb'
+            };
+
+            const modelSrc = modelMap[modelParam];
+            if (modelSrc) {
+                const mainModel = document.getElementById('mainModel');
+                mainModel.src = modelSrc;
+
+>>>>>>> 39085fd0cf61d96fba29e64fae3b42ddc47357b6
                 document.querySelectorAll('.thumbnail').forEach(thumb => {
                     thumb.classList.remove('active');
                 });
 
+<<<<<<< HEAD
                 // Add active class to clicked thumbnail
                 element.classList.add('active');
 
@@ -720,19 +826,21 @@
                         alert(`Searching for: ${searchTerm}`);
                         // In a real application, this would trigger a search
                     }
+=======
+                const activeThumb = Array.from(document.querySelectorAll('.thumbnail')).find(thumb => thumb.src.includes(modelSrc));
+                if (activeThumb) {
+                    activeThumb.classList.add('active');
+>>>>>>> 39085fd0cf61d96fba29e64fae3b42ddc47357b6
                 }
-            });
 
-            function openFullscreen() {
-                const modelViewer = document.getElementById('mainModel');
-                if (modelViewer.requestFullscreen) {
-                    modelViewer.requestFullscreen();
-                } else if (modelViewer.webkitRequestFullscreen) {
-                    modelViewer.webkitRequestFullscreen();
-                } else if (modelViewer.msRequestFullscreen) {
-                    modelViewer.msRequestFullscreen();
-                }
+                updateModelInfo(modelSrc);
+
+                mainModel.cameraOrbit = '0deg 75deg 2.5m';
+
+                document.querySelectorAll('.view-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.view-button').classList.add('active');
             }
+<<<<<<< HEAD
 
             // On page load, check URL parameter and set main model and active thumbnail
             window.addEventListener('DOMContentLoaded', () => {
@@ -789,5 +897,14 @@
         <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     </div>
 </body>
+=======
+        } else {
+            const defaultModelSrc = document.getElementById('mainModel').src;
+            updateModelInfo(defaultModelSrc);
+        }
+    });
+</script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+>>>>>>> 39085fd0cf61d96fba29e64fae3b42ddc47357b6
 
 </html>
