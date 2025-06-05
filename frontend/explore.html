@@ -967,13 +967,12 @@
         });
     }
 
+
+
     // Back Button Functionality
     const backButton = document.querySelector('.back-button');
-
     backButton.addEventListener('click', () => {
-        // In a real app, this would navigate back
-        // For this demo, we'll just show an alert
-        alert('Going back to previous page!');
+        window.history.back(); // Navigate to the previous page
     });
 
     // See More Button Functionality

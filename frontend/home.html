@@ -33,7 +33,7 @@
         font-size: 16px;
         line-height: 1.6;
         padding-top: 125px;
-        background: linear-gradient(135deg, #3C0007 0%, #202D36 100%);
+        background: linear-gradient(135deg, #5c7896 0%, #3c0007 100%);
         background-size: 400% 400%;
         animation: gradientBG 15s ease infinite;
         /* Very light blue-gray */
@@ -259,6 +259,27 @@
 
     .back-button:hover span {
         transform: translateX(5px);
+    }
+
+    #backToTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 40px;
+        right: 30px;
+        z-index: 100;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: #333;
+        color: white;
+        cursor: pointer;
+        padding: 12px 18px;
+        border-radius: 50%;
+        transition: opacity 0.3s ease;
+    }
+
+    #backToTopBtn:hover {
+        background-color: #555;
     }
 
     /* Hero Section */
@@ -884,134 +905,152 @@
         }
     }
 </style>
-<script src="">
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Back to Top Button Functionality
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        const backButton = document.querySelector('.back-button');
 
-
-    // Add click event listener to all model-viewer elements on the page
-    document.querySelectorAll('model-viewer').forEach(modelViewer => {
-        modelViewer.addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent default action if inside a link
-            if (confirm('First login for viewing the product. Do you want to login now?')) {
-                window.location.href = 'login.html';
+        window.addEventListener('scroll', function () {
+            if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
             }
         });
-    });
-    // Countdown Timer Functionality
-    function updateCountdown() {
-        const days = document.querySelector('.countdown-box:nth-child(1) .countdown-number');
-        const hours = document.querySelector('.countdown-box:nth-child(2) .countdown-number');
-        const minutes = document.querySelector('.countdown-box:nth-child(3) .countdown-number');
 
-        let daysValue = parseInt(days.textContent);
-        let hoursValue = parseInt(hours.textContent);
-        let minutesValue = parseInt(minutes.textContent);
+        backToTopBtn.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-        // Update countdown every minute
-        setInterval(() => {
-            minutesValue--;
+        // Back Button Functionality with Navigation History
+        if (backButton) {
+            backButton.addEventListener('click', function () {
+                // Define the home page URL
+                const homePageUrl = window.location.origin + '/index.html';
 
-            if (minutesValue < 0) {
-                minutesValue = 59;
-                hoursValue--;
+                // Check if there's a previous page in history
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    // If no history (e.g., page opened directly), redirect to home
+                    window.location.href = homePageUrl;
+                }
 
-                if (hoursValue < 0) {
-                    hoursValue = 23;
-                    daysValue--;
+                // Store the current page in localStorage to track navigation
+                const currentPage = window.location.pathname;
+                localStorage.setItem('lastPage', currentPage);
+            });
 
-                    if (daysValue < 0) {
-                        // Reset countdown when it reaches zero
-                        daysValue = 6;
-                        hoursValue = 18;
-                        minutesValue = 48;
+            // On page load, check if coming from a specific page
+            const lastPage = localStorage.getItem('lastPage');
+            const currentPage = window.location.pathname;
+            const homePagePath = '/index.html';
+
+            // Ensure back button redirects to home if coming from explore page
+            if (currentPage.includes('explore.html') && lastPage && lastPage.includes(homePagePath)) {
+                backButton.dataset.previousPage = homePagePath;
+            }
+        }
+
+        // Model Viewer Click Redirect to Login
+        document.querySelectorAll('model-viewer').forEach(modelViewer => {
+            modelViewer.addEventListener('click', function (event) {
+                event.preventDefault();
+                if (confirm('First login for viewing the product. Do you want to login now?')) {
+                    window.location.href = 'login.html';
+                }
+            });
+        });
+
+        // Countdown Timer
+        function updateCountdown() {
+            const days = document.querySelector('.countdown-box:nth-child(1) .countdown-number');
+            const hours = document.querySelector('.countdown-box:nth-child(2) .countdown-number');
+            const minutes = document.querySelector('.countdown-box:nth-child(3) .countdown-number');
+
+            let daysValue = parseInt(days.textContent);
+            let hoursValue = parseInt(hours.textContent);
+            let minutesValue = parseInt(minutes.textContent);
+
+            setInterval(() => {
+                minutesValue--;
+                if (minutesValue < 0) {
+                    minutesValue = 59;
+                    hoursValue--;
+                    if (hoursValue < 0) {
+                        hoursValue = 23;
+                        daysValue--;
+                        if (daysValue < 0) {
+                            daysValue = 6;
+                            hoursValue = 18;
+                            minutesValue = 48;
+                        }
                     }
                 }
-            }
+                days.textContent = daysValue.toString().padStart(2, '0');
+                hours.textContent = hoursValue.toString().padStart(2, '0');
+                minutes.textContent = minutesValue.toString().padStart(2, '0');
+            }, 60000); // Update every 60 seconds
+        }
+        updateCountdown();
 
-            // Update display
-            days.textContent = daysValue.toString().padStart(2, '0');
-            hours.textContent = hoursValue.toString().padStart(2, '0');
-            minutes.textContent = minutesValue.toString().padStart(2, '0');
-        }, 60000); // Update every minute
-    }
-
-    // Initialize countdown
-    updateCountdown();
-
-    // Tab Functionality
-    const tabs = document.querySelectorAll('.tab');
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Remove active class from all tabs
-            tabs.forEach(t => t.classList.remove('active'));
-
-            // Add active class to clicked tab
-            tab.classList.add('active');
-
-            // You would typically load different products here based on the selected tab
-            // For this demo, we'll just show an alert
-            alert(`${tab.textContent} category selected!`);
-        });
-    });
-
-    // Navigation Menu Toggle
-    const menuIcon = document.querySelector('.menu-icon');
-    const navLinks = document.querySelector('.nav-links');
-
-    menuIcon.addEventListener('click', () => {
-        navLinks.style.display = navLinks.style.display === 'none' ? 'flex' : 'none';
-    });
-
-    // Back Button Functionality
-    const backButton = document.querySelector('.back-button');
-
-    backButton.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // See More Button Functionality
-    const seeMoreBtn = document.querySelector('.see-more-btn');
-
-    seeMoreBtn.addEventListener('click', () => {
-        // In a real app, this would load more products
-        // For this demo, we'll just show an alert
-        alert('Loading more products!');
-    });
-
-    // Shop Now Button Functionality
-    const shopNowBtn = document.querySelector('.shop-now-btn');
-
-    shopNowBtn.addEventListener('click', () => {
-        // In a real app, this would navigate to the shop
-        // For this demo, we'll just show an alert
-        alert('Redirecting to exclusive offers!');
-        alert('Redirecting to exclusive offers!');
-    });
-
-    // Product Card Click Functionality
-    const productCards = document.querySelectorAll('.product-card');
-
-    productCards.forEach(card => {
-        card.addEventListener('click', () => {
-            // In a real app, this would navigate to the product detail page
-            // For this demo, we'll just show an alert
-            const productName = card.querySelector('.product-name').textContent;
-            alert(`Viewing details for ${productName}`);
+        // Tabs Functionality
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                alert(tab.textContent + ' category selected!');
+            });
         });
 
-        // Add hover effect
-        card.style.cursor = 'pointer';
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'scale(1.05)';
-            card.style.transition = 'transform 0.3s ease';
-        });
+        // Menu Toggle
+        const menuIcon = document.querySelector('.menu-icon');
+        const navLinks = document.querySelector('.nav-links');
+        if (menuIcon && navLinks) {
+            menuIcon.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'none' ? 'flex' : 'none';
+            });
+        }
 
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'scale(1)';
+        // See More Button
+        const seeMoreBtn = document.querySelector('.see-more-btn');
+        if (seeMoreBtn) {
+            seeMoreBtn.addEventListener('click', () => {
+                alert('Loading more products!');
+            });
+        }
+
+        // Shop Now Button
+        const shopNowBtn = document.querySelector('.shop-now-btn');
+        if (shopNowBtn) {
+            shopNowBtn.addEventListener('click', () => {
+                alert('Redirecting to exclusive offers!');
+            });
+        }
+
+        // Product Cards Click and Hover
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const productName = card.querySelector('.product-name').textContent;
+                alert('Viewing details for ' + productName);
+            });
+
+            card.style.cursor = 'pointer';
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'scale(1.05)';
+                card.style.transition = 'transform 0.3s ease';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
         });
     });
-
 </script>
+
+
 
 <body>
     <!-- Header -->
@@ -1053,8 +1092,8 @@
     <!-- Navigation -->
     <nav class="nav-bar">
         <div class="nav-links">
-            <a href="home.html" class="nav-link active">Home</a>
-            <a href="explore.html" class="nav-link">Explore ▼</a>
+            <a href="home.html" class="nav-link active">Home ▼</a>
+            <a href="explore.html" class="nav-link">Explore</a>
             <a href="upload.html" class="nav-link">Upload</a>
             <a href="mydesign.html" class="nav-link">Mydesign</a>
             <a href="#" class="nav-link">Contact</a>
@@ -1065,7 +1104,8 @@
     <div class="back-button">
         <span>← GO BACK</span>
     </div>
-
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" title="Go to top">↑</button>
     <!-- Hero Section -->
     <!-- Hero Section -->
     <section class="hero-section">
@@ -1075,8 +1115,12 @@
                 Your Unique Taste.</p>
             <button class="explore-btn">Explore now</button>
         </div>
-        <model-viewer src="3dmodels/cars/lambo.glb" alt="Luxury Car Design" class="hero-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:600px; height:600px; border-radius:40px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);"></model-viewer>
+        <model-viewer src="3dmodels/cars/lambo.glb" alt="Luxury Car Design" class="hero-image" auto-rotate
+            camera-controls ar ar-modes="webxr scene-viewer quick-look"
+            style="width:600px; height:600px; border-radius:40px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);"></model-viewer>
     </section>
+
+    
 
     <!-- Best Selling Section -->
     <section class="best-selling-section">
@@ -1085,8 +1129,10 @@
 
         <div class="product-grid">
             <div class="product-card">
-                <a href="Itempur.html">
-                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                <a href="itempur.html?model=1">
+                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
                     <h3 class="product-name">Name of the product</h3>
                     <div class="price-like-container">
                         <p class="product-price">$38.99</p>
@@ -1104,59 +1150,10 @@
                 </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-                <div class="price-like-container">
-                    <p class="product-price">$38.99</p>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-heart" viewBox="0 0 16 16">
-                                <path
-                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                            </svg>
-                            <span>2.5k</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <model-viewer src="3dmodels/cars/og.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-                <div class="price-like-container">
-                    <p class="product-price">$38.99</p>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-heart" viewBox="0 0 16 16">
-                                <path
-                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                            </svg>
-                            <span>2.5k</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-                <div class="price-like-container">
-                    <p class="product-price">$38.99</p>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-heart" viewBox="0 0 16 16">
-                                <path
-                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                            </svg>
-                            <span>2.5k</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <a href="Itempur.html">
-                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                <a href="itempur.html?model=2">
+                    <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
                     <h3 class="product-name">Name of the product</h3>
                     <div class="price-like-container">
                         <p class="product-price">$38.99</p>
@@ -1174,59 +1171,133 @@
                 </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-                <div class="price-like-container">
-                    <p class="product-price">$38.99</p>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-heart" viewBox="0 0 16 16">
-                                <path
-                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                            </svg>
-                            <span>2.5k</span>
+                <a href="itempur.html?model=3">
+                    <model-viewer src="3dmodels/cars/f1.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        <p class="product-price">$38.99</p>
+                        <div class="social-stats">
+                            <div class="stat">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                </svg>
+                                <span>2.5k</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/og.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-                <div class="price-like-container">
-                    <p class="product-price">$38.99</p>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-heart" viewBox="0 0 16 16">
-                                <path
-                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                            </svg>
-                            <span>2.5k</span>
+                <a href="itempur.html?model=4">
+                    <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        <p class="product-price">$38.99</p>
+                        <div class="social-stats">
+                            <div class="stat">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                </svg>
+                                <span>2.5k</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-                <div class="price-like-container">
-                    <p class="product-price">$38.99</p>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-heart" viewBox="0 0 16 16">
-                                <path
-                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                            </svg>
-                            <span>2.5k</span>
+                <a href="itempur.html">
+                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        <p class="product-price">$38.99</p>
+                        <div class="social-stats">
+                            <div class="stat">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                </svg>
+                                <span>2.5k</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
-        </div>
+            <div class="product-card">
+                <a href="itempur.html?model=2">
+                    <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        <p class="product-price">$38.99</p>
+                        <div class="social-stats">
+                            <div class="stat">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                </svg>
+                                <span>2.5k</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="product-card">
+                <a href="itempur.html?model=5">
+                    <model-viewer src="3dmodels/cars/og.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        <p class="product-price">$38.99</p>
+                        <div class="social-stats">
+                            <div class="stat">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                </svg>
+                                <span>2.5k</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="product-card">
+                <a href="itempur.html?model=4">
+                    <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        <p class="product-price">$38.99</p>
+                        <div class="social-stats">
+                            <div class="stat">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                </svg>
+                                <span>2.5k</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
-        <button class="see-more-btn">SEE MORE</button>
+            <button class="see-more-btn">SEE MORE</button>
     </section>
 
     <!-- Collection Section -->
@@ -1237,19 +1308,31 @@
 
         <div class="collection-grid">
             <div class="collection-card">
-                <model-viewer src="3dmodels/humans/astronaut.glb" alt="Human Model" class="collection-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:250px; object-fit: contain; border-radius: 12px;"></model-viewer>
+                <a href="itempur.html">
+                    <model-viewer src="3dmodels/humans/astronaut.glb" alt="Human Model" class="collection-image"
+                        auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:250px; object-fit: contain; border-radius: 12px;"></model-viewer>
+                </a>
                 <h3 class="collection-card-title">Accessories</h3>
                 <p class="collection-card-description">Complete your ensemble with designer accessories such as
                     handbags, scarves, belts, and hats.</p>
             </div>
             <div class="collection-card">
-                <model-viewer src="3dmodels/cars/f1.glb" alt="Car Model" class="collection-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:250px; object-fit: contain; border-radius: 12px;"></model-viewer>
+                <a href="itempur.html">
+                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                </a>
                 <h3 class="collection-card-title">Accessories</h3>
                 <p class="collection-card-description">Complete your ensemble with designer accessories such as
                     handbags, scarves, belts, and hats.</p>
             </div>
             <div class="collection-card">
-                <model-viewer src="3dmodels/pokemon/charmander.glb" alt="Pokemon Model" class="collection-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:250px; object-fit: contain; border-radius: 12px;"></model-viewer>
+                <a href="itempur.html">
+                    <model-viewer src="3dmodels/pokemon/charmander.glb" alt="Pokemon Model" class="collection-image"
+                        auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:250px; object-fit: contain; border-radius: 12px;"></model-viewer>
+                </a>
                 <h3 class="collection-card-title">Accessories</h3>
                 <p class="collection-card-description">Complete your ensemble with designer accessories such as
                     handbags, scarves, belts, and hats.</p>
@@ -1260,7 +1343,11 @@
     <!-- Offer Section -->
     <section class="offer-section">
         <!-- Replaced image with 3D model viewer for offer-section -->
-        <model-viewer src="3dmodels/wepons/sniper-rifle.glb" alt="Special Offer Model" class="offer-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:481px; height:465px; border-radius: 25px; border: 5px solid #7598B9; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); object-fit: cover;"></model-viewer>
+        <a href="">
+            <model-viewer src="3dmodels/wepons/sniper-rifle.glb" alt="Special Offer Model" class="offer-image"
+                auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                style="width:481px; height:465px; border-radius: 25px; border: 5px solid #7598B9; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); object-fit: cover;"></model-viewer>
+        </a>
         <div class="offer-content">
             <h2 class="offer-title">Exclusive Offer</h2>
             <p class="offer-description">Unlock the ultimate upgrade with our exclusive offer Enjoy savings of up to 40%
@@ -1300,8 +1387,10 @@
 
         <div class="product-grid">
             <div class="product-card">
-                <a href="Itempur.html">
-                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                <a href="itempur.html?model=1">
+                    <model-viewer src="3dmodels/cars/bmw.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
                     <h3 class="product-name">Name of the product</h3>
                     <div class="price-like-container">
                         <p class="product-price">$38.99</p>
@@ -1319,57 +1408,68 @@
                 </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-                <div class="price-like-container">
-                    <p class="product-price">$38.99</p>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-heart" viewBox="0 0 16 16">
-                                <path
-                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                            </svg>
-                            <span>2.5k</span>
+                <a href="itempur.html?model=2">
+                    <model-viewer src="3dmodels/cars/dodge.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        <p class="product-price">$38.99</p>
+                        <div class="social-stats">
+                            <div class="stat">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                </svg>
+                                <span>2.5k</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/og.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-                <div class="price-like-container">
-                    <p class="product-price">$38.99</p>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-heart" viewBox="0 0 16 16">
-                                <path
-                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                            </svg>
-                            <span>2.5k</span>
+                <a href="itempur.html?model=3">
+                    <model-viewer src="3dmodels/cars/f1.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        <p class="product-price">$38.99</p>
+                        <div class="social-stats">
+                            <div class="stat">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                </svg>
+                                <span>2.5k</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="product-card">
-                <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
-                <h3 class="product-name">Name of the product</h3>
-                <div class="price-like-container">
-                    <p class="product-price">$38.99</p>
-                    <div class="social-stats">
-                        <div class="stat">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-heart" viewBox="0 0 16 16">
-                                <path
-                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                            </svg>
-                            <span>2.5k</span>
+                <a href="itempur.html?model=4">
+                    <model-viewer src="3dmodels/cars/lambo.glb" alt="3D Car Model" class="product-image" auto-rotate
+                        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+                        style="width:100%; height:280px; object-fit: contain; border-bottom: 1px solid #eee; border-radius: 12px;"></model-viewer>
+                    <h3 class="product-name">Name of the product</h3>
+                    <div class="price-like-container">
+                        <p class="product-price">$38.99</p>
+                        <div class="social-stats">
+                            <div class="stat">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                </svg>
+                                <span>2.5k</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
-        </div>
     </section>
 
     <!-- Footer -->
