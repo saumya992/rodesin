@@ -51,7 +51,9 @@
             top: 0;
             z-index: 100;
             transition: width 0.5s ease;
+            /* Smooth transition for width */
             overflow: hidden;
+            
         }
 
         .sidebar.collapsed {
@@ -60,24 +62,32 @@
 
         .main-content {
             margin-left: 216px;
-            padding-top: 100px;
-            padding-bottom: 20px;
+            padding-top: 140px;
+            padding-bottom: 0px;
             position: relative;
-            transition: margin-left 0.3s ease-in-out;
-            width: calc(100% - 216px);
         }
 
         .main-content.collapsed {
             margin-left: 0;
-            width: 100%;
+            width: 500%;
+        }
+
+        .container {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .main-content.collapsed {
+            margin-left: 0;
         }
 
         .back-button {
             transition: margin-left 0.3s ease;
+            /* Smooth transition for back button */
         }
 
         .back-button.collapsed {
             margin-left: -20px;
+            /* Adjust this value to move the button left */
         }
 
         .back-button.collapsed svg {
@@ -96,15 +106,15 @@
             margin: 23px 20px;
             background-color: transparent;
             border-radius: 35px;
-            display: flex;
+            display: relative;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+            cursor: pointer; /* Add cursor pointer for hover */
+            transition: transform 0.3s ease; /* Smooth transition for hover effect */
         }
-
+        
         .sidebar-logo:hover {
-            transform: scale(1.05);
+            transform: scale(1.05); /* Slightly enlarge on hover */
         }
 
         .sidebar-logo img {
@@ -113,8 +123,8 @@
         }
 
         .sidebar-menu {
-            position: 216px;
-            margin-top: 0px;
+            position: relative;
+            margin-top: 20px;
         }
 
         .menu-item {
@@ -142,19 +152,19 @@
 
         .menu-item.active {
             background-color: white;
-            border-radius: 4px;
+            border-radius: 23px;
             width: 140px;
             height: 45px;
-            border: 1px solid #000820;
+            border: 1px solid #929CAA;
             margin-left: 34px;
         }
 
         .menu-item.active svg {
-            color: #fff;
+            color: #800C1F;
         }
 
         .dashboard-active {
-            color: #fff !important;
+            color: #800C1F !important;
         }
 
         .header {
@@ -168,9 +178,9 @@
             left: 216px;
             right: 0;
             height: 80px;
-            background: rgba(92, 120, 150, 0.5);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(92, 120, 150, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             box-shadow: 0 4px 15px rgba(60, 0, 7, 0.3);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
@@ -183,6 +193,7 @@
             width: 100%;
         }
 
+        /* Left group: back button and title */
         .header-left {
             display: flex;
             align-items: center;
@@ -193,16 +204,29 @@
             width: 28px;
             height: 28px;
             background-color: #ffffff;
-            border-radius: 0px;
+            border-radius: 14px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            transition: margin-left 0.3s ease;
             position: relative;
-            z-index: 100;
+            z-index: 101;
             margin-inline-start: -45px;
             margin-top: 10px;
             border: 2px solid #4A5B6B;
+        }
+
+        .back-button svg {
+            transition: transform 0.7s ease;
+        }
+
+        .back-button.collapsed {
+            margin-left: -20px;
+        }
+
+        .back-button.collapsed svg {
+            transform: rotate(180deg);
         }
 
         .page-title {
@@ -235,7 +259,6 @@
             height: 23px;
             color: #0a1e34;
             padding-right: 4px;
-
         }
 
         .search-bar input {
@@ -243,7 +266,7 @@
             outline: none;
             width: 100%;
             font-size: 16px;
-            color: rgb(23, 17, 22);
+            color: rgb(23, 22, 22);
             background-color: #ffffff00;
         }
 
@@ -256,27 +279,13 @@
             width: 46px;
             height: 45px;
             background-color: #ffffff;
-            border-radius: 0px;
+            border-radius: 22px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-right: 10px;
             cursor: pointer;
             border: 2px solid #4A5B6B;
-            position: relative;
-
-        }
-
-        .notification-bell .badge {
-            position: absolute;
-            top: 1px;
-            right: 1px;
-            background-color: #E63946;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 12px;
-            font-weight: bold;
         }
 
         .user-profile {
@@ -285,24 +294,23 @@
             width: 182px;
             height: 44px;
             background-color: #ffffff;
-            border-radius: 0px;
-            border: 2px solid #4A5B6B;
+            border-radius: 22px;
+            border: 1px solid #929CAA;
             padding: 0 3px;
             cursor: pointer;
+            border: 2px solid #4A5B6B;
         }
 
         .user-avatar {
             width: 40px;
             height: 40px;
-            border-radius: 0px;
+            border-radius: 20px;
             margin-right: 12px;
-
         }
 
         .user-info {
             display: flex;
             flex-direction: column;
-
         }
 
         .user-name {
@@ -312,15 +320,15 @@
             font-family: 'Inter', sans-serif;
         }
 
-        .profile {
+        .user-status {
             font-size: 11px;
-            color: rgb(0, 19, 29);
+            color: #929CAA;
             font-family: 'Inter', sans-serif;
         }
 
-        .dropdown-icon2 {
+        
+        .dropdown-icon2{
             margin-left: 30px;
-
         }
 
         .user-dropdown {
@@ -354,22 +362,27 @@
             width: 100%;
             max-width: none;
             margin: 0 auto;
-            padding: 20px 40px;
-            height: calc(100vh - 120px);
+            padding: 0 40px 20px 40px;
+            height: calc(100vh - 80px - 50px);
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            position: relative;
         }
 
         .notifications-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
-            position: sticky;
-            top: 0;
-            padding: 10px 0;
-            z-index: 1;
+            margin-bottom: 0;
+            position: fixed;
+            top: 80px;
+            left: 216px;
+            right: 0;
+            height: 50px;
+            padding: 20px 40px 10px 60px;           
+            z-index: 1000;
+            overflow: hidden;
         }
 
         .notifications-header h2 {
@@ -382,7 +395,16 @@
             display: flex;
             gap: 10px;
         }
-
+        .notifications-controls select {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #4A5B6B;
+            background: #ffffff;
+            font-size: 14px;
+            color: #3C0007;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }   
         .notifications-controls select,
         .notifications-controls button {
             padding: 8px 12px;
@@ -395,7 +417,7 @@
         }
 
         .notifications-controls button:hover {
-            background: #F4A261;
+            background: #a80000;
             color: #ffffff;
         }
 
@@ -404,6 +426,8 @@
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             gap: 10px;
             flex-grow: 1;
+            max-height: calc(100vh - 80px - 50px);
+            overflow-y: auto;
         }
 
         .notification-card {
@@ -415,6 +439,7 @@
             box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            /* Removed position: fixed or sticky to allow normal scrolling */
             position: relative;
             min-height: 90px;
         }
@@ -436,6 +461,11 @@
         /* Animation for removing notification */
         .notification-card.removing {
             animation: fadeOutSlide 0.5s ease forwards;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            transition: height 0.5s ease, margin 0.5s ease, padding 0.5s ease;
         }
 
         @keyframes fadeOutSlide {
@@ -581,13 +611,39 @@
             }
         }
     </style>
+    <style>
+        /* Styles for user-dropdown moved from inline to here */
+        #userDropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 60px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 150px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 10000;
+            cursor: default;
+        }
+        #userDropdown a {
+            display: block;
+            padding: 10px;
+            color: #3C0007;
+            text-decoration: none;
+            border-bottom: 1px solid #ccc;
+        }
+        #userDropdown a:last-child {
+            border-bottom: none;
+        }
+    </style>
 </head>
 
 <body>
     <div class="sidebar">
         <div class="sidebar-logo">
-            <a href="/">
-                <img src="images/ROSHANI.png" alt="Roshani Technologies Logo">
+            <a href="home.html">
+<img src="images/ROSHANI ka logo (1).png" alt="Roshani Technologies Logo">
             </a>
         </div>
         <div class="sidebar-menu">
@@ -665,36 +721,38 @@
                 </div>
 
                 <div class="user-section">
-                    <div class="notification-bell">
-                        <a href="notifications.html">
-                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
-                            </svg>
-                            <span class="badge" id="notificationBadge">0</span>
-                        </a>
+                <div class="notification-bell">
+                    <a href="notifications.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-bell" viewBox="0 0 16 16">
+                            <path
+                                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
+                        </svg> </a>
+                </div>
+                <div class="user-profile" id="userProfile">
+                    <img src="images/img_shape.png" alt="User Avatar" class="user-avatar" />
+                    <div class="user-info">
+                        <span class="user-name">Chirag Jain</span>
+                        <span class="user-status">Unemployed</span>
                     </div>
-                    <div class="user-profile" id="userProfile">
-                        <img src="images/img_shape.png" alt="User Avatar" class="user-avatar" />
-                        <div class="user-info">
-                            <span class="user-name">Chirag Jain</span>
-                            <span class="profile">Unemployed</span>
-                        </div>
-                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="dropdown-icon2" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-                        </svg>
-                        <div class="user-dropdown" id="userDropdown">
-                            <a href="settings.html">Settings</a>
-                            <a href="notifications.html">Notifications</a>
-                            <a href="logout.html">Logout</a>
-                        </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="dropdown-icon2" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                    </svg>
+<div class="user-dropdown" id="userDropdown">
+                        <a href="settings.html">Settings</a>
+                        <a href="notifications.html">Notifications</a>
+                        <a href="logout.html">Logout</a>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
 
         <div class="notification-container">
             <div class="notifications-header">
-                <h2>Notifications</h2>
+                <h2>Summary</h2>
                 <div class="notifications-controls">
                     <select id="filterNotifications">
                         <option value="all">All Notifications</option>
@@ -709,9 +767,9 @@
             </div>
             <div class="notifications-grid" id="notificationsGrid">
                 <div class="notification-card order unread">
-                    <div class="notification-image">
-                        <img src="images/product1.jpg" alt="Product Thumbnail" />
-                    </div>
+                <div class="notification-image">
+                    <img src="images/img_car1_1.png" alt="Product Thumbnail" />
+                </div>
                     <div class="notification-content">
                         <div class="notification-title">New Order Received</div>
                         <div class="notification-description">Order #12345 for "Floral Design T-Shirt" has been placed. Total: $29.99</div>
@@ -723,9 +781,9 @@
                     </div>
                 </div>
                 <div class="notification-card payment read">
-                    <div class="notification-image">
-                        <img src="images/product2.jpg" alt="Product Thumbnail" />
-                    </div>
+                <div class="notification-image">
+                    <img src="images/img_screenshot_20250514_140932_1.png" alt="Product Thumbnail" />
+                </div>
                     <div class="notification-content">
                         <div class="notification-title">Payment Confirmed</div>
                         <div class="notification-description">Payment of $45.00 for "Abstract Art Print" has been successfully processed.</div>
@@ -737,9 +795,9 @@
                     </div>
                 </div>
                 <div class="notification-card review unread">
-                    <div class="notification-image">
-                        <img src="images/product3.jpg" alt="Product Thumbnail" />
-                    </div>
+                <div class="notification-image">
+                    <img src="images/Mechanical-Drawings.png" alt="Product Thumbnail" />
+                </div>
                     <div class="notification-content">
                         <div class="notification-title">New Review Submitted</div>
                         <div class="notification-description">A 5-star review was submitted for "Vintage Poster Design" by John Doe.</div>
@@ -752,7 +810,7 @@
                 </div>
                 <div class="notification-card error read">
                     <div class="notification-image">
-                        <img src="images/error.png" alt="Error Icon" />
+                        <img src="images/ROSHANI ka logo (1).png" alt="Error Icon" />
                     </div>
                     <div class="notification-content">
                         <div class="notification-title">Failed Payment Attempt</div>
