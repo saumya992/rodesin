@@ -60,12 +60,14 @@
         .main-content {
             margin-left: 216px;
             padding-top: 140px;
-            padding-bottom: 0px;
+            padding-bottom: 20px;
             position: relative;
+            width: calc(100% - 216px);
         }
 
         .main-content.collapsed {
             margin-left: 0;
+            width: 100%;
         }
 
         .back-button {
@@ -350,7 +352,6 @@
             height: calc(100vh - 80px - 50px);
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
             position: relative;
         }
 
@@ -364,7 +365,7 @@
             left: 216px;
             right: 0;
             height: 50px;
-            padding: 20px 40px 10px 40px;           
+            padding: 20px 40px 10px 40px;
             z-index: 1000;
             overflow: hidden;
         }
@@ -414,12 +415,13 @@
 
         .deleted-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, auto);
             gap: 20px;
             flex-grow: 1;
-            max-height: calc(100vh - 80px - 50px);
-            overflow-y: auto;
             padding-top: 20px;
+            max-height: calc(100vh - 80px - 50px - 20px);
+            
         }
 
         .design-card {
@@ -430,7 +432,7 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            min-height: 220px;
+            height: 260px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -475,7 +477,7 @@
         }
 
         .design-title {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             color: #3C0007;
             margin-bottom: 5px;
@@ -485,7 +487,7 @@
         }
 
         .design-details {
-            font-size: 12px;
+            font-size: 11px;
             color: #4A5B6B;
             margin-bottom: 3px;
             font-family: 'Inter', sans-serif;
@@ -545,66 +547,6 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal-content h3 {
-            font-size: 18px;
-            color: #3C0007;
-            margin-bottom: 15px;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .modal-buttons button {
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .modal-buttons .confirm {
-            background: #E63946;
-            color: #fff;
-        }
-
-        .modal-buttons .cancel {
-            background: #d9d9d9;
-            color: #333;
-        }
-
         /* Snackbar Styles */
         .snackbar {
             position: fixed;
@@ -643,12 +585,16 @@
             }
 
             .deleted-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
             }
 
             .design-card {
-                flex-direction: row;
-                align-items: center;
+                height: 240px;
+            }
+
+            .design-thumbnail {
+                height: 100px;
             }
         }
 
@@ -690,13 +636,17 @@
                 width: 100%;
             }
 
+            .deleted-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
             .design-card {
-                flex-direction: column;
-                align-items: flex-start;
+                height: 280px;
             }
 
             .design-thumbnail {
-                height: 150px;
+                height: 140px;
             }
         }
     </style>
@@ -705,32 +655,41 @@
     <div class="sidebar">
         <div class="sidebar-logo">
             <a href="home.html">
-                <img src="images/ROSHANI ka logo (1).png" alt="Roshani Technologies Logo">
+                <img src="images\ROSHANI ka logo (1).png" alt="Roshani Technologies Logo">
             </a>
         </div>
         <div class="sidebar-menu">
             <div class="menu-item" data-link="dashboard.html">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z" />
                 </svg>
-                <span>Dashboard</span>
+                <span class="dashboard">Dashboard</span>
             </div>
             <div class="menu-item" data-link="spendings.html">
-                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 0 0 0-1 1v12a1 0 0 0 1 1h2a1 0 0 0 1-1V2a1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 0 0 1-1 1H7a1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-bar-chart" viewBox="0 0 16 16">
+                    <path
+                        d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
                 </svg>
-                <span>Spend</span>
+                <span>Spendings</span>
             </div>
             <div class="menu-item" data-link="downloads.html">
-                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-download" viewBox="0 0 16 16">
+                    <path
+                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                    <path
+                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
                 </svg>
                 <span>Downloads</span>
             </div>
             <div class="menu-item" data-link="favourites.html">
-                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z" />
                 </svg>
                 <span>Favourites</span>
             </div>
@@ -749,7 +708,7 @@
             <div class="menu-item" data-link="settings.html">
                 <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
-                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l-.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
                 </svg>
                 <span>Settings</span>
             </div>
@@ -771,7 +730,7 @@
                         <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
                     </svg>
                 </div>
-                <h1 class="page-title">Deleted</h1>
+                <h1 class="page-title">Trash Bin</h1>
             </div>
 
             <div class="header-right">
@@ -811,7 +770,7 @@
 
         <div class="deleted-container">
             <div class="deleted-header" id="deletedHeader">
-                <h2>Deleted Designs</h2>
+                <h2>Your Designs</h2>
                 <div class="deleted-controls">
                     <select id="filterType">
                         <option value="all">All Types</option>
@@ -829,227 +788,6 @@
                 </div>
             </div>
             <div class="deleted-grid" id="deletedGrid">
-                <!-- New Card 1 (Top) -->
-                <div class="design-card" data-type="svg" data-size="0.8" data-date="2025-06-05">
-                    <input type="checkbox" class="design-checkbox">
-                    <img src="images/design3.svg" alt="Design Thumbnail" class="design-thumbnail" />
-                    <div class="design-content">
-                        <div>
-                            <div class="design-title">Vector Icon Set</div>
-                            <div class="design-details">Deleted: June 5, 2025, 4:44 PM</div>
-                            <div class="design-details">Size: 0.8 MB</div>
-                            <div class="design-details">Type: SVG</div>
-                        </div>
-                        <div class="design-actions">
-                            <button class="delete-permanent">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1.5 1.5 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                </svg>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Card 2 (Top) -->
-                <div class="design-card" data-type="png" data-size="4.0" data-date="2025-06-04T20:00:00">
-                    <input type="checkbox" class="design-checkbox">
-                    <img src="images/design5.png" alt="Design Thumbnail" class="design-thumbnail" />
-                    <div class="design-content">
-                        <div>
-                            <div class="design-title">Nature Landscape</div>
-                            <div class="design-details">Deleted: June 4, 2025, 8:00 PM</div>
-                            <div class="design-details">Size: 4.0 MB</div>
-                            <div class="design-details">Type: PNG</div>
-                        </div>
-                        <div class="design-actions">
-                            <button class="delete-permanent">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1.5 1.5 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                </svg>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Existing Card 1 -->
-                <div class="design-card" data-type="png" data-size="2.5" data-date="2025-06-04T21:30:00">
-                    <input type="checkbox" class="design-checkbox">
-                    <img src="images/design1.png" alt="Design Thumbnail" class="design-thumbnail" />
-                    <div class="design-content">
-                        <div>
-                            <div class="design-title">Abstract Art #1</div>
-                            <div class="design-details">Deleted: June 4, 2025, 9:30 PM</div>
-                            <div class="design-details">Size: 2.5 MB</div>
-                            <div class="design-details">Type: PNG</div>
-                        </div>
-                        <div class="design-actions">
-                            <button class="delete-permanent">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1.5 1.5 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                </svg>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Existing Card 2 -->
-                <div class="design-card" data-type="jpeg" data-size="1.8" data-date="2025-06-03T14:15:00">
-                    <input type="checkbox" class="design-checkbox">
-                    <img src="images/design2.jpeg" alt="Design Thumbnail" class="design-thumbnail" />
-                    <div class="design-content">
-                        <div>
-                            <div class="design-title">Minimalist Poster</div>
-                            <div class="design-details">Deleted: June 3, 2025, 2:15 PM</div>
-                            <div class="design-details">Size: 1.8 MB</div>
-                            <div class="design-details">Type: JPEG</div>
-                        </div>
-                        <div class="design-actions">
-                            <button class="delete-permanent">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1.5 1.5 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                </svg>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Card 3 (Bottom) -->
-                <div class="design-card" data-type="jpeg" data-size="3.2" data-date="2025-06-02T10:00:00">
-                    <input type="checkbox" class="design-checkbox">
-                    <img src="images/design6.jpeg" alt="Design Thumbnail" class="design-thumbnail" />
-                    <div class="design-content">
-                        <div>
-                            <div class="design-title">Cityscape Photo</div>
-                            <div class="design-details">Deleted: June 2, 2025, 10:00 AM</div>
-                            <div class="design-details">Size: 3.2 MB</div>
-                            <div class="design-details">Type: JPEG</div>
-                        </div>
-                        <div class="design-actions">
-                            <button class="delete-permanent">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1.5 1.5 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                </svg>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Card 4 (Bottom) -->
-                <div class="design-card" data-type="png" data-size="1.5" data-date="2025-06-01T15:30:00">
-                    <input type="checkbox" class="design-checkbox">
-                    <img src="images/design7.png" alt="Design Thumbnail" class="design-thumbnail" />
-                    <div class="design-content">
-                        <div>
-                            <div class="design-title">Floral Pattern</div>
-                            <div class="design-details">Deleted: June 1, 2025, 3:30 PM</div>
-                            <div class="design-details">Size: 1.5 MB</div>
-                            <div class="design-details">Type: PNG</div>
-                        </div>
-                        <div class="design-actions">
-                            <button class="delete-permanent">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1.5 1.5 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                </svg>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Card 5 -->
-                <div class="design-card" data-type="svg" data-size="0.5" data-date="2025-05-31T12:00:00">
-                    <input type="checkbox" class="design-checkbox">
-                    <img src="images/design8.svg" alt="Design Thumbnail" class="design-thumbnail" />
-                    <div class="design-content">
-                        <div>
-                            <div class="design-title">Logo Sketch</div>
-                            <div class="design-details">Deleted: May 31, 2025, 12:00 PM</div>
-                            <div class="design-details">Size: 0.5 MB</div>
-                            <div class="design-details">Type: SVG</div>
-                        </div>
-                        <div class="design-actions">
-                            <button class="delete-permanent">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1.5 1.5 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                </svg>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Card 6 -->
-                <div class="design-card" data-type="png" data-size="2.0" data-date="2025-05-30T18:00:00">
-                    <input type="checkbox" class="design-checkbox">
-                    <img src="images/design9.png" alt="Design Thumbnail" class="design-thumbnail" />
-                    <div class="design-content">
-                        <div>
-                            <div class="design-title">Abstract Waves</div>
-                            <div class="design-details">Deleted: May 30, 2025, 6:00 PM</div>
-                            <div class="design-details">Size: 2.0 MB</div>
-                            <div class="design-details">Type: PNG</div>
-                        </div>
-                        <div class="design-actions">
-                            <button class="delete-permanent">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1.5 1.5 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                </svg>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Card 7 -->
-                <div class="design-card" data-type="jpeg" data-size="2.8" data-date="2025-05-29T09:00:00">
-                    <input type="checkbox" class="design-checkbox">
-                    <img src="images/design10.jpeg" alt="Design Thumbnail" class="design-thumbnail" />
-                    <div class="design-content">
-                        <div>
-                            <div class="design-title">Sunset View</div>
-                            <div class="design-details">Deleted: May 29, 2025, 9:00 AM</div>
-                            <div class="design-details">Size: 2.8 MB</div>
-                            <div class="design-details">Type: JPEG</div>
-                        </div>
-                        <div class="design-actions">
-                            <button class="delete-permanent">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1.5 1.5 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                </svg>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- New Card 8 -->
-                                <!-- New Card 8 -->
-                <div class="design-card" data-type="png" data-size="1.2" data-date="2025-05-28T14:00:00">
-                    <input type="checkbox" class="design-checkbox">
-                    <img src="images/design11.png" alt="Design Thumbnail" class="design-thumbnail" />
-                    <div class="design-content">
-                        <div>
-                            <div class="design-title">Geometric Shapes</div>
-                            <div class="design-details">Deleted: May 28, 2025, 2:00 PM</div>
-                            <div class="design-details">Size: 1.2 MB</div>
-                            <div class="design-details">Type: PNG</div>
-                        </div>
-                        <div class="design-actions">
-                            <button class="delete-permanent">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1.5 1.5 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                </svg>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 <div class="no-designs" id="noDesigns">
                     <svg width="80" height="80" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 16 16">
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
@@ -1057,17 +795,6 @@
                     </svg>
                     <div>No deleted designs found.</div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal for Delete Confirmation -->
-    <div class="modal" id="deleteModal">
-        <div class="modal-content">
-            <h3>Are you sure you want to permanently delete this design?</h3>
-            <div class="modal-buttons">
-                <button class="confirm" id="confirmDelete">Yes, Delete</button>
-                <button class="cancel" id="cancelDelete">Cancel</button>
             </div>
         </div>
     </div>
@@ -1108,25 +835,155 @@
             }
         });
 
+        // Sidebar menu item click navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all menu items
+                document.querySelectorAll('.menu-item').forEach(el => {
+                    el.classList.remove('active');
+                });
+                // Add active class to the clicked item
+                item.classList.add('active');
+                // Get the link from data attribute
+                const link = item.getAttribute('data-link');
+                // Navigate after a short delay to allow animation
+                setTimeout(() => {
+                    window.location.href = link;
+                }, 300); // Adjust the delay as needed
+            });
+        });
+
+        // Design card creation function
+        function createDesignCard(design) {
+            const card = document.createElement('div');
+            card.className = 'design-card';
+            card.dataset.type = design.type;
+            card.dataset.size = design.size;
+            card.dataset.date = design.date;
+            card.innerHTML = `
+                <input type="checkbox" class="design-checkbox">
+                <img src="${design.thumbnail}" alt="Design Thumbnail" class="design-thumbnail" />
+                <div class="design-content">
+                    <div>
+                        <div class="design-title">${design.title}</div>
+                        <div class="design-details">Deleted: ${new Date(design.date).toLocaleString()}</div>
+                        <div class="design-details">Size: ${design.size} MB</div>
+                        <div class="design-details">Type: ${design.type.toUpperCase()}</div>
+                    </div>
+                    <div class="design-actions">
+                        <button class="view-design">
+                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                            </svg>
+                            View
+                        </button>
+                        <button class="delete-permanent">
+                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1.5 1.5 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                            </svg>
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Sample data (replace with backend fetch)
+        const sampleDesigns = [
+            {
+                title: 'Vector Icon Set',
+                thumbnail: 'images/design3.svg',
+                type: 'svg',
+                size: 0.8,
+                date: '2025-06-05T16:44:00'
+            },
+            {
+                title: 'Nature Landscape',
+                thumbnail: 'images/design5.png',
+                type: 'png',
+                size: 4.0,
+                date: '2025-06-04T20:00:00'
+            },
+            {
+                title: 'Abstract Art #1',
+                thumbnail: 'images/design1.png',
+                type: 'png',
+                size: 2.5,
+                date: '2025-06-04T21:30:00'
+            },
+            {
+                title: 'Minimalist Poster',
+                thumbnail: 'images/design2.jpeg',
+                type: 'jpeg',
+                size: 1.8,
+                date: '2025-06-03T14:15:00'
+            },
+            {
+                title: 'Cityscape Photo',
+                thumbnail: 'images/design6.jpeg',
+                type: 'jpeg',
+                size: 3.2,
+                date: '2025-06-02T10:00:00'
+            },
+            {
+                title: 'Floral Pattern',
+                thumbnail: 'images/design7.png',
+                type: 'png',
+                size: 1.5,
+                date: '2025-06-01T15:30:00'
+            }
+        ];
+
+        // Function to fetch designs from backend (placeholder)
+        async function fetchDesigns() {
+            // Replace with actual backend API call
+            // Example: const response = await fetch('/api/deleted-designs');
+            // return await response.json();
+            return sampleDesigns;
+        }
+
+        // Function to render designs
+        async function renderDesigns() {
+            const deletedGrid = document.getElementById('deletedGrid');
+            const noDesigns = document.getElementById('noDesigns');
+            const designs = await fetchDesigns();
+
+            deletedGrid.innerHTML = '';
+            if (designs.length === 0) {
+                deletedGrid.appendChild(noDesigns);
+                noDesigns.style.display = 'block';
+            } else {
+                noDesigns.style.display = 'none';
+                designs.forEach(design => {
+                    const card = createDesignCard(design);
+                    deletedGrid.appendChild(card);
+                });
+                attachCardEventListeners();
+                filterAndSortDesigns();
+            }
+        }
+
         // Filter and Sort functionality
         const filterType = document.getElementById('filterType');
         const sortBy = document.getElementById('sortBy');
         const deletedGrid = document.getElementById('deletedGrid');
         const noDesigns = document.getElementById('noDesigns');
-        const designs = Array.from(document.querySelectorAll('.design-card'));
 
         function filterAndSortDesigns() {
-            let filteredDesigns = designs;
+            let designs = Array.from(document.querySelectorAll('.design-card'));
 
             // Filter by type
             const typeValue = filterType.value;
             if (typeValue !== 'all') {
-                filteredDesigns = filteredDesigns.filter(design => design.dataset.type === typeValue);
+                designs = designs.filter(card => card.dataset.type === typeValue);
             }
 
-            // Sort
+            // Sort designs
             const sortValue = sortBy.value;
-            filteredDesigns.sort((a, b) => {
+            designs.sort((a, b) => {
                 if (sortValue === 'date-desc') {
                     return new Date(b.dataset.date) - new Date(a.dataset.date);
                 } else if (sortValue === 'date-asc') {
@@ -1138,101 +995,126 @@
                 }
             });
 
-            // Display filtered and sorted designs
+            // Clear and repopulate grid
             deletedGrid.innerHTML = '';
-            if (filteredDesigns.length === 0) {
+            if (designs.length === 0) {
                 deletedGrid.appendChild(noDesigns);
                 noDesigns.style.display = 'block';
             } else {
                 noDesigns.style.display = 'none';
-                filteredDesigns.forEach(design => deletedGrid.appendChild(design));
+                designs.forEach(card => deletedGrid.appendChild(card));
+                attachCardEventListeners();
             }
         }
 
+        // Attach event listeners to filter and sort
         filterType.addEventListener('change', filterAndSortDesigns);
         sortBy.addEventListener('change', filterAndSortDesigns);
 
-        // Bulk Delete functionality
-        const bulkDeleteButton = document.getElementById('bulkDelete');
-        const checkboxes = document.querySelectorAll('.design-checkbox');
+        // Bulk delete functionality
+        const bulkDelete = document.getElementById('bulkDelete');
+        function toggleBulkDelete() {
+            const checked = document.querySelectorAll('.design-checkbox:checked').length;
+            bulkDelete.style.display = checked > 0 ? 'inline-block' : 'none';
+        }
 
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                const checkedCount = document.querySelectorAll('.design-checkbox:checked').length;
-                bulkDeleteButton.style.display = checkedCount > 0 ? 'block' : 'none';
-
-                // Highlight selected cards
-                const card = checkbox.closest('.design-card');
-                card.classList.toggle('selected', checkbox.checked);
-            });
-        });
-
-        bulkDeleteButton.addEventListener('click', () => {
-            const checkedDesigns = document.querySelectorAll('.design-checkbox:checked');
-            if (checkedDesigns.length > 0) {
-                showModal(() => {
-                    checkedDesigns.forEach(checkbox => {
-                        const card = checkbox.closest('.design-card');
-                        card.remove();
-                        showSnackbar(`${checkedDesigns.length} design(s) permanently deleted!`, () => {
-                            deletedGrid.appendChild(card);
-                            filterAndSortDesigns();
-                        });
-                    });
-                    bulkDeleteButton.style.display = 'none';
+        // Attach event listeners to design cards
+        function attachCardEventListeners() {
+            document.querySelectorAll('.design-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const card = checkbox.closest('.design-card');
+                    card.classList.toggle('selected', checkbox.checked);
+                    toggleBulkDelete();
                 });
-            }
-        });
+            });
 
-        // Permanent Delete functionality
-        const deleteModal = document.getElementById('deleteModal');
-        const confirmDelete = document.getElementById('confirmDelete');
-        const cancelDelete = document.getElementById('cancelDelete');
-        const snackbar = document.getElementById('snackbar');
-        const snackbarMessage = document.getElementById('snackbarMessage');
-        const snackbarUndo = document.getElementById('snackbarUndo');
-
-        let currentCard = null;
-
-        document.querySelectorAll('.delete-permanent').forEach(button => {
-            button.addEventListener('click', () => {
-                currentCard = button.closest('.design-card');
-                showModal(() => {
-                    currentCard.remove();
-                    showSnackbar('Design permanently deleted!', () => {
-                        deletedGrid.appendChild(currentCard);
+            document.querySelectorAll('.delete-permanent').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = button.closest('.design-card');
+                    showSnackbar(`"${card.querySelector('.design-title').textContent}" permanently deleted!`, () => {
+                        // Undo action (placeholder)
+                        deletedGrid.appendChild(card);
                         filterAndSortDesigns();
                     });
+                    card.remove();
+                    filterAndSortDesigns();
                 });
             });
-        });
 
-        function showModal(onConfirm) {
-            deleteModal.style.display = 'flex';
-            confirmDelete.onclick = () => {
-                onConfirm();
-                deleteModal.style.display = 'none';
-                filterAndSortDesigns();
-            };
-            cancelDelete.onclick = () => {
-                deleteModal.style.display = 'none';
-            };
+            // Add event listener for view buttons
+            document.querySelectorAll('.view-design').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = button.closest('.design-card');
+                    const title = card.querySelector('.design-title').textContent;
+                    // Placeholder for view functionality
+                    alert(`Viewing design: ${title}`);
+                    // Replace with actual view logic, e.g., open modal or navigate to view page
+                });
+            });
         }
 
+        // Snackbar functionality
         function showSnackbar(message, undoAction) {
+            const snackbar = document.getElementById('snackbar');
+            const snackbarMessage = document.getElementById('snackbarMessage');
+            const snackbarUndo = document.getElementById('snackbarUndo');
+
             snackbarMessage.textContent = message;
             snackbar.style.display = 'flex';
-            snackbarUndo.onclick = () => {
+
+            // Clear previous event listeners
+            const newUndo = snackbarUndo.cloneNode(true);
+            snackbarUndo.parentNode.replaceChild(newUndo, snackbarUndo);
+
+            // Add new undo listener
+            newUndo.addEventListener('click', () => {
                 undoAction();
                 snackbar.style.display = 'none';
-            };
+            });
+
+            // Auto-hide after 5 seconds
             setTimeout(() => {
                 snackbar.style.display = 'none';
-            }, 3000);
+            }, 5000);
         }
 
-        // Initial filter and sort
-        filterAndSortDesigns();
+        // Bulk delete action
+        bulkDelete.addEventListener('click', () => {
+            const checkedCards = document.querySelectorAll('.design-checkbox:checked');
+            const titles = Array.from(checkedCards).map(checkbox => 
+                checkbox.closest('.design-card').querySelector('.design-title').textContent
+            );
+            const removedCards = Array.from(checkedCards).map(checkbox => checkbox.closest('.design-card'));
+
+            checkedCards.forEach(checkbox => checkbox.closest('.design-card').remove());
+            showSnackbar(`${titles.length} design(s) permanently deleted!`, () => {
+                removedCards.forEach(card => deletedGrid.appendChild(card));
+                filterAndSortDesigns();
+            });
+            filterAndSortDesigns();
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('dashboardSearchInput');
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            const designs = document.querySelectorAll('.design-card');
+            let hasResults = false;
+
+            designs.forEach(card => {
+                const title = card.querySelector('.design-title').textContent.toLowerCase();
+                const isVisible = title.includes(query);
+                card.style.display = isVisible ? 'block' : 'none';
+                if (isVisible) hasResults = true;
+            });
+
+            noDesigns.style.display = hasResults ? 'none' : 'block';
+        });
+
+        // Initial render
+        renderDesigns();
     </script>
 </body>
 </html>
