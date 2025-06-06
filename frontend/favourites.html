@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roshani Dashboard - Favourites</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;600&family=Roboto&family=Inder&display=swap" rel="stylesheet">
     <style>
-        /* General Reset and Body */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -16,23 +14,38 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #ebdfd7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px 10px;
+            background: linear-gradient(135deg, #5C7896 0%, #3C0007 100%);
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
             position: relative;
             overflow-x: hidden;
         }
 
-        a {
-    text-decoration: none;
-    color: #202D36;
-    transition: color 0.3s ease;
-}
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-        /* Sidebar styles */
+        a {
+            text-decoration: none;
+            color: #3C0007;
+            transition: color 0.3s ease;
+        }
+
         .sidebar {
             position: fixed;
             width: 216px;
             height: 100vh;
-            background-color: #000000;
+            background: rgba(60, 0, 7, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(60, 0, 7, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             left: 0;
             top: 0;
             z-index: 100;
@@ -44,28 +57,63 @@
             width: 0;
         }
 
+        .main-content {
+            margin-left: 216px;
+            padding-top: 140px;
+            padding-bottom: 20px;
+            position: relative;
+            width: calc(100% - 216px);
+        }
+
+        .main-content.collapsed {
+            margin-left: 0;
+            width: 100%;
+        }
+
+        .back-button {
+            transition: margin-left 0.3s ease;
+        }
+
+        .back-button.collapsed {
+            margin-left: -20px;
+        }
+
+        .back-button.collapsed svg {
+            transform: rotate(180deg);
+            transition: transform 0.7s ease;
+        }
+
+        .back-button svg {
+            transition: transform 0.7s ease;
+        }
+
         .sidebar-logo {
             position: relative;
             width: 180px;
             height: 75px;
-            margin: 23px 15px;
-            background-color: #ebdfd7;
+            margin: 23px 20px;
+            background-color: transparent;
             border-radius: 35px;
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-logo:hover {
+            transform: scale(1.05);
         }
 
         .sidebar-logo img {
-            width: 180px;
-            height: 75px;
+            width: 170px;
+            height: 70px;
         }
 
-   .sidebar-menu {
+        .sidebar-menu {
             position: relative;
             margin-top: 20px;
         }
-
 
         .menu-item {
             display: flex;
@@ -95,40 +143,42 @@
             border-radius: 23px;
             width: 140px;
             height: 45px;
-            border: 1px solid #d9d9d9;
+            border: 1px solid #929CAA;
             margin-left: 34px;
         }
 
         .menu-item.active svg {
-            color: #fc8b23;
+            color: #800C1F;
         }
 
         .dashboard-active {
-            color: orange !important;
+            color: #800C1F !important;
         }
 
-        /* Main content */
-        .main-content {
-            margin-left: 216px;
-            padding: 20px 30px;
-            position: relative;
-            transition: margin-left 0.3s ease;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .main-content.collapsed {
-            margin-left: 0;
-        }
-
-        /* Header */
         .header {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             justify-content: space-between;
             gap: 10px;
+            position: fixed;
+            top: 0;
+            left: 216px;
+            right: 0;
+            height: 80px;
+            background: rgba(92, 120, 150, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(60, 0, 7, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 0 30px;
+            transition: left 0.47s ease, width 0.47s ease;
+        }
+
+        .header.collapsed {
+            left: 0;
+            width: 100%;
         }
 
         .header-left {
@@ -138,7 +188,7 @@
         }
 
         .back-button {
-            width: 30px;
+            width: 28px;
             height: 28px;
             background-color: #ffffff;
             border-radius: 14px;
@@ -149,7 +199,9 @@
             transition: margin-left 0.3s ease;
             position: relative;
             z-index: 101;
-            margin-inline-start: -40px;
+            margin-inline-start: -45px;
+            margin-top: 10px;
+            border: 2px solid #4A5B6B;
         }
 
         .back-button svg {
@@ -165,9 +217,11 @@
         }
 
         .page-title {
-            font-size: 27px;
-            font-weight: 500;
-            color: #000000;
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 48px;
+            color: #ffffff;
         }
 
         .header-right {
@@ -182,15 +236,16 @@
             width: 313px;
             height: 48px;
             background-color: #ffffff;
+            border: 2px solid #4A5B6B;
             border-radius: 24px;
-            border: 1px solid #d9d9d9;
-            padding: 0 10px;
+            padding: 0 15px;
         }
 
-        .search-bar img {
-            width: 22px;
+        .search-bar svg {
+            width: 23px;
             height: 23px;
-            margin-right: 8px;
+            color: #0a1e34;
+            padding-right: 4px;
         }
 
         .search-bar input {
@@ -198,13 +253,13 @@
             outline: none;
             width: 100%;
             font-size: 16px;
-            color: #00000066;
+            color: rgb(23, 22, 22);
+            background-color: #ffffff00;
         }
 
         .user-section {
             display: flex;
             align-items: center;
-            gap: 10px;
         }
 
         .notification-bell {
@@ -215,7 +270,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-right: 10px;
             cursor: pointer;
+            border: 2px solid #4A5B6B;
         }
 
         .user-profile {
@@ -225,9 +282,10 @@
             height: 44px;
             background-color: #ffffff;
             border-radius: 22px;
-            border: 1px solid #d9d9d9;
+            border: 1px solid #929CAA;
             padding: 0 3px;
             cursor: pointer;
+            border: 2px solid #4A5B6B;
         }
 
         .user-avatar {
@@ -245,106 +303,411 @@
         .user-name {
             font-size: 12px;
             font-weight: 600;
-            color: #292d32;
+            color: #3C0007;
+            font-family: 'Inter', sans-serif;
         }
 
         .user-status {
             font-size: 11px;
-            color: #b3b3b3;
+            color: #929CAA;
+            font-family: 'Inter', sans-serif;
         }
 
-        .dropdown-icon {
+        .dropdown-icon2 {
             margin-left: 30px;
         }
 
-        /* Favourites List */
-        .favourites-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px; /* Space between items */
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 60px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 0;
+            width: 150px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            cursor: auto;
         }
 
-        .favourite-item {
+        .user-dropdown a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .user-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        /* Favourites Section */
+        .favourites-container {
+            width: 100%;
+            max-width: none;
+            margin: 0 auto;
+            padding: 0 40px 20px 40px;
+            height: calc(100vh - 80px - 50px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .favourites-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
-            background: #e9e9e9;
-            border-radius: 5px;
+            margin-bottom: 0;
+            position: fixed;
+            top: 80px;
+            left: 216px;
+            right: 0;
+            height: 50px;
+            padding: 20px 40px 10px 40px;
+            z-index: 1000;
+            overflow: hidden;
         }
 
-        .favourite-name {
-            font-size: 18px;
-            color: #333;
+        .favourites-header.collapsed {
+            left: 0;
+            width: 100%;
         }
 
-        .view-option button {
-            margin-left: 10px;
+        .favourites-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .favourites-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .favourites-controls select,
+        .favourites-controls button {
             padding: 8px 12px;
-            border: none;
             border-radius: 5px;
-            background-color: #007bff;
-            color: white;
+            border: 1px solid #4A5B6B;
+            background: #ffffff;
+            font-size: 14px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background 0.3s ease;
         }
 
-        .view-option button:hover {
-            background-color: #0056b3;
+        .favourites-controls button {
+            background: #9c0000;
+            color: #fff;
+        }
+
+        .favourites-controls button:hover {
+            background: #560000;
+        }
+
+        .favourites-controls select:hover,
+        .favourites-controls button:hover {
+            background: #F4A261;
+            color: #ffffff;
+        }
+
+        .favourites-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 20px;
+            flex-grow: 1;
+            padding-top: 20px;
+            max-height: calc(100vh - 80px - 50px - 20px);
+        }
+
+        .design-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            height: 260px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .design-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .design-card.selected {
+            border: 2px solid #E63946;
+            background: rgba(230, 57, 70, 0.1);
+        }
+
+        .design-checkbox {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
+
+        .design-thumbnail {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 1px solid #d9d9d9;
+            transition: transform 0.3s ease;
+        }
+
+        .design-card:hover .design-thumbnail {
+            transform: scale(1.05);
+        }
+
+        .design-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .design-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #3C0007;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .design-details {
+            font-size: 11px;
+            color: #4A5B6B;
+            margin-bottom: 3px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .design-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .design-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #3C0007;
+            font-size: 12px;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .design-actions button:hover {
+            color: #E63946;
+        }
+
+        .design-actions button svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .no-designs {
+            text-align: center;
+            color: #ffffff;
+            font-size: 18px;
+            margin-top: 50px;
+            grid-column: 1 / -1;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .no-designs svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Snackbar Styles */
+        .snackbar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2e7d32;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1500;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(50px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        .snackbar button {
+            background: none;
+            border: none;
+            color: #F4A261;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .favourites-container {
+                padding: 15px;
+            }
+
+            .favourites-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .design-card {
+                height: 240px;
+            }
+
+            .design-thumbnail {
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-content {
+                margin-left: 0;
+                padding: 15px 5px;
+                width: 100%;
+            }
+
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+
+            .header {
+                left: 0;
+                width: 100%;
+            }
+
+            .favourites-header {
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                height: auto;
+                padding: 15px;
+            }
+
+            .favourites-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            .favourites-controls select,
+            .favourites-controls button {
+                width: 100%;
+            }
+
+            .favourites-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .design-card {
+                height: 280px;
+            }
+
+            .design-thumbnail {
+                height: 140px;
+            }
         }
     </style>
 </head>
-
 <body>
     <div class="sidebar">
         <div class="sidebar-logo">
-            <img src="images\ROSHANI ka logo (1).png" alt="Roshani Technologies Logo" />
+            <a href="home.html">
+                <img src="images\ROSHANI ka logo (1).png" alt="Roshani Technologies Logo">
+            </a>
         </div>
-     <div class="sidebar-menu">
+        <div class="sidebar-menu">
             <div class="menu-item" data-link="dashboard.html">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid" viewBox="0 0 16 16">
-  <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
-</svg>
-                <span>Dashboard</span>
+                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z" />
+                </svg>
+                <span class="dashboard">Dashboard</span>
             </div>
             <div class="menu-item" data-link="spendings.html">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
-  <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/>
-</svg>
+                    <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
+                </svg>
                 <span>Spendings</span>
             </div>
             <div class="menu-item" data-link="downloads.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
-</svg>                <span>Downloads</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                </svg>
+                <span>Downloads</span>
             </div>
             <div class="menu-item active" data-link="favourites.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-  <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
-</svg>                <span class="dashboard-active">Favourites</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z" />
+                </svg>
+                <span class="dashboard-active">Favourites</span>
             </div>
             <div class="menu-item" data-link="deleted.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-</svg>                <span>Deleted</span>
+                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 0 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                </svg>
+                <span>Deleted</span>
             </div>
             <div class="menu-item" data-link="notifications.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
-</svg>                <span>Notifications</span>
+                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+                </svg>
+                <span>Notifications</span>
             </div>
             <div class="menu-item" data-link="settings.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
-  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
-</svg>                <span>Settings</span>
+                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l-.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
+                </svg>
+                <span>Settings</span>
             </div>
             <div class="menu-item" data-link="logout.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-</svg>                <span>Log out</span>
+                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                </svg>
+                <span>Log out</span>
             </div>
         </div>
     </div>
@@ -352,111 +715,368 @@
     <div class="main-content">
         <div class="header">
             <div class="header-left">
-                <div class="back-button" id="backButton" onclick="toggleSidebar()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-</svg>
+                <div class="back-button" id="backButton">
+                    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                    </svg>
                 </div>
                 <h1 class="page-title">Favourites</h1>
             </div>
 
             <div class="header-right">
                 <div class="search-bar">
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-</svg>
-                    <input type="text" placeholder="Search for anything..." />
+                    <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                    <input id="dashboardSearchInput" type="text" placeholder="Search for anything..." />
                 </div>
 
                 <div class="user-section">
                     <div class="notification-bell">
                         <a href="notifications.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-bell" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
-                            </svg> </a>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+                            </svg>
+                        </a>
                     </div>
-                    <div class="user-profile">
-                        <img src="images\img_shape.png" alt="User Avatar" class="user-avatar" />
+                    <div class="user-profile" id="userProfile">
+                        <img src="images/img_shape.png" alt="User Avatar" class="user-avatar" />
                         <div class="user-info">
                             <span class="user-name">Chirag Jain</span>
                             <span class="user-status">Unemployed</span>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="dropdown-icon" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="dropdown-icon2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
                         </svg>
+                        <div class="user-dropdown" id="userDropdown" style="display:none; position:absolute; right:0; top:60px; background:#fff; border:1px solid #ccc; border-radius:5px; width:150px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 10000; cursor: default;">
+                            <a href="settings.html" style="display:block; padding:10px; color:#3C0007; text-decoration:none; border-bottom:1px solid #ccc;">Settings</a>
+                            <a href="notifications.html" style="display:block; padding:10px; color:#3C0007; text-decoration:none; border-bottom:1px solid #ccc;">Notifications</a>
+                            <a href="logout.html" style="display:block; padding:10px; color:#3C0007; text-decoration:none;">Logout</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="favourites-list">
-            <div class="favourite-item">
-                <div class="favourite-name">Favourite Item 1</div>
-                <div class="view-option">
-                    <button onclick="viewFavourite('item1')">View</button>
-                    <button onclick="removeFavourite('item1')">Remove</button>
+        <div class="favourites-container">
+            <div class="favourites-header" id="favouritesHeader">
+                <h2>Your Favourite Designs</h2>
+                <div class="favourites-controls">
+                    <select id="filterType">
+                        <option value="all">All Types</option>
+                        <option value="png">PNG</option>
+                        <option value="jpeg">JPEG</option>
+                        <option value="svg">SVG</option>
+                    </select>
+                    <select id="sortBy">
+                        <option value="date-desc">Sort by Added (Newest)</option>
+                        <option value="date-asc">Sort by Added (Oldest)</option>
+                        <option value="size-desc">Sort by Size (Largest)</option>
+                        <option value="size-asc">Sort by Size (Smallest)</option>
+                    </select>
+                    <button id="bulkRemove" style="display: none;">Bulk Remove</button>
                 </div>
             </div>
-            <div class="favourite-item">
-                <div class="favourite-name">Favourite Item 2</div>
-                <div class="view-option">
-                    <button onclick="viewFavourite('item2')">View</button>
-                    <button onclick="removeFavourite('item2')">Remove</button>
+            <div class="favourites-grid" id="favouritesGrid">
+                <div class="no-designs" id="noDesigns">
+                    <svg width="80" height="80" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 16 16">
+                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z" />
+                    </svg>
+                    <div>No favourite designs found.</div>
                 </div>
             </div>
-            <div class="favourite-item">
-                <div class="favourite-name">Favourite Item 3</div>
-                <div class="view-option">
-                    <button onclick="viewFavourite('item3')">View</button>
-                    <button onclick="removeFavourite('item3')">Remove</button>
-                </div>
-            </div>
-            <!-- Add more favourite items as needed -->
         </div>
     </div>
 
+    <!-- Snackbar for Notifications -->
+    <div class="snackbar" id="snackbar" style="display: none;">
+        <span id="snackbarMessage">Design removed from favourites!</span>
+        <button id="snackbarUndo">Undo</button>
+    </div>
+
     <script>
-        function viewFavourite(itemName) {
-            // Logic to view the favourite item
-            alert("Viewing " + itemName);
-        }
+        // Sidebar toggle functionality
+        const backButton = document.getElementById('backButton');
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
+        const header = document.querySelector('.header');
+        const favouritesHeader = document.getElementById('favouritesHeader');
 
-        function removeFavourite(itemName) {
-            // Logic to remove the favourite item
-            alert("Removing " + itemName);
-        }
+        backButton.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('collapsed');
+            header.classList.toggle('collapsed');
+            favouritesHeader.classList.toggle('collapsed');
+            backButton.classList.toggle('collapsed');
+        });
 
-        document.querySelectorAll(".menu-item").forEach(item => {
-            item.addEventListener("click", () => {
-                // Remove active class from all menu items
-                document.querySelectorAll(".menu-item").forEach(el => {
-                    el.classList.remove("active");
+        // User dropdown toggle
+        const userProfile = document.getElementById('userProfile');
+        const userDropdown = document.getElementById('userDropdown');
+        userProfile.addEventListener('click', () => {
+            userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', (e) => {
+            if (!userProfile.contains(e.target)) {
+                userDropdown.style.display = 'none';
+            }
+        });
+
+        // Sidebar menu item click navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.menu-item').forEach(el => {
+                    el.classList.remove('active');
                 });
-                // Add active class to the clicked item
-                item.classList.add("active");
-                // Get the link from data attribute
-                const link = item.getAttribute("data-link");
-                // Navigate after a short delay to allow animation
+                item.classList.add('active');
+                const link = item.getAttribute('data-link');
                 setTimeout(() => {
                     window.location.href = link;
-                }, 300); // Adjust the delay as needed
+                }, 300);
             });
         });
 
-        function toggleSidebar() {
-            const sidebar = document.querySelector(".sidebar");
-            const mainContent = document.querySelector(".main-content");
-            const backButton = document.getElementById("backButton");
-
-            sidebar.classList.toggle("collapsed");
-            mainContent.classList.toggle("collapsed");
-            backButton.classList.toggle("collapsed");
+        // Design card creation function
+        function createDesignCard(design) {
+            const card = document.createElement('div');
+            card.className = 'design-card';
+            card.dataset.type = design.type;
+            card.dataset.size = design.size;
+            card.dataset.date = design.date;
+            card.innerHTML = `
+                <input type="checkbox" class="design-checkbox">
+                <img src="${design.thumbnail}" alt="Design Thumbnail" class="design-thumbnail" />
+                <div class="design-content">
+                    <div>
+                        <div class="design-title">${design.title}</div>
+                        <div class="design-details">Added: ${new Date(design.date).toLocaleString()}</div>
+                        <div class="design-details">Size: ${design.size} MB</div>
+                        <div class="design-details">Type: ${design.type.toUpperCase()}</div>
+                    </div>
+                    <div class="design-actions">
+                        <button class="view-design">
+                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5zM8 3.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/>
+                            </svg>
+                            View
+                        </button>
+                        <button class="remove-favourite">
+                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M2.866 14.85c-.078.444.36.791-.88-.93z"/>
+                            </svg>
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
         }
+
+        // Sample data (replace with backend fetch)
+        const sampleFavourites = [
+            {
+                title: 'Favorite Logo',
+                thumbnail: 'https://via.placeholder.com/150',
+                type: 'png',
+                size: 1.5,
+                date: '2025-06-05T10:30:00Z'
+            },
+            {
+                title: 'Star Illustration',
+                thumbnail: 'https://via.placeholder.com/150',
+                type: 'svg',
+                size: 0.4,
+                date: '2025-06-04T14:20:00Z'
+            },
+            {
+                title: 'Sunset Poster',
+                thumbnail: 'https://via.placeholder.com/150',
+                type: 'jpeg',
+                size: 2.7,
+                date: '2025-06-03T09:15:00Z'
+            }
+        ];
+
+        // Function to fetch favourites from backend (placeholder)
+        async function fetchFavourites() {
+            // Replace with actual backend API call
+            // Example: const response = await fetch('/api/favourites');
+            // return await response.json();
+            return sampleFavourites;
+        }
+
+        // Render designs
+        async function renderFavourites() {
+            const favouritesGrid = document.getElementById('favouritesGrid');
+            const noDesigns = document.getElementById('noDesigns');
+            const designs = await fetchFavourites();
+
+            favouritesGrid.innerHTML = '';
+            if (designs.length === 0) {
+                favouritesGrid.appendChild(noDesigns);
+                noDesigns.style.display = 'block';
+            } else {
+                noDesigns.style.display = 'none';
+                designs.forEach(design => {
+                    const card = createDesignCard(design);
+                    favouritesGrid.appendChild(card);
+                });
+                attachCardEventListeners();
+                filterAndSortDesigns();
+            }
+        }
+
+        // Filter and Sort functionality
+        const filterType = document.getElementById('filterType');
+        const sortBy = document.getElementById('sortBy');
+        const favouritesGrid = document.getElementById('favouritesGrid');
+        const noDesigns = document.getElementById('noDesigns');
+
+        function filterAndSortDesigns() {
+            let designs = Array.from(document.querySelectorAll('.design-card'));
+
+            // Filter by type
+            const typeValue = filterType.value;
+            if (typeValue !== 'all') {
+                designs = designs.filter(card => card.dataset.type === typeValue);
+            }
+
+            // Sort designs
+            const sortValue = sortBy.value;
+            designs.sort((a, b) => {
+                if (sortValue === 'date-desc') {
+                    return new Date(b.dataset.date) - new Date(a.dataset.date);
+                } else if (sortValue === 'date-asc') {
+                    return new Date(a.dataset.date) - new Date(b.dataset.date);
+                } else if (sortValue === 'size-desc') {
+                    return parseFloat(b.dataset.size) - parseFloat(a.dataset.size);
+                } else if (sortValue === 'size-asc') {
+                    return parseFloat(a.dataset.size) - parseFloat(b.dataset.size);
+                }
+            });
+
+            // Clear and repopulate grid
+            favouritesGrid.innerHTML = '';
+            if (designs.length === 0) {
+                favouritesGrid.appendChild(noDesigns);
+                noDesigns.style.display = 'block';
+            } else {
+                noDesigns.style.display = 'none';
+                designs.forEach(card => favouritesGrid.appendChild(card));
+                attachCardEventListeners();
+            }
+        }
+
+        // Attach event listeners to filter and sort
+        filterType.addEventListener('change', filterAndSortDesigns);
+        sortBy.addEventListener('change', filterAndSortDesigns);
+
+        // Bulk remove functionality
+        const bulkRemove = document.getElementById('bulkRemove');
+        function toggleBulkRemove() {
+            const checked = document.querySelectorAll('.design-checkbox:checked').length;
+            bulkRemove.style.display = checked > 0 ? 'inline-block' : 'none';
+        }
+
+        // Attach event listeners to design cards
+        function attachCardEventListeners() {
+            document.querySelectorAll('.design-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const card = checkbox.closest('.design-card');
+                    card.classList.toggle('selected', checkbox.checked);
+                    toggleBulkRemove();
+                });
+            });
+
+            document.querySelectorAll('.remove-favourite').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = button.closest('.design-card');
+                    showSnackbar(`"${card.querySelector('.design-title').textContent}" removed from favourites.`, () => {
+                        // Undo action
+                        favouritesGrid.appendChild(card);
+                        filterAndSortDesigns();
+                    });
+                    card.remove();
+                    filterAndSortDesigns();
+                });
+            });
+
+            // View button functionality
+            document.querySelectorAll('.view-design').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = button.closest('.design-card');
+                    const title = card.querySelector('.design-title').textContent;
+                    alert(`Viewing design: ${title}`);
+                    // Replace with actual view logic, e.g., modal or page navigation
+                });
+            });
+        }
+
+        // Snackbar functionality
+        function showSnackbar(message, undoAction) {
+            const snackbar = document.getElementById('snackbar');
+            const snackbarMessage = document.getElementById('snackbarMessage');
+            const snackbarUndo = document.getElementById('snackbarUndo');
+
+            snackbarMessage.textContent = message;
+            snackbar.style.display = 'flex';
+
+            // Clear previous event listeners
+            const newUndo = snackbarUndo.cloneNode(true);
+            snackbarUndo.parentNode.replaceChild(newUndo, snackbarUndo);
+
+            // Add new undo listener
+            newUndo.addEventListener('click', () => {
+                undoAction();
+                snackbar.style.display = 'none';
+            });
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                snackbar.style.display = 'none';
+            }, 5000);
+        }
+
+        // Bulk remove action
+        bulkRemove.addEventListener('click', () => {
+            const checkedCards = document.querySelectorAll('.design-checkbox:checked');
+            const titles = Array.from(checkedCards).map(checkbox => 
+                checkbox.closest('.design-card').querySelector('.design-title').textContent
+            );
+            const removedCards = Array.from(checkedCards).map(checkbox => checkbox.closest('.design-card'));
+
+            checkedCards.forEach(checkbox => checkbox.closest('.design-card').remove());
+            showSnackbar(`${titles.length} design(s) removed from favourites!`, () => {
+                removedCards.forEach(card => favouritesGrid.appendChild(card));
+                filterAndSortDesigns();
+            });
+            filterAndSortDesigns();
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('dashboardSearchInput');
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            const designs = document.querySelectorAll('.design-card');
+            let hasResults = false;
+
+            designs.forEach(card => {
+                const title = card.querySelector('.design-title').textContent.toLowerCase();
+                const isVisible = title.includes(query);
+                card.style.display = isVisible ? 'block' : 'none';
+                if (isVisible) hasResults = true;
+            });
+
+            noDesigns.style.display = hasResults ? 'none' : 'block';
+        });
+
+        // Initial render
+        renderFavourites();
     </script>
 </body>
-
 </html>
