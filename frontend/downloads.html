@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roshani Dashboard - Downloads</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;600&family=Roboto&family=Inder&display=swap" rel="stylesheet">
     <style>
-        /* General Reset and Body */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -15,23 +14,37 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #ebdfd7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #5C7896 0%, #3C0007 100%);
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
             position: relative;
             overflow-x: hidden;
         }
-        
-        a {
-    text-decoration: none;
-    color: #202D36;
-    transition: color 0.3s ease;
-}
 
-        /* Sidebar styles */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        a {
+            text-decoration: none;
+            color: #3C0007;
+            transition: color 0.3s ease;
+        }
+
         .sidebar {
             position: fixed;
             width: 216px;
             height: 100vh;
-            background-color: #000000;
+            background: rgba(60, 0, 7, 0.25);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(60, 0, 7, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             left: 0;
             top: 0;
             z-index: 100;
@@ -43,33 +56,79 @@
             width: 0;
         }
 
-        .sidebar-logo {
+        .main-content {
+            margin-left: 216px;
+            padding-top: 140px;
+            padding-bottom: 20px;
             position: relative;
+            width: calc(100% - 216px);
+        }
+
+        .main-content.collapsed {
+            margin-left: 0;
+            width: 100%;
+        }
+
+        .back-button {
+            width: 28px;
+            height: 28px;
+            background-color: #ffffff;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: margin-left 0.3s ease;
+            position: relative;
+            z-index: 101;
+            margin-inline-start: -45px;
+            margin-top: 10px;
+            border: 2px solid #4A5B6B;
+        }
+
+        .back-button.collapsed {
+            margin-left: -20px;
+        }
+
+        .back-button.collapsed svg {
+            transform: rotate(180deg);
+            transition: transform 0.7s ease;
+        }
+
+        .back-button svg {
+            transition: transform 0.7s ease;
+        }
+
+        .sidebar-logo {
             width: 180px;
             height: 75px;
-            margin: 23px 15px;
-            background-color: #ebdfd7;
+            margin: 23px 20px;
+            background-color: transparent;
             border-radius: 35px;
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-logo:hover {
+            transform: scale(1.05);
         }
 
         .sidebar-logo img {
-            width: 180px;
-            height: 75px;
+            width: 170px;
+            height: 70px;
         }
 
-     .sidebar-menu {
-            position: relative;
+        .sidebar-menu {
             margin-top: 20px;
         }
-
 
         .menu-item {
             display: flex;
             align-items: center;
-            padding: 10px 10px;
+            padding: 10px;
             margin-bottom: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -94,41 +153,39 @@
             border-radius: 23px;
             width: 140px;
             height: 45px;
-            border: 1px solid #d9d9d9;
+            border: 1px solid #929CAA;
             margin-left: 34px;
         }
 
         .menu-item.active svg {
-            color: #fc8b23;
+            color: #800C1F;
         }
 
         .dashboard-active {
-            color: orange !important;
+            color: #800C1F !important;
         }
 
-
-        /* Main content */
-        .main-content {
-            margin-left: 216px;
-            padding: 20px 30px;
-            position: relative;
-            transition: margin-left 0.3s ease;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .main-content.collapsed {
-            margin-left: 0;
-        }
-
-        /* Header */
         .header {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
             justify-content: space-between;
-            gap: 10px;
+            position: fixed;
+            top: 0;
+            left: 216px;
+            right: 0;
+            height: 80px;
+            background: rgba(92, 120, 150, 0.25);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(60, 0, 7, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 0 30px;
+            transition: left 0.47s ease, width 0.47s ease;
+        }
+
+        .header.collapsed {
+            left: 0;
+            width: 100%;
         }
 
         .header-left {
@@ -137,37 +194,11 @@
             gap: 30px;
         }
 
-        .back-button {
-            width: 30px;
-            height: 28px;
-            background-color: #ffffff;
-            border-radius: 14px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: margin-left 0.3s ease;
-            position: relative;
-            z-index: 101;
-            margin-inline-start: -40px;
-        }
-
-        .back-button svg {
-            transition: transform 0.7s ease;
-        }
-
-        .back-button.collapsed {
-            margin-left: -20px;
-        }
-
-        .back-button.collapsed svg {
-            transform: rotate(180deg);
-        }
-
         .page-title {
-            font-size: 27px;
-            font-weight: 500;
-            color: #000000;
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 600;
+            color: #ffffff;
         }
 
         .header-right {
@@ -182,15 +213,16 @@
             width: 313px;
             height: 48px;
             background-color: #ffffff;
+            border: 2px solid #4A5B6B;
             border-radius: 24px;
-            border: 1px solid #d9d9d9;
-            padding: 0 10px;
+            padding: 0 15px;
         }
 
-        .search-bar img {
-            width: 22px;
+        .search-bar svg {
+            width: 23px;
             height: 23px;
-            margin-right: 8px;
+            color: #0a1e34;
+            padding-right: 4px;
         }
 
         .search-bar input {
@@ -198,13 +230,13 @@
             outline: none;
             width: 100%;
             font-size: 16px;
-            color: #00000066;
+            color: rgb(23, 22, 22);
+            background-color: transparent;
         }
 
         .user-section {
             display: flex;
             align-items: center;
-            gap: 10px;
         }
 
         .notification-bell {
@@ -215,7 +247,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-right: 10px;
             cursor: pointer;
+            border: 2px solid #4A5B6B;
         }
 
         .user-profile {
@@ -225,7 +259,7 @@
             height: 44px;
             background-color: #ffffff;
             border-radius: 22px;
-            border: 1px solid #d9d9d9;
+            border: 2px solid #4A5B6B;
             padding: 0 3px;
             cursor: pointer;
         }
@@ -245,104 +279,477 @@
         .user-name {
             font-size: 12px;
             font-weight: 600;
-            color: #292d32;
+            color: #3C0007;
+            font-family: 'Inter', sans-serif;
         }
 
         .user-status {
             font-size: 11px;
-            color: #b3b3b3;
+            color: #929CAA;
+            font-family: 'Inter', sans-serif;
         }
-        .dropdown-icon {
+
+        .dropdown-icon2 {
             margin-left: 30px;
         }
 
-        /* Diagram List */
-        .diagram-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px; /* Space between items */
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 60px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 150px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
         }
 
-        .diagram-item {
+        .user-dropdown a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .user-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        /* Downloads Section */
+        .downloads-container {
+            width: 100%;
+            padding: 0 40px 20px;
+            height: calc(100vh - 80px - 70px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .downloads-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
-            background: #e9e9e9;
-            border-radius: 5px;
+            position: fixed;
+            top: 80px;
+            left: 216px;
+            right: 0;
+            height: 70px;
+            padding: 20px 40px;
+            z-index: 1000;
         }
 
-        .diagram-name {
-            font-size: 18px;
-            color: #333;
+        .downloads-header.collapsed {
+            left: 0;
+            width: 100%;
         }
 
-        .view-option button {
-            margin-left: 10px;
+        .downloads-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .downloads-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .downloads-controls select,
+        .downloads-controls input,
+        .downloads-controls button {
             padding: 8px 12px;
-            border: none;
             border-radius: 5px;
-            background-color: #007bff;
-            color: white;
+            border: 1px solid #4A5B6B;
+            background: #ffffff;
+            font-size: 14px;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
 
-        .view-option button:hover {
-            background-color: #0056b3;
+        .downloads-controls button:hover,
+        .downloads-controls select:hover {
+            background: #F4A261;
+            color: #ffffff;
+        }
+
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            flex-grow: 1;
+            padding-top: 20px;
+            overflow-y: auto;
+        }
+
+        .download-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-checkbox {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
+
+        .download-card.selected {
+            border: 2px solid #E63946;
+            background: rgba(230, 57, 70, 0.1);
+        }
+
+        .download-thumbnail {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 1px solid #d9d9d9;
+            transition: transform 0.3s ease;
+        }
+
+        .download-card:hover .download-thumbnail {
+            transform: scale(1.05);
+        }
+
+        .download-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .download-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #3C0007;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .download-details {
+            font-size: 11px;
+            color: #4A5B6B;
+            margin-bottom: 3px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .download-status {
+            font-size: 11px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .status-downloaded {
+            color: #2e7d32;
+        }
+
+        .status-available {
+            color: #1976d2;
+        }
+
+        .status-expired {
+            color: #757575;
+        }
+
+        .download-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .download-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #3C0007;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .download-actions button:hover {
+            color: #E63946;
+        }
+
+        .download-actions button svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .download-actions button.disabled {
+            color: #757575;
+            cursor: not-allowed;
+        }
+
+        .no-downloads {
+            text-align: center;
+            color: #ffffff;
+            font-size: 18px;
+            margin-top: 50px;
+            grid-column: 1 / -1;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .no-downloads svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #4A5B6B;
+            background: #ffffff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background: #F4A261;
+            color: #ffffff;
+        }
+
+        .pagination button.disabled {
+            background: #e0e0e0;
+            cursor: not-allowed;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #3C0007;
+        }
+
+        .modal img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .snackbar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2e7d32;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 1500;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(50px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        .snackbar button {
+            background: none;
+            border: none;
+            color: #F4A261;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .downloads-container {
+                padding: 15px;
+            }
+
+            .downloads-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .download-card {
+                height: 260px;
+            }
+
+            .download-thumbnail {
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-content {
+                margin-left: 0;
+                padding: 15px 5px;
+                width: 100%;
+            }
+
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+
+            .header {
+                left: 0;
+                width: 100%;
+            }
+
+            .downloads-header {
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                height: auto;
+                padding: 15px;
+            }
+
+            .downloads-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            .downloads-controls select,
+            .downloads-controls input,
+            .downloads-controls button {
+                width: 100%;
+            }
+
+            .downloads-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .download-card {
+                height: 300px;
+            }
+
+            .download-thumbnail {
+                height: 140px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <div class="sidebar-logo">
-            <img src="images\ROSHANI ka logo (1).png" alt="Roshani Technologies Logo" />
+            <a href="home.html">
+                <img src="images/ROSHANI ka logo (1).png" alt="Roshani Technologies Logo">
+            </a>
         </div>
-       <div class="sidebar-menu">
-            <div class="menu-item " data-link="dashboard.html">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid" viewBox="0 0 16 16">
-  <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
-</svg>
+        <div class="sidebar-menu">
+            <div class="menu-item" data-link="dashboard.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
+                </svg>
                 <span>Dashboard</span>
             </div>
             <div class="menu-item" data-link="spendings.html">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
-  <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/>
-</svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/>
+                </svg>
                 <span>Spendings</span>
             </div>
             <div class="menu-item active" data-link="downloads.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
-</svg>                <span class="dashboard-active">Downloads</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                </svg>
+                <span class="dashboard-active">Downloads</span>
             </div>
             <div class="menu-item" data-link="favourites.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-  <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
-</svg>                <span>Favourites</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                </svg>
+                <span>Favourites</span>
             </div>
             <div class="menu-item" data-link="deleted.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-</svg>                <span>Deleted</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                </svg>
+                <span>Deleted</span>
             </div>
             <div class="menu-item" data-link="notifications.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
-</svg>                <span>Notifications</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663 2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92L8 1.918zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+                </svg>
+                <span>Notifications</span>
             </div>
             <div class="menu-item" data-link="settings.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
-  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
-</svg>                <span>Settings</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764-.415-1.6.42-1.184 1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l-.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.185l.292.159a1.873 1.873 0 0 0 2.692-1.115l-.094-.319z"/>
+                </svg>
+                <span>Settings</span>
             </div>
             <div class="menu-item" data-link="logout.html">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-</svg>                <span>Log out</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                </svg>
+                <span>Log out</span>
             </div>
         </div>
     </div>
@@ -350,112 +757,519 @@
     <div class="main-content">
         <div class="header">
             <div class="header-left">
-                <div class="back-button" id="backButton" onclick="toggleSidebar()">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-</svg>
-                </div>
-                <h1 class="page-title">Download Diagrams</h1>
-            </div>
+                <div class="back-button" id="backButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                    </svg>
 
+                </div>
+                <h1 class="page-title">Downloads</h1>
+            </div>
             <div class="header-right">
                 <div class="search-bar">
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-</svg>
-                    <input type="text" placeholder="Search for anything..." />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.1 1.1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                    <input id="searchInput" type="text" placeholder="Search by name or tag..." />
                 </div>
-
-                 <div class="user-section">
+                <div class="user-section">
                     <div class="notification-bell">
                         <a href="notifications.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-bell" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
-                            </svg> </a>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 16a2 2 0 0 0 2-2H6m0 2a2 2 0 0 2 0 0 2M8 1.918l-.797.161A4 4.002 0   \
+0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663 2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92L8 1.918zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 0 1 1.99 0A5.002 5.002 0 0 0 1 6c0 .88.32 4.2 1.22 6"/>
+                            </svg>
+                        </a>
                     </div>
-                    <div class="user-profile">
-                        <img src="images\img_shape.png" alt="User Avatar" class="user-avatar" />
+                    <div class="user-profile" id="userProfile">
+                        <img src="images/design3.jpeg" alt="User Avatar" class="user-avatar" />
                         <div class="user-info">
                             <span class="user-name">Chirag Jain</span>
                             <span class="user-status">Unemployed</span>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="dropdown-icon" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                        <svg class="dropdown-icon2" viewBox="0 0 16 16" fill="http://www.w3.org/2000/svg" width="16" height="8">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.29315.646-5.647a.5.5 0 0 1 .708.708l-6 a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
                         </svg>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="http://settings.html">Settings</a>
+                            <a href="http://notifications.html">Notifications</a>
+                            <a href="http://logout.html">Logout</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="container">
-            <div class="diagram-list">
-                <div class="diagram-item">
-                    <div class="diagram-name">Diagram 1</div>
-                    <div class="view-option">
-                        <button onclick="viewDiagram('diagram1')">View</button>
-                        <button onclick="downloadDiagram('diagram1')">Download</button>
-                    </div>
+        <div class="downloads-container">
+            <div class="downloads-header" id="downloadsHeader">
+                <h2>Your Downloads</h2>
+                <div class="downloads-controls">
+                    <select id="typeFilter">
+                        <option value="all">All Types</option>
+                        <option value="pdf">PDF</option>
+                        <option value="png">PNG</option>
+                        <option value="jpeg">JPEG</option>
+                        <option value="zip">ZIP</option>
+                    </select>
+                    <select id="statusFilter">
+                        <option value="all">All Statuses</option>
+                        <option value="downloaded">Downloaded</option>
+                        <option value="available">Available</option>
+                        <option value="expired">Expired</option>
+                    </select>
+                    <input type="date" id="dateRange" placeholder="Select Date">
+                    <select id="sortBy">
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                        <option value="date-desc">Date (Newest)</option>
+                        <option value="date-asc">Date (Oldest)</option>
+                        <option value="size-desc">Size (Largest)</option>
+                        <option value="size-asc">Size (Smallest)</option>
+                    </select>
                 </div>
-                <div class="diagram-item">
-                    <div class="diagram-name">Diagram 2</div>
-                    <div class="view-option">
-                        <button onclick="viewDiagram('diagram2')">View</button>
-                        <button onclick="downloadDiagram('diagram2')">Download</button>
-                    </div>
-                </div>
-                <div class="diagram-item">
-                    <div class="diagram-name">Diagram 3</div>
-                    <div class="view-option">
-                        <button onclick="viewDiagram('diagram3')">View</button>
-                        <button onclick="downloadDiagram('diagram3')">Download</button>
-                    </div>
-                </div>
-                <!-- Add more diagrams as needed -->
             </div>
+            <div class="downloads-grid" id="downloadsGrid">
+                <div class="no-downloads" id="noDownloads">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#ffffff" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                    </svg>
+                    <div>No downloads found.</div>
+                </div>
+            </div>
+            <div class="pagination" id="pagination"></div>
         </div>
     </div>
 
+    <!-- Modal for Preview -->
+    <div class="modal" id="previewModal">
+        <div class="modal-content">
+            <span class="modal-clAVAose-btn" id="modalClose">&times;</span>
+            <img id="previewImage" src="" alt="Preview">
+            <p id="previewTitle"></p>
+        </div>
+    </div>
+
+    <!-- Snackbar for Notifications -->
+    <div class="snackbar" id="snackbar">
+        <span id="snackbarMessage"></span>
+        <button id="undoAction">Undo</button>
+    </div>
+
     <script>
-        function viewDiagram(diagramName) {
-            // Logic to view the diagram
-            alert("Viewing " + diagramName);
-        }
+        // Sidebar toggle
+        const backButton = document.getElementById('backButton');
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
+        const header = document.querySelector('.header');
+        const downloadsHeader = document.getElementById('downloadsHeader');
 
-        function downloadDiagram(diagramName) {
-            // Logic to download the diagram
-            alert("Downloading " + diagramName);
-        }
+        backButton.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('collapsed');
+            header.classList.toggle('collapsed');
+            downloadsHeader.classList.toggle('collapsed');
+            backButton.classList.toggle('collapsed');
+        });
 
-        document.querySelectorAll(".menu-item").forEach(item => {
-            item.addEventListener("click", () => {
-                // Remove active class from all menu items
-                document.querySelectorAll(".menu-item").forEach(el => {
-                    el.classList.remove("active");
-                });
-                // Add active class to the clicked item
-                item.classList.add("active");
-                // Get the link from data attribute
-                const link = item.getAttribute("data-link");
-                // Navigate after a short delay to allow animation
-                setTimeout(() => {
-                    window.location.href = link;
-                }, 300); // Adjust the delay as needed
+        // User dropdown toggle
+        const userProfile = document.getElementById('userProfile');
+        const userDropdown = document.getElementById('userDropdown');
+        userProfile.addEventListener('click', () => {
+            userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!userProfile.contains(e.target)) {
+                userDropdown.style.display = 'none';
+            }
+        });
+
+        // Sidebar navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+                item.classList.add('active');
+                const link = item.getAttribute('data-link');
+                setTimeout(() => window.location.href = link, 300);
             });
         });
 
-        function toggleSidebar() {
-            const sidebar = document.querySelector(".sidebar");
-            const mainContent = document.querySelector(".main-content");
-            const backButton = document.getElementById("backButton");
+        // Sample download data
+        const sampleDownloads = [
+            {
+                id: 1,
+                title: 'Blueprint Design',
+                author: 'John Doe',
+                date: '2025-06-05T10:00:00Z',
+                type: 'pdf',
+                size: 5.3,
+                thumbnail: 'https://via.placeholder.com/150',
+                status: 'downloaded',
+                remainingDownloads: 0,
+                tags: ['blueprint', 'design']
+            },
+            {
+                id: 2,
+                title: 'Logo Pack',
+                author: 'Jane Smith',
+                date: '2025-06-04T15:30:00Z',
+                type: 'zip',
+                size: 12.8,
+                thumbnail: 'https://via.placeholder.com/150',
+                status: 'available',
+                remainingDownloads: 3,
+                tags: ['logo', 'branding']
+            },
+            {
+                id: 3,
+                title: 'Nature Photo',
+                author: 'Alex Brown',
+                date: '2025-06-03T08:00:00Z',
+                type: 'jpeg',
+                size: 3.1,
+                thumbnail: 'https://via.placeholder.com/150',
+                status: 'available',
+                remainingDownloads: 2,
+                tags: ['photo', 'nature']
+            },
+            {
+                id: 4,
+                title: 'Icon Set',
+                author: 'Emily Davis',
+                date: '2025-06-01T12:00:00Z',
+                type: 'png',
+                size: 0.7,
+                thumbnail: 'https://via.placeholder.com/150',
+                status: 'expired',
+                remainingDownloads: 0,
+                tags: ['icons', 'ui']
+            },
+            {
+                id: 5,
+                title: 'Presentation Template',
+                author: 'Michael Lee',
+                date: '2025-05-30T16:00:00Z',
+                type: 'pdf',
+                size: 8.4,
+                thumbnail: 'https://via.placeholder.com/150',
+                status: 'downloaded',
+                remainingDownloads: 0,
+                tags: ['template', 'presentation']
+            },
+            {
+                id: 6,
+                title: 'UI Kit',
+                author: 'Sarah Wilson',
+                date: '2025-05-28T09:00:00Z',
+                type: 'zip',
+                size: 15.6,
+                thumbnail: 'https://via.placeholder.com/150',
+                status: 'available',
+                remainingDownloads: 5,
+                tags: ['ui', 'design']
+            }
+        ];
 
-            sidebar.classList.toggle("collapsed");
-            mainContent.classList.toggle("collapsed");
-            backButton.classList.toggle("collapsed");
+        // Pagination settings
+        const itemsPerPage = 6;
+        let currentPage = 1;
+
+        // Create download card
+        function createDownloadCard(download) {
+            const card = document.createElement('div');
+            card.className = 'download-card';
+            card.dataset.id = download.id;
+            card.dataset.type = download.type;
+            card.dataset.date = download.date;
+            card.dataset.size = download.size;
+            card.dataset.status = download.status;
+
+            const statusText = download.status.charAt(0).toUpperCase() + download.status.slice(1);
+            const statusClass = `status-${download.status}`;
+            const downloadDisabled = download.status === 'expired' || download.remainingDownloads === 0 ? 'disabled' : '';
+
+            card.innerHTML = `
+                <input type="checkbox" class="download-checkbox">
+                <img src="${download.thumbnail}" alt="Thumbnail" class="download-thumbnail">
+                <div class="download-content">
+                    <div>
+                        <div class="download-title">${download.title}</div>
+                        <div class="download-details">Author: ${download.author}</div>
+                        <div class="download-details">Purchased: ${new Date(download.date).toLocaleString()}</div>
+                        <div class="download-details">Type: ${download.type.toUpperCase()} | Size: ${download.size} MB</div>
+                        <div class="download-details">Downloads Left: ${download.remainingDownloads}</div>
+                        <div class="download-status ${statusClass}">${statusText}</div>
+                    </div>
+                    <div class="download-actions">
+                        <button class="preview-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                            </svg>
+                            Preview
+                        </button>
+                        <button class="download-btn ${downloadDisabled}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.554 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                            </svg>
+                            ${download.status === 'downloaded' ? 'Re-download' : 'Download'}
+                        </button>
+                        <button class="report-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2z"/>
+                                <path d="M3 0h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3zm5 3a3 3 0 0 0-3 3v5h6V6a3 3 0 0 0-3-3z"/>
+                            </svg>
+                            Report
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
         }
+
+        // Fetch downloads (placeholder)
+        async function fetchDownloads() {
+            return sampleDownloads;
+        }
+
+        // Render downloads with pagination
+        async function renderDownloads(page = 1) {
+            const downloadsGrid = document.getElementById('downloadsGrid');
+            const noDownloads = document.getElementById('noDownloads');
+            const pagination = document.getElementById('pagination');
+            const downloads = await fetchDownloads();
+
+            // Apply filters and search
+            let filtered = filterDownloads(downloads);
+
+            // Paginate
+            const totalPages = Math.ceil(filtered.length / itemsPerPage);
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginated = filtered.slice(start, end);
+
+            downloadsGrid.innerHTML = '';
+            if (paginated.length === 0) {
+                downloadsGrid.appendChild(noDownloads);
+                noDownloads.style.display = 'flex';
+                pagination.style.display = 'none';
+            } else {
+                noDownloads.style.display = 'none';
+                paginated.forEach(download => {
+                    const card = createDownloadCard(download);
+                    downloadsGrid.appendChild(card);
+                });
+                renderPagination(totalPages, page);
+                attachCardEventListeners();
+                pagination.style.display = 'flex';
+            }
+        }
+
+        // Filter and sort downloads
+        function filterDownloads(downloads) {
+            const typeFilter = document.getElementById('typeFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const dateRange = document.getElementById('dateRange').value;
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const sortBy = document.getElementById('sortBy').value;
+
+            let filtered = downloads.filter(item => {
+                const matchesType = typeFilter === 'all' || item.type === typeFilter;
+                const matchesStatus = statusFilter === 'all' || item.status === statusFilter;
+                const matchesDate = !dateRange || new Date(item.date).toISOString().split('T')[0] === dateRange;
+                const matchesSearch = item.title.toLowerCase().includes(searchInput) || 
+                                    item.tags.some(tag => tag.toLowerCase().includes(searchInput));
+                return matchesType && matchesStatus && matchesDate && matchesSearch;
+            });
+
+            filtered.sort((a, b) => {
+                switch (sortBy) {
+                    case 'name-asc':
+                        return a.title.localeCompare(b.title);
+                    case 'name-desc':
+                        return b.title.localeCompare(a.title);
+                    case 'date-desc':
+                        return new Date(b.date) - new Date(a.date);
+                    case 'date-asc':
+                        return new Date(a.date) - new Date(b.date);
+                    case 'size-desc':
+                        return b.size - a.size;
+                    case 'size-asc':
+                        return a.size - b.size;
+                    default:
+                        return 0;
+                }
+            });
+
+            return filtered;
+        }
+
+        // Render pagination
+        function renderPagination(totalPages, currentPage) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            const prev = document.createElement('button');
+            prev.textContent = 'Previous';
+            prev.disabled = currentPage === 1;
+            prev.className = prev.disabled ? 'disabled' : '';
+            prev.onclick = () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderDownloads(currentPage);
+                }
+            };
+
+            const next = document.createElement('button');
+            next.textContent = 'Next';
+            next.disabled = currentPage === totalPages;
+            next.className = next.disabled ? 'disabled' : '';
+            next.onclick = () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderDownloads(currentPage);
+                }
+            };
+
+            pagination.appendChild(prev);
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                pageBtn.className = i === currentPage ? 'active' : '';
+                pageBtn.onclick = () => {
+                    currentPage = i;
+                    renderDownloads(currentPage);
+                };
+                pagination.appendChild(pageBtn);
+            }
+            pagination.appendChild(next);
+        }
+
+        // Attach event listeners
+        function attachCardEventListeners() {
+            document.querySelectorAll('.download-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const card = checkbox.closest('.download-card');
+                    card.classList.toggle('selected', checkbox.checked);
+                });
+            });
+
+            document.querySelectorAll('.preview-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = button.closest('.download-card');
+                    const title = card.querySelector('.download-title').textContent;
+                    const thumbnail = card.querySelector('.download-thumbnail').src;
+                    showPreview(title, thumbnail);
+                });
+            });
+
+            document.querySelectorAll('.download-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (!button.classList.contains('disabled')) {
+                        const card = button.closest('.download-card');
+                        const title = card.querySelector('.download-title').textContent;
+                        showSnackbar(`Downloading: ${title}`);
+                        // Simulate download
+                        setTimeout(() => {
+                            showSnackbar(`${title} downloaded successfully!`);
+                            const download = sampleDownloads.find(d => d.title === title);
+                            if (download) {
+                                download.status = 'downloaded';
+                                download.remainingDownloads = Math.max(0, download.remainingDownloads - 1);
+                                renderDownloads(currentPage);
+                            }
+                        }, 2000);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.report-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = button.closest('.download-card');
+                    const title = card.querySelector('.download-title').textContent;
+                    showSnackbar(`Issue reported for: ${title}`);
+                    // Placeholder for reporting logic
+                });
+            });
+        }
+
+        // Show preview modal
+        function showPreview(title, thumbnail) {
+            const modal = document.getElementById('previewModal');
+            const previewImage = document.getElementById('previewImage');
+            const previewTitle = document.getElementById('previewTitle');
+            const modalClose = document.getElementById('modalClose');
+
+            previewImage.src = thumbnail;
+            previewTitle.textContent = title;
+            modal.style.display = 'flex';
+
+            // Close modal on button click
+            modalClose.addEventListener('click', () => {
+                modal.style.display = 'none';
+            }, { once: true });
+
+            // Close modal on click outside content
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            }, { once: true });
+        }
+
+        // Snackbar functionality
+        function showSnackbar(message, undoCallback = null) {
+            const snackbar = document.getElementById('snackbar');
+            const snackbarMessage = document.getElementById('snackbarMessage');
+            const undoAction = document.getElementById('undoAction');
+
+            snackbarMessage.textContent = message;
+            snackbar.style.display = 'flex';
+
+            // Clear previous undo listeners
+            const newUndo = undoAction.cloneNode(true);
+            undoAction.parentNode.replaceChild(newUndo, undoAction);
+
+            // Add undo listener if provided
+            if (undoCallback) {
+                newUndo.addEventListener('click', () => {
+                    undoCallback();
+                    snackbar.style.display = 'none';
+                }, { once: true });
+            } else {
+                newUndo.style.display = 'none';
+            }
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                snackbar.style.display = 'none';
+            }, 5000);
+        }
+
+        // Filter and search event listeners
+        const typeFilter = document.getElementById('typeFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        const dateRange = document.getElementById('dateRange');
+        const searchInput = document.getElementById('searchInput');
+        const sortBy = document.getElementById('sortBy');
+
+        [typeFilter, statusFilter, dateRange, sortBy].forEach(element => {
+            element.addEventListener('change', () => {
+                currentPage = 1; // Reset to first page on filter change
+                renderDownloads(currentPage);
+            });
+        });
+
+        searchInput.addEventListener('input', () => {
+            currentPage = 1; // Reset to first page on search
+            renderDownloads(currentPage);
+        });
+
+        // Initial render
+        renderDownloads();
     </script>
-</body>
-</html>
